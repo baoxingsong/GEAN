@@ -1,0 +1,1159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BuildServerSettings">
+    <option name="LOGIN" value="" />
+    <option name="SERVER_URL" value="http://buildserver" />
+    <option name="REMEMBER_ME" value="true" />
+    <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
+    <option name="INSPECTIONS_BUILD_TYPE_IDS" />
+    <option name="DUPLICATES_BUILD_TYPE_IDS" />
+    <option name="COVERAGE_SETTINGS" />
+    <option name="TEST_STATUS_ENABLED" value="true" />
+    <option name="TEST_STATUS_SHOW_SUCCESSFUL" value="false" />
+    <option name="POSTPONE_SUITABLE_CONFIGURATIONS_SEARCH" value="false" />
+    <option name="ARTIFACTS_BUILD_TYPE_IDS" />
+    <option name="PERFORM_COMMIT_IF_SUCCESSFUL" value="true" />
+    <option name="PERFORM_COMMIT_IF_NO_NEW_FAILED_TESTS" value="false" />
+    <option name="REQUEST_CONFIRMATON" value="false" />
+    <option name="PRE_TESTED_COMMIT" value="true" />
+    <option name="FILTER_BY_STATUS" value="false" />
+    <option name="FILTER_MARKED_AS_FIXED" value="false" />
+    <option name="SHOW_CLOSE_PROMPT" value="true" />
+    <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
+    <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
+    <generated>
+      <config projectName="GEAN" targetName="gtest" />
+      <config projectName="GEAN" targetName="gtest_main" />
+      <config projectName="GEAN" targetName="gean" />
+    </generated>
+  </component>
+  <component name="CMakeSettings" AUTO_RELOAD="true">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b811acea-0f13-437a-869a-147e89aa9af6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/cns.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_not_work.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_old.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_old.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_oldv2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow_old1.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/hengAlign.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/hengAlign.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/hengAlignNotwork2.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/myImportandFunction/hengAlign_notgOOD.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/song_cns.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/song_cns.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/tests/myImportandFunction/hengAlign_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configure" beforeDir="false" afterPath="$PROJECT_DIR$/configure" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align1.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align2.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align3.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align4.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align5.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/align6.tbl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/summaryTheNewGff.pl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/denovoVariantCalling/tair10.fa.gz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/build-linux-autotools.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/build-linux-autotools.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/build-linux-bazel.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/build-linux-bazel.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/env-linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/env-linux.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/env-osx.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/env-osx.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/get-nprocessors.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/get-nprocessors.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/install-linux.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/install-linux.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/install-osx.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/install-osx.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/log-config.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/log-config.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/ci/travis.sh" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/ci/travis.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/fuse_gmock_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/fuse_gmock_files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/ast.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/ast.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/keywords.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/keywords.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/tokenize.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/tokenize.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/gmock_gen.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/gmock_gen.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock-config.in" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock-config.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock_doctor.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock_doctor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/scripts/upload_gmock.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/upload_gmock.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/test/gmock_leak_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_leak_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/test/gmock_output_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_output_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googlemock/test/gmock_test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_test_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/CMakeDirectoryInformation.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/CMakeDirectoryInformation.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/build.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean_target.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/cmake_clean_target.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/depend.internal" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/flags.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/flags.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/link.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/gtest.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/gtest.cbp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/libgtest.a" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/libgtest.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/libgtest_main.a" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/libgtest_main.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/libgtest_maind.a" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/libgtest_maind.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/libgtestd.a" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/libgtestd.a" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/fuse_gtest_files.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/fuse_gtest_files.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/gen_gtest_pred_impl.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/gen_gtest_pred_impl.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/gtest-config.in" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/gtest-config.in" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/pump.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/pump.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/release_docs.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/release_docs.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/upload.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/upload.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/scripts/upload_gtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/scripts/upload_gtest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_break_on_failure_unittest.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_break_on_failure_unittest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_catch_exceptions_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_catch_exceptions_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_color_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_color_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_env_var_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_env_var_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_filter_unittest.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_filter_unittest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_help_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_help_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_list_tests_unittest.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_list_tests_unittest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_output_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_output_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_shuffle_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_shuffle_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_test_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_throw_on_failure_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_throw_on_failure_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_uninitialized_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_uninitialized_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_outfiles_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_outfiles_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_output_unittest.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_output_unittest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_test_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_test_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/googletest/googletest/xcode/Scripts/versiongenerate.py" beforeDir="false" afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Scripts/versiongenerate.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ksw2.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ksw2_extz2_sse.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/song.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/song.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InputParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/control/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlLayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlLayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlLayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlLayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/NucmerRead.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/NucmerRead.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/checkOrfState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/checkOrfState.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/myImportantFunction.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/myImportantFunction.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/MSA/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/UpdateVariants.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/UpdateVariants.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/reannotation/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/control/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/impl/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/myImportandFunction/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/service/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/std/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/util/.dropbox.attr" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/.dropbox.attr" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/CMakeFiles/" />
+    <ignored path="$PROJECT_DIR$/googletest/googletest/CMakeFiles/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="ExportToHTMLSettings">
+    <option name="printScope" value="1" />
+    <option name="PRINT_LINE_NUMBERS" value="true" />
+    <option name="OUTPUT_DIRECTORY" value="$PROJECT_DIR$/exportToHTML" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlign.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3105">
+              <caret line="207" column="40" selection-start-line="207" selection-start-column="40" selection-end-line="207" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="338">
+              <caret line="91" column="20" lean-forward="true" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlign.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/parameters.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="675">
+              <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="60">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/util/nucleotideCodeSubstitutionMatrix.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1305">
+              <caret line="87" column="15" selection-start-line="87" selection-start-column="15" selection-end-line="87" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/impl/impl.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="645">
+              <caret line="43" selection-start-line="43" selection-end-line="43" />
+              <folding>
+                <element signature="e#714#741#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" selection-start-line="7" selection-end-line="7" />
+              <folding>
+                <element signature="e#134#151#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>t32_t *H = 0, H0 = 0, last_H0_t =</find>
+      <find>hengAlign</find>
+      <find>357</find>
+      <find>long</find>
+      <find>long_thres</find>
+      <find>y =</find>
+      <find>y[</find>
+      <find>x1</find>
+      <find>H1 = _mm_add_epi32(H1</find>
+      <find>H1 = _mm_add_epi32</find>
+      <find>H1=</find>
+      <find>H1 =</find>
+      <find>left</find>
+      <find>left a</find>
+      <find>H[t]</find>
+      <find>st0</find>
+      <find>st_</find>
+      <find>319</find>
+      <find>x</find>
+      <find>x</find>
+      <find>x1_</find>
+      <find>298</find>
+      <find>std::cout</find>
+      <find>line 183</find>
+      <find>line 357</find>
+      <find>end</find>
+      <find>km</find>
+      <find>ez</find>
+      <find>some</find>
+      <find>tbuf</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>16</replace>
+      <replace>$1 /netscratch/dep_tsiantis/grp_gan/song/tsianst/GWAS/prepareForGenotyping/$1.sdi /netscratch/dep_tsiantis/grp_gan/song/tsianst/GWAS/prepareForGenotyping/$1.fa</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/model/REGION.h" />
+        <option value="$PROJECT_DIR$/src/model/STRAND.h" />
+        <option value="$PROJECT_DIR$/src/model/Transcript.cpp" />
+        <option value="$PROJECT_DIR$/src/model/Transcript.h" />
+        <option value="$PROJECT_DIR$/src/model/TwoSeqOfMsaResult.cpp" />
+        <option value="$PROJECT_DIR$/src/model/TwoSeqOfMsaResult.h" />
+        <option value="$PROJECT_DIR$/src/model/variant.cpp" />
+        <option value="$PROJECT_DIR$/src/model/variant.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.cpp" />
+        <option value="$PROJECT_DIR$/src/util/myutil.cpp" />
+        <option value="$PROJECT_DIR$/src/util/myutil.h" />
+        <option value="$PROJECT_DIR$/src/util/nucleotideCodeSubstitutionMatrix.cpp" />
+        <option value="$PROJECT_DIR$/src/util/nucleotideCodeSubstitutionMatrix.h" />
+        <option value="$PROJECT_DIR$/src/util/parameters.cpp" />
+        <option value="$PROJECT_DIR$/src/util/parameters.h" />
+        <option value="$PROJECT_DIR$/src/util/util.h" />
+        <option value="$PROJECT_DIR$/src/InputParser.h" />
+        <option value="$PROJECT_DIR$/src/impl/NucmerRead.cpp" />
+        <option value="$PROJECT_DIR$/src/controlLayer.h" />
+        <option value="$PROJECT_DIR$/src/InputParser.cpp" />
+        <option value="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" />
+        <option value="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" />
+        <option value="$PROJECT_DIR$/configure" />
+        <option value="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" />
+        <option value="$PROJECT_DIR$/src/impl/checkOrfState.cpp" />
+        <option value="$PROJECT_DIR$/src/service/UpdateVariants.cpp" />
+        <option value="$PROJECT_DIR$/src/controlLayer.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/myImportantFunction.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch_V2.cpp" />
+        <option value="$PROJECT_DIR$/song.cpp" />
+        <option value="$PROJECT_DIR$/ksw2.h" />
+        <option value="$PROJECT_DIR$/src/song_cns.h" />
+        <option value="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" />
+        <option value="$PROJECT_DIR$/src/song_cns.cpp" />
+        <option value="$PROJECT_DIR$/ksw2_extz2_sse.c" />
+        <option value="$PROJECT_DIR$/src/cns.cpp" />
+        <option value="$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" />
+        <option value="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/someMinimap2Code.h" />
+        <option value="$PROJECT_DIR$/src/tests/myImportandFunction/hengAlign_test.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/hengAlign.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/hengAlign.h" />
+      </list>
+    </option>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="myImportandFunction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="GEAN" type="b2602c69:ProjectViewProjectNode" />
+              <item name="gean" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="myImportandFunction" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/myImportandFunction" />
+      <recent name="$PROJECT_DIR$/src/tests/myImportandFunction" />
+      <recent name="$PROJECT_DIR$/example/variantsSynchronization" />
+      <recent name="$PROJECT_DIR$/script" />
+      <recent name="$PROJECT_DIR$/example/denovoVariantCalling" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Google Test.alignSlidingWindow.c3">
+    <configuration name="All in alignSlidingWindow_test.cpp" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GEAN" TARGET_NAME="gean" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GEAN" RUN_TARGET_NAME="gean" TEST_PATTERN="all-tests(file://$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp)" TEST_MODE="PATTERN">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alignNeedlemanForTranscript_simd_avx2int32.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GEAN" TARGET_NAME="gean" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GEAN" RUN_TARGET_NAME="gean" TEST_CLASS="alignNeedlemanForTranscript_simd_avx2int32" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alignSlidingWindow.c2" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GEAN" TARGET_NAME="gean" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GEAN" RUN_TARGET_NAME="gean" TEST_CLASS="alignSlidingWindow" TEST_METHOD="c2" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alignSlidingWindow.c3" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GEAN" TARGET_NAME="gean" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GEAN" RUN_TARGET_NAME="gean" TEST_CLASS="alignSlidingWindow" TEST_METHOD="c3" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="hengAlign.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="GEAN" TARGET_NAME="gean" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="GEAN" RUN_TARGET_NAME="gean" TEST_CLASS="hengAlign" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="BeforeTestRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Google Test.hengAlign.c1" />
+      <item itemvalue="Google Test.alignSlidingWindow.c2" />
+      <item itemvalue="Google Test.alignNeedlemanForTranscript_simd_avx2int32.c1" />
+      <item itemvalue="Google Test.alignSlidingWindow.c3" />
+      <item itemvalue="Google Test.All in alignSlidingWindow_test.cpp" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Google Test.alignSlidingWindow.c3" />
+        <item itemvalue="Google Test.All in alignSlidingWindow_test.cpp" />
+        <item itemvalue="Google Test.alignSlidingWindow.c2" />
+        <item itemvalue="Google Test.hengAlign.c1" />
+        <item itemvalue="Google Test.alignNeedlemanForTranscript_simd_avx2int32.c1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b811acea-0f13-437a-869a-147e89aa9af6" name="Default Changelist" comment="" />
+      <created>1534337909197</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1534337909197</updated>
+      <workItem from="1534337910410" duration="88000" />
+      <workItem from="1534338003657" duration="930000" />
+      <workItem from="1534339058548" duration="625000" />
+      <workItem from="1534344541579" duration="2495000" />
+      <workItem from="1534417892066" duration="704000" />
+      <workItem from="1534676273044" duration="465000" />
+      <workItem from="1534678015079" duration="21721000" />
+      <workItem from="1534710719188" duration="385000" />
+      <workItem from="1534941864090" duration="276000" />
+      <workItem from="1534942549401" duration="6475000" />
+      <workItem from="1535030098945" duration="5946000" />
+      <workItem from="1535054043735" duration="16000" />
+      <workItem from="1535054086120" duration="4395000" />
+      <workItem from="1535098809911" duration="1413000" />
+      <workItem from="1535114684329" duration="3978000" />
+      <workItem from="1535183239370" duration="1794000" />
+      <workItem from="1535284340442" duration="4828000" />
+      <workItem from="1535307350049" duration="705000" />
+      <workItem from="1535356524528" duration="2601000" />
+      <workItem from="1535368634496" duration="64000" />
+      <workItem from="1535369312585" duration="1067000" />
+      <workItem from="1535371611610" duration="2301000" />
+      <workItem from="1535390961074" duration="5179000" />
+      <workItem from="1535450512879" duration="5686000" />
+      <workItem from="1535463173583" duration="34725000" />
+      <workItem from="1535713427464" duration="718000" />
+      <workItem from="1535828053410" duration="17232000" />
+      <workItem from="1536256314364" duration="202000" />
+      <workItem from="1536308433133" duration="1985000" />
+      <workItem from="1536324287158" duration="529000" />
+      <workItem from="1536324864315" duration="1352000" />
+      <workItem from="1536398371200" duration="3175000" />
+      <workItem from="1536477770410" duration="550000" />
+      <workItem from="1536930613869" duration="553000" />
+      <workItem from="1536931353907" duration="871000" />
+      <workItem from="1536932593031" duration="68000" />
+      <workItem from="1536932739839" duration="2043000" />
+      <workItem from="1537082802103" duration="6638000" />
+      <workItem from="1537189733763" duration="49000" />
+      <workItem from="1537361107767" duration="46000" />
+      <workItem from="1537361182019" duration="1909000" />
+      <workItem from="1537883881366" duration="588000" />
+      <workItem from="1537947348863" duration="596000" />
+      <workItem from="1538255765511" duration="49000" />
+      <workItem from="1538295518898" duration="417000" />
+      <workItem from="1538296361794" duration="49000" />
+      <workItem from="1538308526310" duration="57000" />
+      <workItem from="1538310115428" duration="1588000" />
+      <workItem from="1538333664998" duration="2709000" />
+      <workItem from="1538340001878" duration="278000" />
+      <workItem from="1538343203037" duration="489000" />
+      <workItem from="1538344404210" duration="396000" />
+      <workItem from="1538381266225" duration="526000" />
+      <workItem from="1538381817770" duration="1951000" />
+      <workItem from="1538440105997" duration="1458000" />
+      <workItem from="1538486631749" duration="3000" />
+      <workItem from="1539080676749" duration="1557000" />
+      <workItem from="1539460821741" duration="5803000" />
+      <workItem from="1539467576757" duration="201000" />
+      <workItem from="1539467850608" duration="483000" />
+      <workItem from="1539497283700" duration="253000" />
+      <workItem from="1539958684136" duration="53000" />
+      <workItem from="1539958769928" duration="3188000" />
+      <workItem from="1539976624446" duration="29562000" />
+      <workItem from="1540137637703" duration="2387000" />
+      <workItem from="1540362553059" duration="8916000" />
+      <workItem from="1542034683684" duration="4684000" />
+      <workItem from="1542106782466" duration="322000" />
+      <workItem from="1542117921216" duration="287000" />
+      <workItem from="1542145085100" duration="269000" />
+      <workItem from="1542196283583" duration="407000" />
+      <workItem from="1542196746700" duration="1901000" />
+      <workItem from="1542290941898" duration="140000" />
+      <workItem from="1542291091607" duration="302000" />
+      <workItem from="1542475071850" duration="695000" />
+      <workItem from="1542538537422" duration="45000" />
+      <workItem from="1542955547336" duration="158000" />
+      <workItem from="1542956210282" duration="330000" />
+      <workItem from="1542957415498" duration="5939000" />
+      <workItem from="1543500535613" duration="19000" />
+      <workItem from="1543500581751" duration="28000" />
+      <workItem from="1543500655682" duration="464000" />
+      <workItem from="1543849933075" duration="1223000" />
+      <workItem from="1544319081940" duration="121000" />
+      <workItem from="1544319220213" duration="12000" />
+      <workItem from="1544325781073" duration="25965000" />
+      <workItem from="1544393685214" duration="5499000" />
+      <workItem from="1544412025142" duration="43000" />
+      <workItem from="1544412088915" duration="1073000" />
+      <workItem from="1545350446335" duration="18384000" />
+      <workItem from="1545448880902" duration="361000" />
+      <workItem from="1545488011560" duration="176000" />
+      <workItem from="1545768086264" duration="6232000" />
+      <workItem from="1545827253842" duration="3574000" />
+      <workItem from="1545844180934" duration="928000" />
+      <workItem from="1545947093546" duration="478000" />
+      <workItem from="1546138571771" duration="31000" />
+      <workItem from="1546138740182" duration="23000" />
+      <workItem from="1546139043905" duration="13854000" />
+      <workItem from="1546184262943" duration="3290000" />
+      <workItem from="1546195832571" duration="25646000" />
+      <workItem from="1546244364438" duration="14571000" />
+      <workItem from="1546305701830" duration="73000" />
+      <workItem from="1546305797991" duration="13390000" />
+      <workItem from="1546352638178" duration="5282000" />
+      <workItem from="1546368107310" duration="3000" />
+      <workItem from="1546407964277" duration="96000" />
+    </task>
+    <task id="LOCAL-00001" summary="a lot of updates">
+      <created>1542475334835</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1542475334835</updated>
+    </task>
+    <task id="LOCAL-00002" summary="a lot of updates">
+      <created>1542475818921</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1542475818921</updated>
+    </task>
+    <task id="LOCAL-00003" summary="whole genome wide base pair resolution sequence alignment and variant calling">
+      <created>1542990295816</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1542990295816</updated>
+    </task>
+    <task id="LOCAL-00004" summary="whole genome wide base pair resolution sequence alignment and variant calling">
+      <created>1542990695866</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1542990695867</updated>
+    </task>
+    <task id="LOCAL-00005" summary="whole genome wide base pair resolution sequence alignment and variant calling">
+      <created>1542991511936</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1542991511936</updated>
+    </task>
+    <task id="LOCAL-00006" summary="whole genome wide base pair resolution sequence alignment and variant calling">
+      <created>1542991531657</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1542991531657</updated>
+    </task>
+    <task id="LOCAL-00007" summary="typo fixing">
+      <created>1542993591457</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1542993591458</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update whole genome MSA pipeline">
+      <created>1544412263724</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1544412263724</updated>
+    </task>
+    <task id="LOCAL-00009" summary="update whole genome MSA pipeline">
+      <created>1544413319453</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1544413319453</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="hengAlign_c1 - 2019.01.01 at 22h 56m 37s.xml">
+      <configuration name="hengAlign.c1" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.01 at 23h 39m 28s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="hengAlign_c1 - 2019.01.01 at 23h 39m 48s.xml">
+      <configuration name="hengAlign.c1" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.01 at 23h 41m 46s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="hengAlign_c1 - 2019.01.01 at 23h 42m 15s.xml">
+      <configuration name="hengAlign.c1" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.01 at 23h 44m 47s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.01 at 23h 48m 35s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.02 at 00h 22m 29s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c2 - 2019.01.02 at 00h 22m 38s.xml">
+      <configuration name="alignSlidingWindow.c2" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="alignSlidingWindow_c3 - 2019.01.02 at 00h 22m 49s.xml">
+      <configuration name="alignSlidingWindow.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="471808000" />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25686592" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32903865" />
+      <window_info active="true" anchor="bottom" id="Messages" order="1" visible="true" weight="0.3219178" />
+      <window_info anchor="bottom" id="CMake" order="2" sideWeight="0.4983845" weight="0.34931508" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.49757674" weight="0.29726028" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.3520548" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="9" weight="0.32903865" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32739726" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5024233" side_tool="true" weight="0.29863015" />
+      <window_info anchor="bottom" id="TeamCity" order="14" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="LuaJ" order="4" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25282714" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection Results" order="0" weight="0.32903865" />
+      <window_info anchor="bottom" id="Messages" order="1" weight="0.3219178" />
+      <window_info anchor="bottom" id="CMake" order="2" sideWeight="0.4983845" weight="0.34931508" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.32876712" />
+      <window_info anchor="bottom" id="Run" order="5" sideWeight="0.49757674" weight="0.29726028" />
+      <window_info anchor="bottom" id="Debug" order="6" weight="0.3520548" />
+      <window_info anchor="bottom" id="Cvs" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="8" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="9" weight="0.32903865" />
+      <window_info anchor="bottom" id="Database Changes" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32739726" />
+      <window_info anchor="bottom" id="Terminal" order="12" />
+      <window_info anchor="bottom" id="Event Log" order="13" sideWeight="0.5024233" side_tool="true" weight="0.29863015" />
+      <window_info anchor="bottom" id="TeamCity" order="14" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="LuaJ" order="4" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <MESSAGE value="update" />
+    <MESSAGE value="a lot of updates" />
+    <MESSAGE value="whole genome wide base pair resolution sequence alignment and variant calling" />
+    <MESSAGE value="typo fixing" />
+    <MESSAGE value="update whole genome MSA pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="update whole genome MSA pipeline" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch_v2.cpp</url>
+          <line>23</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/model/Transcript.cpp" />
+    <entry file="file://$PROJECT_DIR$/src/impl/NucmerRead.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="570">
+          <caret line="38" column="14" selection-start-line="38" selection-start-column="14" selection-end-line="38" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow_old1.cpp" />
+    <entry file="file://$PROJECT_DIR$/CMakeCache.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/util/nucleotideCodeSubstitutionMatrix_test.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksw2.h" />
+    <entry file="file://$PROJECT_DIR$/song.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="212">
+          <caret line="34" column="9" selection-start-line="32" selection-end-line="34" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/nucleotideCodeSubstitutionMatrix.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1909">
+          <caret line="63" selection-start-line="63" selection-end-line="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/TranscriptUpdateInformation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="525">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/deNovoGenomeVariantCalling.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-247" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/control/myReAnnotationAndExonerateAndNovo.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="178">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/song_cns.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#98#115#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="38" />
+          <folding>
+            <element signature="e#666#683#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_old.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="57" column="37" selection-start-line="57" selection-start-column="27" selection-end-line="57" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ksw2_extz2_sse.c" />
+    <entry file="file://$PROJECT_DIR$/src/song_cns.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2355">
+          <caret line="157" column="7" selection-start-line="157" selection-start-column="7" selection-end-line="157" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6471">
+          <caret line="500" column="54" lean-forward="true" selection-start-line="500" selection-start-column="54" selection-end-line="500" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cns.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="2535" selection-start-line="2535" selection-end-line="2535" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanWunsch_simd_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="223">
+          <caret line="24" column="34" lean-forward="true" selection-start-line="24" selection-start-column="34" selection-end-line="24" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="62">
+          <caret line="46" column="6" selection-start-line="46" selection-start-column="6" selection-end-line="46" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_old.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="842">
+          <caret line="324" selection-start-line="324" selection-end-line="324" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_backup.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_old_v2.cpp" />
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1573">
+          <caret line="326" column="37" selection-start-line="326" selection-start-column="37" selection-end-line="326" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanWunsch_v2.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/reannotation/transcriptRealignmentAndExonerate.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2690">
+          <caret line="41" column="51" selection-start-line="41" selection-start-column="51" selection-end-line="41" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/reannotation/reAnnotationAndExonerateAndNovo.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-765">
+          <caret line="108" column="68" selection-start-line="108" selection-start-column="68" selection-end-line="108" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/deNovoGenomeVariantCallingService.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="769">
+          <caret line="531" column="18" lean-forward="true" selection-start-line="506" selection-start-column="4" selection-end-line="531" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignTranscript.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2811" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_not_work.cpp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_oldv2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="360" selection-start-line="360" selection-end-line="360" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="51" column="35" selection-start-line="51" selection-start-column="17" selection-end-line="51" selection-end-column="35" />
+          <folding>
+            <element signature="e#183#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#38#101#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="31" column="110" selection-start-line="31" selection-start-column="110" selection-end-line="31" selection-end-column="110" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configure">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" selection-start-line="15" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlignNotwork2.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="246" column="88" selection-start-line="246" selection-start-column="88" selection-end-line="246" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlign_notgOOD.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="7" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/someMinimap2Code.h" />
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/hengAlign_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="42" column="69" selection-start-line="42" selection-start-column="69" selection-end-line="42" selection-end-column="69" />
+          <folding>
+            <element signature="e#41#104#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="152" column="57" selection-start-line="152" selection-start-column="57" selection-end-line="152" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/myImportantFunction.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#250#288#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlign.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3105">
+          <caret line="207" column="40" selection-start-line="207" selection-start-column="40" selection-end-line="207" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/hengAlign.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="31" selection-start-line="20" selection-start-column="31" selection-end-line="20" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/parameters.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="6" selection-start-line="45" selection-start-column="6" selection-end-line="45" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/util/nucleotideCodeSubstitutionMatrix.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1305">
+          <caret line="87" column="15" selection-start-line="87" selection-start-column="15" selection-end-line="87" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/impl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="645">
+          <caret line="43" selection-start-line="43" selection-end-line="43" />
+          <folding>
+            <element signature="e#714#741#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+          <folding>
+            <element signature="e#134#151#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="91" column="20" lean-forward="true" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

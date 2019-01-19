@@ -1,0 +1,14 @@
+//
+// Created by Baoxing song on 20.10.18.
+//
+
+#ifndef ZSDP_DENOVOGENOMEVARIANTCALLINGSERVICE_H
+#define ZSDP_DENOVOGENOMEVARIANTCALLINGSERVICE_H
+
+
+class deNovoGenomeVariantCallingService {
+
+};
+
+
+#endif //ZSDP_DENOVOGENOMEVARIANTCALLINGSERVICE_H

@@ -1,0 +1,1294 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BuildServerSettings">
+    <option name="LOGIN" value="" />
+    <option name="SERVER_URL" value="http://buildserver" />
+    <option name="REMEMBER_ME" value="true" />
+    <option name="USE_IDEA_PROXY_SETTINGS" value="true" />
+    <option name="INSPECTIONS_BUILD_TYPE_IDS" />
+    <option name="DUPLICATES_BUILD_TYPE_IDS" />
+    <option name="COVERAGE_SETTINGS" />
+    <option name="TEST_STATUS_ENABLED" value="true" />
+    <option name="TEST_STATUS_SHOW_SUCCESSFUL" value="false" />
+    <option name="POSTPONE_SUITABLE_CONFIGURATIONS_SEARCH" value="false" />
+    <option name="ARTIFACTS_BUILD_TYPE_IDS" />
+    <option name="PERFORM_COMMIT_IF_SUCCESSFUL" value="true" />
+    <option name="PERFORM_COMMIT_IF_NO_NEW_FAILED_TESTS" value="false" />
+    <option name="REQUEST_CONFIRMATON" value="false" />
+    <option name="PRE_TESTED_COMMIT" value="true" />
+    <option name="FILTER_BY_STATUS" value="false" />
+    <option name="FILTER_MARKED_AS_FIXED" value="false" />
+    <option name="SHOW_CLOSE_PROMPT" value="true" />
+    <option name="TOOL_WINDOW_SELECTED_CONTENT_INDEX" value="0" />
+    <option name="FILTER_BY_CURRENT_PROJECT" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true" buildAllGenerated="true">
+    <generated>
+      <config projectName="zsdp" targetName="gtest" />
+      <config projectName="zsdp" targetName="gtest_main" />
+      <config projectName="zsdp" targetName="zsdp" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="b811acea-0f13-437a-869a-147e89aa9af6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/googletest/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/.travis.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/BUILD.bazel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/CONTRIBUTING.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/Makefile.am" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/WORKSPACE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/appveyor.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/build-linux-autotools.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/build-linux-bazel.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/env-linux.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/env-osx.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/get-nprocessors.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/install-linux.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/install-osx.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/log-config.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/ci/travis.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/configure.ac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/CHANGES" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/CONTRIBUTORS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/Makefile.am" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/cmake/gmock.pc.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/cmake/gmock_main.pc.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/configure.ac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/CheatSheet.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/CookBook.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/DesignDoc.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/Documentation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/ForDummies.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/FrequentlyAskedQuestions.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/docs/KnownIssues.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-actions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-cardinalities.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-actions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-actions.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-function-mockers.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-matchers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-matchers.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-nice-strict.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-generated-nice-strict.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-matchers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-more-actions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-more-matchers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock-spec-builders.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/gmock.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/custom/gmock-generated-actions.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/custom/gmock-matchers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/custom/gmock-port.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/gmock-generated-internal-utils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/gmock-generated-internal-utils.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/gmock-internal-utils.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/include/gmock/internal/gmock-port.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2005/gmock.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2005/gmock.vcproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2005/gmock_config.vsprops" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2005/gmock_main.vcproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2005/gmock_test.vcproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2010/gmock.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2010/gmock.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2010/gmock_config.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2010/gmock_main.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2010/gmock_test.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2015/gmock.sln" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2015/gmock.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2015/gmock_config.props" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2015/gmock_main.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/msvc/2015/gmock_test.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/fuse_gmock_files.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/README" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/README.cppclean" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/ast.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/gmock_class_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/keywords.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/tokenize.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/cpp/utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/generator/gmock_gen.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock-config.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/gmock_doctor.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/scripts/upload_gmock.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock-all.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock-cardinalities.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock-internal-utils.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock-matchers.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock-spec-builders.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/src/gmock_main.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/BUILD.bazel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-actions_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-cardinalities_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-generated-actions_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-generated-function-mockers_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-generated-internal-utils_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-generated-matchers_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-internal-utils_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-matchers_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-more-actions_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-nice-strict_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-port_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock-spec-builders_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_all_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_ex_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_leak_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_leak_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_link2_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_link_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_link_test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_output_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_output_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_output_test_golden.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_stress_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googlemock/test/gmock_test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/CHANGES" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/CMakeLists.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/CONTRIBUTORS" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/Makefile.am" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/cmake/gtest.pc.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/cmake/gtest_main.pc.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/cmake/internal_utils.cmake" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest.cbproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest.groupproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest_all.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest_link.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest_main.cbproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/codegear/gtest_unittest.cbproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/configure.ac" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/AdvancedGuide.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/Documentation.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/FAQ.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/Pkgconfig.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/Primer.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/PumpManual.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/Samples.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/docs/XcodeGuide.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/gtest.cbp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-death-test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-message.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-param-test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-param-test.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-printers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-spi.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-test-part.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest-typed-test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest_pred_impl.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/gtest_prod.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/custom/gtest-port.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/custom/gtest-printers.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/custom/gtest.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-death-test-internal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-filepath.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-internal.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-linked_ptr.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-param-util-generated.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-param-util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-port-arch.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-port.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-string.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-tuple.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-tuple.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-type-util.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/include/gtest/internal/gtest-type-util.h.pump" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/libgtest.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/libgtest_main.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/libgtest_maind.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/libgtestd.a" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/m4/acx_pthread.m4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/m4/gtest.m4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/msvc/2010/gtest_prod_test-md.vcxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/msvc/2010/gtest_unittest.vcxproj.filters" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/prime_tables.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample1.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample1.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample10_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample1_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample2.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample2.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample2_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample3-inl.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample3_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample4.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample4.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample4_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample5_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample6_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample7_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample8_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/samples/sample9_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/fuse_gtest_files.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/gen_gtest_pred_impl.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/gtest-config.in" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/pump.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/release_docs.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/upload.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/scripts/upload_gtest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-all.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-death-test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-filepath.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-internal-inl.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-port.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-printers.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-test-part.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest-typed-test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/src/gtest_main.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/BUILD.bazel" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-death-test_ex_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-death-test_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-filepath_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-linked_ptr_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-listener_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-message_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-options_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-param-test_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-param-test_test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-port_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-printers_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-test-part_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-typed-test2_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-typed-test_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest-typed-test_test.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_all_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_break_on_failure_unittest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_break_on_failure_unittest_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_catch_exceptions_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_catch_exceptions_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_color_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_color_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_env_var_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_env_var_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_environment_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_filter_unittest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_filter_unittest_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_help_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_help_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_list_tests_unittest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_list_tests_unittest_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_main_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_no_test_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_output_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_output_test_golden_lin.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_pred_impl_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_premature_exit_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_prod_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_repeat_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_shuffle_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_shuffle_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_sole_header_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_stress_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_throw_on_failure_ex_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_throw_on_failure_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_throw_on_failure_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_uninitialized_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_uninitialized_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_unittest.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_outfile1_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_outfile2_test_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_outfiles_test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_output_unittest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_output_unittest_.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/gtest_xml_test_utils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/production.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/test/production.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/DebugProject.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/FrameworkTarget.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/General.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/ReleaseProject.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/StaticLibraryTarget.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Config/TestTarget.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Resources/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/Info.plist" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/WidgetFramework.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/runtests.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/widget.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/widget.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Samples/FrameworkSample/widget_test.cc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Scripts/runtests.sh" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/Scripts/versiongenerate.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/googletest/googletest/xcode/gtest.xcodeproj/project.pbxproj" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/UpdateVariants.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/service/UpdateVariants.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/song.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/song.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/InputParser.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/InputParser.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlLayer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlLayer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controlLayer.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/controlLayer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/TranscriptUpdateInformation.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/TranscriptUpdateInformation.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/annotationLiftOver.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/annotationLiftOver.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/impl.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/impl.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/readGffFile.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/readGffFile.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/impl/readGffFileWithEverything.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GenomeBasicFeature.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GenomeBasicFeature.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/GenomeBasicFeature.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/GenomeBasicFeature.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Transcript.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Transcript.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/model/Transcript.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Transcript.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow_V2.cpp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow_V2.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/reannotation/reAnnotationAndExonerateAndNovo.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/reannotation/reAnnotationAndExonerateAndNovo.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/service/service.h" beforeDir="false" afterPath="$PROJECT_DIR$/src/service/service.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/impl/readGffFileWithEverything.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/impl/readGffFileWithEverything.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
+    <ignored path="$PROJECT_DIR$/CMakeFiles/" />
+    <ignored path="$PROJECT_DIR$/googletest/googletest/CMakeFiles/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FUSProjectUsageTrigger">
+    <session id="1183674606">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="3" />
+          <entry key="project.open.time.0" value="2" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="cpp" value="8" />
+          <entry key="h" value="3" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CMakeLists.txt" value="1" />
+          <entry key="ObjectiveC" value="11" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cpp" value="252" />
+          <entry key="h" value="18" />
+          <entry key="txt" value="4" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CMakeLists.txt" value="4" />
+          <entry key="ObjectiveC" value="270" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="-1085908037">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="7" />
+          <entry key="project.open.time.10" value="2" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="2" />
+          <entry key="project.open.time.7" value="2" />
+          <entry key="project.open.time.9" value="1" />
+          <entry key="project.opened" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cpp" value="4572" />
+          <entry key="h" value="206" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="CMakeLists.txt" value="1" />
+          <entry key="ObjectiveC" value="4778" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="SpliceSites" value="1" />
+          <entry key="bitset" value="2" />
+          <entry key="configure" value="1" />
+          <entry key="cpp" value="54" />
+          <entry key="functional" value="1" />
+          <entry key="h" value="13" />
+          <entry key="txt" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CMakeLists.txt" value="2" />
+          <entry key="ObjectiveC" value="70" />
+          <entry key="PLAIN_TEXT" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.cidr.testingFrameworks.usages">
+        <counts>
+          <entry key="Google Test" value="43" />
+        </counts>
+      </usages-collector>
+    </session>
+    <session id="364912012">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="4" />
+          <entry key="project.open.time.11" value="1" />
+          <entry key="project.open.time.13" value="2" />
+          <entry key="project.open.time.3" value="1" />
+          <entry key="project.opened" value="5" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="Makefile" value="1" />
+          <entry key="cpp" value="4" />
+          <entry key="h" value="4" />
+          <entry key="md" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Markdown" value="1" />
+          <entry key="ObjectiveC" value="8" />
+          <entry key="PLAIN_TEXT" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="cpp" value="799" />
+          <entry key="h" value="14" />
+          <entry key="md" value="38" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Markdown" value="38" />
+          <entry key="ObjectiveC" value="813" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/service/UpdateVariants.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="202">
+              <caret line="225" column="130" selection-start-line="225" selection-start-column="130" selection-end-line="225" selection-end-column="130" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controlLayer.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6780">
+              <caret line="452" column="5" selection-start-line="452" selection-start-column="5" selection-end-line="452" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="165">
+              <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2">
+              <caret line="694" column="5" lean-forward="true" selection-start-line="694" selection-start-column="5" selection-end-line="694" selection-end-column="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="353">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="269">
+              <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9900">
+              <caret line="660" selection-start-line="660" selection-end-line="660" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="80" selection-start-line="14" selection-start-column="80" selection-end-line="14" selection-end-column="80" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/control/myCoordinateLiftOver.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="67" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="67" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/impl/coordinateLiftOver.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>exon</find>
+      <find>msatosdi</find>
+      <find>referenceTranscriptHashSet</find>
+      <find>usage</find>
+      <find>targetPosition</find>
+      <find>targetTranscriptsHashMap</find>
+      <find>targetCdsEnds</find>
+      <find>get_dna_acid_map</find>
+      <find>N</find>
+      <find>alignment_avx_int8</find>
+      <find>std::</find>
+      <find>line 984</find>
+      <find>std::cout &lt;&lt;</find>
+      <find>std::cout</find>
+      <find>targetCdsStarts</find>
+      <find>transcriptRealignmentAndExonerate</find>
+      <find>transcriptRealignment</find>
+      <find>startTarget</find>
+      <find>TransGff</find>
+      <find>TransferAllExonWithNucmerResult</find>
+      <find>startShitfDistance</find>
+      <find>alignQuerySequence</find>
+      <find>queryPosition</find>
+      <find>newStart</find>
+      <find>getAlltheOverLappedGenes2</find>
+      <find>slidingWinAlnAndGeneRateAnnotation</find>
+      <find>newTranscriptAddCds</find>
+      <find>geneStruAlnAndGeneRateAnnotation</find>
+      <find>geneGeneStruAlnAndGeneRateAnnotation</find>
+      <find>databaseStart</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/controlLayer.h" />
+        <option value="$PROJECT_DIR$/src/service/service.h" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
+        <option value="$PROJECT_DIR$/src/impl/readGffFile.cpp" />
+        <option value="$PROJECT_DIR$/src/model/Transcript.h" />
+        <option value="$PROJECT_DIR$/src/model/Transcript.cpp" />
+        <option value="$PROJECT_DIR$/src/impl/impl.h" />
+        <option value="$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.cpp" />
+        <option value="$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.h" />
+        <option value="$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp" />
+        <option value="$PROJECT_DIR$/src/service/reannotation/reAnnotationAndExonerateAndNovo.cpp" />
+        <option value="$PROJECT_DIR$/src/tests/impl/readGffFileWithEverything.cpp" />
+        <option value="$PROJECT_DIR$/src/tests/std/bitsetTest.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" />
+        <option value="$PROJECT_DIR$/src/impl/annotationLiftOver.cpp" />
+        <option value="$PROJECT_DIR$/song.cpp" />
+        <option value="$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp" />
+        <option value="$PROJECT_DIR$/src/InputParser.cpp" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/service/UpdateVariants.h" />
+        <option value="$PROJECT_DIR$/src/controlLayer.cpp" />
+        <option value="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h" />
+        <option value="$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp" />
+        <option value="$PROJECT_DIR$/src/service/UpdateVariants.cpp" />
+        <option value="$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp" />
+        <option value="$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp" />
+        <option value="$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="OCFindUsagesOptions" text="true" ivars="false" properties="true" derivedClasses="false" />
+  <component name="ProjectFrameBounds" fullScreen="true">
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="control" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="myImportandFunction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="reannotation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="myImportandFunction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="zsdp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="zsdp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="std" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/myImportandFunction" />
+      <recent name="$PROJECT_DIR$/cmake-build-debug" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Google Test.TransferAllExonWithNucmerResult.c3">
+    <configuration name="TransferAllExonWithNucmerResult.c3" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="zsdp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zsdp" RUN_TARGET_NAME="zsdp" TEST_CLASS="TransferAllExonWithNucmerResult" TEST_METHOD="c3" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alignNeedlemanForTranscript_simd_avx2int32.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="zsdp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zsdp" RUN_TARGET_NAME="zsdp" TEST_CLASS="alignNeedlemanForTranscript_simd_avx2int32" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="alignSlidingWindow.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="zsdp" RUN_TARGET_PROJECT_NAME="zsdp" RUN_TARGET_NAME="zsdp" TEST_CLASS="alignSlidingWindow" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="bool.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="zsdp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zsdp" RUN_TARGET_NAME="zsdp" TEST_CLASS="bool" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="needlemanWunsch_simd_test.c1" type="CMakeGoogleTestRunConfigurationType" factoryName="Google Test" temporary="true" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="zsdp" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="zsdp" RUN_TARGET_NAME="zsdp" TEST_CLASS="needlemanWunsch_simd_test" TEST_METHOD="c1" TEST_MODE="SUITE_TEST">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Build All" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" CONFIG_NAME="Debug" EXPLICIT_BUILD_TARGET_NAME="all">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="gtest" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="gtest_main" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="zsdp" TARGET_NAME="gtest_main" CONFIG_NAME="Debug">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Build All" />
+      <item itemvalue="Application.gtest" />
+      <item itemvalue="Application.gtest_main" />
+      <item itemvalue="Google Test.needlemanWunsch_simd_test.c1" />
+      <item itemvalue="Google Test.alignNeedlemanForTranscript_simd_avx2int32.c1" />
+      <item itemvalue="Google Test.bool.c1" />
+      <item itemvalue="Google Test.TransferAllExonWithNucmerResult.c3" />
+      <item itemvalue="Google Test.alignSlidingWindow.c1" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Google Test.TransferAllExonWithNucmerResult.c3" />
+        <item itemvalue="Google Test.alignSlidingWindow.c1" />
+        <item itemvalue="Google Test.alignNeedlemanForTranscript_simd_avx2int32.c1" />
+        <item itemvalue="Google Test.bool.c1" />
+        <item itemvalue="Google Test.needlemanWunsch_simd_test.c1" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b811acea-0f13-437a-869a-147e89aa9af6" name="Default Changelist" comment="" />
+      <created>1534337909197</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1534337909197</updated>
+      <workItem from="1534337910410" duration="88000" />
+      <workItem from="1534338003657" duration="930000" />
+      <workItem from="1534339058548" duration="625000" />
+      <workItem from="1534344541579" duration="2495000" />
+      <workItem from="1534417892066" duration="704000" />
+      <workItem from="1534676273044" duration="465000" />
+      <workItem from="1534678015079" duration="21721000" />
+      <workItem from="1534710719188" duration="385000" />
+      <workItem from="1534941864090" duration="276000" />
+      <workItem from="1534942549401" duration="6475000" />
+      <workItem from="1535030098945" duration="5946000" />
+      <workItem from="1535054043735" duration="16000" />
+      <workItem from="1535054086120" duration="4395000" />
+      <workItem from="1535098809911" duration="1413000" />
+      <workItem from="1535114684329" duration="3978000" />
+      <workItem from="1535183239370" duration="1794000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TestHistory">
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 15h 57m 12s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 15h 58m 57s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 16h 01m 42s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 16h 03m 51s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 16h 07m 59s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 16h 39m 56s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 16h 44m 01s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 17h 15m 21s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 17h 17m 59s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+    <history-entry file="TransferAllExonWithNucmerResult_c3 - 2018.08.22 at 17h 22m 59s.xml">
+      <configuration name="TransferAllExonWithNucmerResult.c3" configurationId="CMakeGoogleTestRunConfigurationType" />
+    </history-entry>
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="51465000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28221512" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="0" weight="0.32876712" />
+      <window_info anchor="bottom" id="CMake" order="1" sideWeight="0.4983845" weight="0.32876712" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.32903865" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5016155" side_tool="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="TeamCity" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="LuaJ" order="4" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28271407" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info active="true" anchor="bottom" id="Messages" order="0" visible="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="CMake" order="1" sideWeight="0.4983845" weight="0.32876712" />
+      <window_info anchor="bottom" id="Message" order="2" />
+      <window_info anchor="bottom" id="Find" order="3" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.32903865" />
+      <window_info anchor="bottom" id="Debug" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="8" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="10" />
+      <window_info anchor="bottom" id="Terminal" order="11" />
+      <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.5016155" side_tool="true" weight="0.32876712" />
+      <window_info anchor="bottom" id="TeamCity" order="13" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info anchor="right" id="LuaJ" order="4" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/tests/control/myReAnnotationAndExonerateAndNovo_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-26" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/service.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="15" column="39" selection-start-line="15" selection-start-column="39" selection-end-line="15" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/readGffFileWithEverything.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4830">
+          <caret line="322" column="37" selection-start-line="322" selection-start-column="34" selection-end-line="322" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow_V2.cpp" />
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="40" lean-forward="true" selection-start-line="19" selection-start-column="40" selection-end-line="19" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.linuxbrew/Cellar/gcc/5.5.0_4/include/c++/5.5.0/bitset" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/configure" />
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/SpliceSites" />
+    <entry file="file://$PROJECT_DIR$/src/impl/readGffFile.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/readFastaFile.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="88" lean-forward="true" selection-start-line="7" selection-start-column="49" selection-end-line="7" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanWunsch_simd_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1154">
+          <caret line="233" selection-start-line="233" selection-end-line="233" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Transcript.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="431">
+          <caret line="108" column="1" selection-start-line="108" selection-start-column="1" selection-end-line="108" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/impl.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="630">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/CheckAndUpdateTranscriptsEnds.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="52" column="126" selection-start-line="51" selection-end-line="52" selection-end-column="126" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/readGffFile.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/getSequencesFromGff.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/impl/readGffFileWithEverything.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="23" column="88" selection-start-line="23" selection-start-column="88" selection-end-line="23" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32_backup.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5010">
+          <caret line="665" column="36" selection-start-line="665" selection-start-column="36" selection-end-line="665" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/std/bitsetTest.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_backup.cpp" />
+    <entry file="file://$PROJECT_DIR$/src/impl/TranscriptUpdateInformation.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="6" column="5" selection-start-line="6" selection-start-column="5" selection-end-line="6" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="42" column="8" selection-start-line="42" selection-start-column="8" selection-end-line="42" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Makefile">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md" />
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1860">
+          <caret line="124" selection-start-line="124" selection-end-line="124" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/InputParser.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="24" selection-start-line="26" selection-start-column="24" selection-end-line="26" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="33" column="33" selection-start-line="33" selection-start-column="33" selection-end-line="33" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/annotationLiftOver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="885">
+          <caret line="59" column="1" selection-start-line="59" selection-start-column="1" selection-end-line="59" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6930">
+          <caret line="462" column="21" selection-start-line="462" selection-start-column="21" selection-end-line="462" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="675">
+          <caret line="45" column="37" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/UpdateVariants.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.linuxbrew/Cellar/gcc/5.5.0_4/include/c++/5.5.0/functional" />
+    <entry file="file://$PROJECT_DIR$/src/impl/checkOrfState.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="109" selection-start-line="7" selection-end-line="8" selection-end-column="109" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/reannotation/reAnnotationAndExonerateAndNovo.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="401">
+          <caret line="108" column="71" selection-start-line="108" selection-start-column="38" selection-end-line="108" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/control/myReAnnotationAndExonerateAndNovo.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/reannotation/transcriptRealignmentAndExonerate.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="830">
+          <caret line="270" lean-forward="true" selection-start-line="270" selection-end-line="270" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/model/Transcript.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="38" column="6" selection-start-line="38" selection-start-column="6" selection-end-line="38" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/song.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1095">
+          <caret line="73" column="21" selection-start-line="73" selection-start-column="21" selection-end-line="73" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controlLayer.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="12" selection-start-line="46" selection-start-column="4" selection-end-line="46" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/UpdateVariants.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="225" column="130" selection-start-line="225" selection-start-column="130" selection-end-line="225" selection-end-column="130" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controlLayer.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6780">
+          <caret line="452" column="5" selection-start-line="452" selection-start-column="5" selection-end-line="452" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="13" column="5" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/myImportandFunction/alignSlidingWindow_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="32" column="29" selection-start-line="32" selection-start-column="29" selection-end-line="32" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="80" selection-start-line="14" selection-start-column="80" selection-end-line="14" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/control/myCoordinateLiftOver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="67" selection-start-line="23" selection-start-column="11" selection-end-line="23" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/impl/coordinateLiftOver.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="41" column="4" selection-start-line="41" selection-start-column="4" selection-end-line="41" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/service/TransferGffWithNucmerResult.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2">
+          <caret line="694" column="5" lean-forward="true" selection-start-line="694" selection-start-column="5" selection-end-line="694" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/myImportandFunction/alignSlidingWindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9900">
+          <caret line="660" selection-start-line="660" selection-end-line="660" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tests/service/TransferGffWithNucmerResult_test.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
