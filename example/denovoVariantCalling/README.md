@@ -5,6 +5,7 @@ The Ler-0 de novo genome sequence was released by reference publication 1.
 ## Find highly similar fragments
 The purpose of this step is to provide anchors for high resolution alignment. Results from some seed-to-chain algorithm is enough.
 I am using mummer-4.0.0beta2.
+
 ```
 nucmer -t 40 --maxmatch -c 100 -b 500 -l 50 -p t2l tair10.fa ler.fa
 show-coords -H -T -r -l -c t2l.delta >t2l.tab
