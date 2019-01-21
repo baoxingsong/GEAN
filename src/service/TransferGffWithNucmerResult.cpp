@@ -544,6 +544,7 @@ void TransferGffWithNucmerResult( const std::string & gffFilePath, const std::st
 
 //for gene
 bool overlap2( const Gene & gene, const Range & range ){
+    //std::cout << "gene.getStart() " << gene.getStart() << " gene.getEnd() " << gene.getEnd() << " range.getStart() " << range.getStart() << " range.getEnd() " << range.getEnd() << std::endl;
     if(   ( gene.getStart()<=range.getStart() && range.getStart()<=gene.getEnd()) ||
           ( gene.getStart()<=range.getEnd() && range.getEnd()<=gene.getEnd()) ||
           ( range.getStart()<=gene.getStart() && gene.getStart()<=range.getEnd())||
@@ -560,7 +561,7 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
     endShiftDistance=0;
     int newStartShitfDistance=0;
     int newEndShiftDistance=0;
-    int i=0, j=geneNameMap[chr].size()-1, newi, newj, k=10;
+    int i=0, j=geneNameMap[chr].size()-1, newi, newj, k=14;
     bool iChanged=true, jChanged=true;
     int interVal = 3;
     while( k>0 && (iChanged || jChanged)  ){
@@ -594,20 +595,28 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
     if( j >= geneNameMap[chr].size() ){
         j = geneNameMap[chr].size()-1;
     }
+   // std::cout << "i " << i << " j " << j << std::endl;
     for( ; i<=j; ++i ){
+//        std::cout << "line 599 i " << i << " geneNameMap[chr][i] " << geneNameMap[chr][i] << std::endl;
         if( overlap2(geneHashMap[geneNameMap[chr][i]], alignmentMatch.getDatabase()) ){
+  //          std::cout << "line 601" << std::endl;
             newStartShitfDistance = startShitfDistance;
             newEndShiftDistance = endShiftDistance;
             if( geneHashMap[geneNameMap[chr][i]].getStart() < alignmentMatch.getDatabase().getStart() ){
                 if( startShitfDistance <= (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart()) ){
+//                    std::cout << "geneHashMap[geneNameMap[chr][i]].getStart(): " << geneHashMap[geneNameMap[chr][i]].getStart() <<
+//                    " alignmentMatch.getDatabase().getStart(): " << alignmentMatch.getDatabase().getStart() <<
+//                    " geneHashMap[geneNameMap[chr][i]].getEnd(): " << geneHashMap[geneNameMap[chr][i]].getEnd() << std::endl;
                     newStartShitfDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart());
                 }
             }
             if( geneHashMap[geneNameMap[chr][i]].getEnd() > alignmentMatch.getDatabase().getEnd() ){
                 if( endShiftDistance < (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart()) ){
+                    //std::cout << "line 612" << std::endl;
                     newEndShiftDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart());
                 }
             }
+//            std::cout << "newStartShitfDistance: " << newStartShitfDistance << " newEndShiftDistance: " << newEndShiftDistance << std::endl;
             if( newStartShitfDistance <= 100000 && newEndShiftDistance <= 100000 ){
                 startShitfDistance=newStartShitfDistance;
                 endShiftDistance=newEndShiftDistance;
@@ -841,7 +850,7 @@ void geneGeneStruAlnAndGeneRateAnnotation(Transcript & newTranscript, Transcript
                                           std::map<std::string, std::string>& parameters,
                                           NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix,
                                           std::map<int, int> & importantPositions2){
-    std::cout << "ZSDP " << referenceTranscript->getName() << std::endl;
+    //std::cout << "ZSDP " << referenceTranscript->getName() << std::endl;
     int i;
     std::string refGenomeSequence = getSubsequence(databaseSequences,
                                                    referenceTranscript->getChromeSomeName(),
@@ -1155,6 +1164,7 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
     std::map<std::string, Transcript> transcriptHashMap;
     readGffFileWithEveryThing(gffFilePath, geneNameMap, geneHashMap, transcriptHashMap);
 
+    //std::cout << " reading gffFile done " << std::endl;
     std::string line;
     char delim = '\t';
     std::vector<std::string> elems;
@@ -1171,8 +1181,9 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
             elems.clear();
             split(line, delim, elems);
             queryStart=stoi(elems[3]);
-            if(databaseStart>0 && transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
-                std::cout << "begain to analysis " << line << std::endl;
+//            if(databaseStart>0 && transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
+            if( transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
+                //std::cout << "begain to analysis " << line << std::endl;
                 databaseChr=transcriptHashMap[elems[0]].getChromeSomeName();
                 queryChr=elems[2];
 
@@ -1181,17 +1192,17 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
                 queryEnd=queryStart;
                 std::vector<std::string> cigarElems;
                 splitCIGAR(elems[5], cigarElems);
-                std::cout << "cigar split done" << std::endl;
+//                std::cout << "cigar split done" << std::endl;
                 for(int i=0;i<cigarElems.size();++i) {
                     std::string cVal = cigarElems[i];
                     char cLetter = cVal[cVal.length() - 1];
                     if( i == cigarElems.size()-1 && (cLetter == 'H' || cLetter == 'S' ) ){ // ignore the last soft/hard clipping
                         continue;
                     }
-                    std::cout << cVal << std::endl;
-                    std::cout << cLetter << std::endl;
+//                    std::cout << cVal << std::endl;
+//                    std::cout << cLetter << std::endl;
                     int cLen = stoi(cVal.substr(0, cVal.length() - 1));
-                    std::cout << cLen << std::endl;
+//                    std::cout << cLen << std::endl;
                     switch (cLetter) {
                         case 'H':
                             //databaseStart += cLen;
@@ -1230,25 +1241,28 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
                     }
                 }
                 databaseEnd = transcriptHashMap[elems[0]].getPEnd();
-                std::cout << "cigar parsing done" << std::endl;
+               // std::cout << "cigar parsing done" << std::endl;
 //                --databaseEnd;
                 --queryEnd;
                 if( alignmentMatchsMap.find(databaseChr) == alignmentMatchsMap.end() ){
                     alignmentMatchsMap[databaseChr] = std::vector<AlignmentMatch>();
                 }
                 int samFlag = stoi(elems[1]);
-                if( 0 == samFlag % 32 ){
+                if( (0 == samFlag % 32 && transcriptHashMap[elems[0]].getStrand()==POSITIVE)
+                    || (0 != samFlag % 32 && transcriptHashMap[elems[0]].getStrand()==NEGATIVE) ){
                     AlignmentMatch alignmentMatch(queryChr, queryStart, queryEnd, POSITIVE, databaseChr, databaseStart, databaseEnd, windowSize);
                     alignmentMatchsMap[databaseChr].push_back(alignmentMatch);
-                    std::cout << "adding " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
-                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
+//                    std::cout << "adding POSITIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
+//                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 }else{
                     AlignmentMatch alignmentMatch(queryChr, queryStart, queryEnd, NEGATIVE, databaseChr, databaseStart, databaseEnd, windowSize);
                     alignmentMatchsMap[databaseChr].push_back(alignmentMatch);
 
-                    std::cout << "adding " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
-                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
+//                    std::cout << "adding NEGATIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
+//                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 }
+            }else{
+                std::cout << "could not analysis line: " << line << std::endl;
             }
         }
     }
@@ -1305,20 +1319,22 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
         it1!=alignmentMatchsMap.end(); ++it1){
         if( databaseSequences.find(it1->first) != databaseSequences.end() ){
             for( AlignmentMatch alignmentMatch : it1->second ){
-                std::cout << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
-                          << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
+//                std::cout << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
+//                          << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 if( querySequences.find(alignmentMatch.getQueryChr())!=querySequences.end() ){
                     //update algnmentMatch begin
                     std::vector<Gene*> overLappedGenes;
                     if( slowMode ){
+                        //std::cout << "line 1317" << std::endl;
                         getAlltheOverLappedGenes2( geneNameMap, geneHashMap, it1->first, alignmentMatch, overLappedGenes,
                                                    startShitfDistance, endShiftDistance);
                     }else{
                         getAlltheOverLappedGenes( geneNameMap, geneHashMap, it1->first, alignmentMatch, overLappedGenes,
                                                   startShitfDistance, endShiftDistance);
+                        //std::cout << "line 1323" << std::endl;
                     }
-
-//                    std::cout << "line 982" << std::endl;
+                    //std::exit(0);
+                    //std::cout << "line 982 overLappedGenes.size() " << overLappedGenes.size() << std::endl;
                     if( overLappedGenes.size()>0 ) {
                         std::vector<NewGffRecord> newGffRecords;
 //                        std::cout << "line 984" << std::endl;
@@ -1336,7 +1352,7 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                                                             overLappedGenes, transcriptHashMap, importantPositions,
                                                             slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
                         }
-                        std::cout << "genome sequence alignment done" << std::endl;
+                        //std::cout << "genome sequence alignment done" << std::endl;
                         if( POSITIVE == alignmentMatch.getQueryStrand() ) {
                             for( Gene * gene : overLappedGenes ) {
                                 NewGffRecord newGffRecord;
@@ -1363,7 +1379,7 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                                         newGffRecord.transcripts.push_back(newTranscript);
 //                                        std::cout << "line 1060" << std::endl;
                                     } else {
-                                        std::cout << "realign " << referenceTranscript->getName() << std::endl;
+                                        //std::cout << "realign " << referenceTranscript->getName() << std::endl;
                                         Transcript newTranscript2(referenceTranscript->getName(),
                                                                   alignmentMatch.getQueryChr(),
                                                                   referenceTranscript->getStrand());
@@ -1504,7 +1520,7 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
 //                                        std::cout << "line 1040" << std::endl;
                                         newGffRecord.transcripts.push_back(newTranscript);
                                     } else {
-                                        std::cout << "realign " << referenceTranscript->getName() << std::endl;
+//                                        std::cout << "realign " << referenceTranscript->getName() << std::endl;
                                         Transcript newTranscript2(referenceTranscript->getName(),
                                                                   alignmentMatch.getQueryChr(),
                                                                   thisStrand);

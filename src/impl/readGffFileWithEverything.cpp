@@ -92,6 +92,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
     readGffFileWithEveryThing (filePath, geneNameMap, geneHashMap, transcriptHashMap,
                                cdsParentRegex, transcriptParentRegex, transcriptIdRegex, geneIdRegex, transcriptNickNames, geneNickNames, ignoreTypes);
 }
+
 void readGffFileWithEveryThing (const std::string& filePath, std::map<std::string, std::vector<std::string> > & geneNameMap,
                                 std::map<std::string, Gene > & geneHashMap,
                                 std::map<std::string, Transcript> & transcriptHashMap,
@@ -215,6 +216,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                             transcriptHashMap[transcriptId].setScore(score);
                             transcriptHashMap[transcriptId].setLastColumnInformation(lastColumnInformation);
                             transcriptHashMap[transcriptId].setType(elemetns[2]);
+                            //std::cout << "transcript  " << transcriptId << std::endl;
                             if (geneHashMap.find(geneId) != geneHashMap.end()) {
 
                             } else {
@@ -354,9 +356,11 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                 transcriptHashMap[*transcript].updateInforCds();
             }
         }
-        geneNameMap[it->second.getChromeSomeName()].push_back(it->second.getName());
+        geneHashSet[it->second.getChromeSomeName()].push_back(it->second);
+        //geneNameMap[it->second.getChromeSomeName()].push_back(it->second.getName());
     }
-
+    // the purpose of geneHashSet if to keep the IDs in geneNameMap in order
+    // this is very important for the gff record transformation
     for (std::map<std::string, std::vector<Gene>>::iterator it=geneHashSet.begin(); it!=geneHashSet.end(); ++it){
         std::sort(it->second.begin(), it->second.end(), [](Gene a, Gene b) {
             return a.getStart() < b.getStart();

@@ -398,7 +398,7 @@ void alignment_avx_int16(const std::string& _dna_q, const std::string& _dna_d, s
     }
     // here, I do not track from the last elements of the matrix, so this is a kind of trim
     // This is not really global sequence alignment
-    std::cout << "i " << i << " j " << j << " highestScore " << highestScore << std::endl;
+    //std::cout << "i " << i << " j " << j << " highestScore " << highestScore << std::endl;
 
     while (i != 0 || j != 0) {
         if (i == 0) {

@@ -565,10 +565,7 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
             minIntron=5;
         }
 
-        bool slowMode = false;
-        if ( inputParser.cmdOptionExists("-sl") ){
-            slowMode = true;
-        }
+
         int lengthThreadhold;
         if( inputParser.cmdOptionExists("-l") ){
             lengthThreadhold = std::stoi( inputParser.getCmdOption("-l") );

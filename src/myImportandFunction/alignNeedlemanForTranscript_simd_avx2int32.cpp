@@ -657,7 +657,7 @@ void alignNeedlemanForTranscript_simd_avx2int32::calculate_similarity( __m256i**
     free(vProfile[3]);
     //std::cout << "alignNeedlemanForTranscript_simd_avx2int32 line 429" << std::endl;
     delete [] vProfile;
-    std::cout << "alignNeedlemanForTranscript_simd_avx2int32 line 431" << std::endl;
+//    std::cout << "alignNeedlemanForTranscript_simd_avx2int32 line 431" << std::endl;
 }
 
 char element_int_to_char( int element ){
