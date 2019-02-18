@@ -13,6 +13,10 @@ This pipeline could help to peform analysis where the gene structure annotaion o
 Using the gene annotation as anchors, GEAN could perform base-pair resolution whole-genome-wide sequence alignment and perform variant calling.
 
 ## Install
+### Dependencies
+CPU support avx2\
+GCC >=6.0 \
+Cmake >- 3.0
 ```
 git clone https://github.com/baoxingsong/GEAN.git
 cd GEAN

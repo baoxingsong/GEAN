@@ -40,7 +40,7 @@ transcript_to_gene_regex_reference_gff  [\s\S]*?CDS[\s\S]*?Parent=((\S*?)\.\d+)
 transcript_to_gene_regex_novo_gff   transcript[\s\S]*?ID=(\S*?);Parent=(\S+)
 #regular to parse reference gff file. Get the map from CDS records to transcript id
 #it seems C++ have problem with \w and \d
-cdsParentRegex  ([\s\S]*)Parent=([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.:_]+)
+cdsParentRegex  ([\s\S]*)Parent=([abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.:_-]+)
 #regular to parse additional gff file. Get the map from CDS records to transcript id
 novo_cdsParentRegex [\s\S]*?ID=([\s\S]*?);Parent=([\s\S]*?)$
 # regular expression to get the file name of gff file. The file name would be used as the prefix for temp files
