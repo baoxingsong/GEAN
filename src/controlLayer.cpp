@@ -521,8 +521,7 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
         if( inputParser.cmdOptionExists("-w") ){
             windowWidth = std::stoi( inputParser.getCmdOption("-w") );
         }
-        TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, minIntron, slowMode, windowWidth,lengthThreadhold );
-
+        TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, minIntron, slowMode, windowWidth, lengthThreadhold );
         return 0;
     }else{
         std::cerr << usage.str();

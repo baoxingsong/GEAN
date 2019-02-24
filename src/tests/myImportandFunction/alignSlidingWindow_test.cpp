@@ -95,7 +95,7 @@ TEST(alignSlidingWindow, c2){ // it takes about 25mins to finish the alignment
 TEST(alignSlidingWindow, c3){
     std::cout << std::endl;
     std::string parameterFile = "configure";
-    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "./");
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, ".");
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
     std::string dna_q = "TAAACCT";
     std::string dna_d = "CCTATCTGA";
@@ -104,5 +104,44 @@ TEST(alignSlidingWindow, c3){
     alignSlidingWindow(dna_q, dna_d, _alignment_q, _alignment_d, 5, parameters, nucleotideCodeSubstitutionMatrix);
     std::cout << _alignment_q << std::endl;
     std::cout << _alignment_d << std::endl;
+    ASSERT_EQ(0, 0);
+}
+
+
+
+
+TEST(alignSlidingWindow, c5){
+    std::cout << std::endl;
+    std::string parameterFile = "configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/song/Dropbox/gean");
+    NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
+
+    std::map<std::string, Fasta> querySequences;
+    std::map<std::string, Fasta> databaseSequences;
+
+    readFastaFile("/Users/song/Dropbox/A1033_01_h50.fasta", querySequences);
+    readFastaFile("/Users/song/Dropbox/adapter.fa", databaseSequences);
+
+
+    std::string dna_q;
+    std::string dna_d;
+    std::cout << "begin to alignment" << std::endl;
+    for( std::map<std::string, Fasta>::iterator it=querySequences.begin(); it != querySequences.end(); it++ ){
+        for( std::map<std::string, Fasta>::iterator it1=databaseSequences.begin(); it1 != databaseSequences.end(); it1++ ) {
+            dna_q = it->second.getSequence();
+            dna_d = it1->second.getSequence();
+            std::string _alignment_q="";
+            std::string _alignment_d="";
+
+            alignSlidingWindow(dna_q, dna_d, _alignment_q, _alignment_d, 60, parameters,
+                               nucleotideCodeSubstitutionMatrix);
+            std::cout << "sequence" << std::endl;
+            std::cout << dna_q << std::endl;
+            std::cout << dna_d << std::endl;
+            std::cout << "alignment" << std::endl;
+            std::cout << _alignment_q << std::endl;
+            std::cout << _alignment_d << std::endl << std::endl;
+        }
+    }
     ASSERT_EQ(0, 0);
 }

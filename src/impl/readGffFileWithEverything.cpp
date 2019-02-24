@@ -15,8 +15,9 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
     cdsParentRegex.insert("Parent=([\\s\\S^,^;]*?)$");//exon
     transcriptParentRegex.insert("Parent=([\\s\\S]*?)[;,]");
     transcriptIdRegex.insert("ID=([\\s\\S]*?)[;,]");
-    geneIdRegex.insert("ID=([\\s\\S]*?)[;,]");
-    geneIdRegex.insert("ID=([\\s\\S]*?)$"); //melon
+    //geneIdRegex.insert("ID=([\\s\\S]*?)[;,;]");
+    geneIdRegex.insert("ID=([-_0-9:a-zA-Z.]*?)[;,]");
+    geneIdRegex.insert("ID=([-_0-9:a-zA-Z.]*?)$"); //melon
     // tair10 end
 
     //ensembl begin
@@ -167,6 +168,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                 Gene gene1(geneId, chromosomeName, strand);
                                 geneHashMap[geneId] = gene1;
                             }
+//                            std::cout << "line 170 " << geneId << std::endl;
                             geneHashMap[geneId].setStart(start);
                             geneHashMap[geneId].setEnd(end);
                             geneHashMap[geneId].setSource(source);
@@ -220,11 +222,12 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                             if (geneHashMap.find(geneId) != geneHashMap.end()) {
 
                             } else {
+                                //std::cout << "there is something wrong with the gff file, maybe could not generate correct result" << std::endl;
                                 Gene gene1(geneId, chromosomeName, strand);
                                 geneHashMap[geneId] = gene1;
                             }
                             geneHashMap[geneId].addTranscript(transcriptHashMap[transcriptId]);
-                            //                        std::cout << "line 178 very good very good " << geneHashMap[geneId].getName() << " " << transcriptHashMap[transcriptId].getName() << std::endl;
+                            //std::cout << "line 178 very good very good " << geneHashMap[geneId].getName() << " " << transcriptHashMap[transcriptId].getName() << std::endl;
                             matched = true;
                             break; // jump out for loop
                         }
@@ -338,7 +341,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                 } else if (ignoreTypes.find(elemetns[2]) != ignoreTypes.end()) { // ignore those elements
 
                 } else {
-                    std::cout << "we could not analysis the line in the gff/gtf file: " << line << std::endl;
+//                    std::cout << "we could not analysis the line in the gff/gtf file: " << line << std::endl;
                 }
             }
         }
@@ -439,8 +442,8 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
     cdsParentRegex.insert("Parent=([\\s\\S^,^;]*?)$");//exon
     transcriptParentRegex.insert("Parent=([\\s\\S]*?)[;,]");
     transcriptIdRegex.insert("ID=([\\s\\S]*?)[;,]");
-    geneIdRegex.insert("ID=([\\s\\S]*?)[;,]");
-    geneIdRegex.insert("ID=([\\s\\S]*?)$"); //melon
+    geneIdRegex.insert("ID=([-_0-9:a-zA-Z.]*?)[;,]");
+    geneIdRegex.insert("ID=([-_0-9:a-zA-Z.]*?)$"); //melon
     // tair10 end
 
     //ensembl begin

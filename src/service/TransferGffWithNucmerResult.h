@@ -32,5 +32,6 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                                        const std::string & databaseFastaFilePath,
                                        const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
                                        std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                       const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment);
+                                       const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source);
+
 #endif //ANNOTATIONLIFTOVER_TRANSFERGFFWITHNUCMERRESULT_H

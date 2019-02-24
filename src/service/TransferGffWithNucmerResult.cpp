@@ -610,6 +610,8 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
                     newStartShitfDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart());
                 }
             }
+//            std::cout << "geneHashMap[geneNameMap[chr][i]].getEnd() " << geneHashMap[geneNameMap[chr][i]].getEnd() <<
+//                         " alignmentMatch.getDatabase().getEnd() " << alignmentMatch.getDatabase().getEnd() << std::endl;
             if( geneHashMap[geneNameMap[chr][i]].getEnd() > alignmentMatch.getDatabase().getEnd() ){
                 if( endShiftDistance < (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart()) ){
                     //std::cout << "line 612" << std::endl;
@@ -618,8 +620,12 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
             }
 //            std::cout << "newStartShitfDistance: " << newStartShitfDistance << " newEndShiftDistance: " << newEndShiftDistance << std::endl;
             if( newStartShitfDistance <= 100000 && newEndShiftDistance <= 100000 ){
-                startShitfDistance=newStartShitfDistance;
-                endShiftDistance=newEndShiftDistance;
+                if( startShitfDistance<newStartShitfDistance ){
+                    startShitfDistance=newStartShitfDistance;
+                }
+                if( endShiftDistance<newEndShiftDistance ){
+                    endShiftDistance=newEndShiftDistance;
+                }
                 overLappedGenes.push_back(&geneHashMap[geneNameMap[chr][i]]);
             }
         }
@@ -715,6 +721,7 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
             if( queryStart < 1 ){
                 queryStart=1;
             }
+            //std::cout << "queryStart: " << queryStart << " databaseStart: " << databaseStart << std::endl;
             querySequence0 = getSubsequence(querySequences, alignmentMatch.getQueryChr(), queryStart,
                                             alignmentMatch.getQueryStart()-1);
         } else if ( NEGATIVE == alignmentMatch.getQueryStrand() && alignmentMatch.getQueryEnd() < querySequences[alignmentMatch.getQueryChr()].getSequence().length() ) {
@@ -775,13 +782,193 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
         alignSlidingWindow(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
     }
 
-
     alignSlidingWindow(querySequence1, databaseSequence1, alignQuerySequence1, alignDatabaseSequence1, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
 
     alignQuerySequence = alignQuerySequence + alignQuerySequence1;
     alignQuerySequence = alignQuerySequence + alignQuerySequence2;
     alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence1;
     alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence2;
+//    std::cout << "alignQuerySequence: " << alignQuerySequence << std::endl;
+//    std::cout << "alignDatabaseSequence: " << alignDatabaseSequence << std::endl;
+    //generate annotation according to sequence alignment begin
+//    std::cout << "line 661" << std::endl;
+    for( Gene * gene : overLappedGenes ){
+//        std::cout << gene->getName() << std::endl;
+        for (int i=0; i< gene->getTranscriptVector().size(); ++i) {
+//            std::cout << gene->getTranscriptVector()[i] << std::endl;
+            if( transcriptHashMap[gene->getTranscriptVector()[i]].getCdsVector().size() > 0 ){
+                for (int it4 =0; it4< transcriptHashMap[gene->getTranscriptVector()[i]].getCdsVector().size(); ++it4) {
+                    GenomeBasicFeature * cds = & transcriptHashMap[gene->getTranscriptVector()[i]].getCdsVector()[it4];
+                    importantPositions[(*cds).getStart()] = 0;
+                    importantPositions[(*cds).getEnd()] = 0;
+                }
+            }
+            if( transcriptHashMap[gene->getTranscriptVector()[i]].getExonVector().size()>0 ){
+                for (int it4=0; it4< transcriptHashMap[gene->getTranscriptVector()[i]].getExonVector().size(); ++it4) {
+                    GenomeBasicFeature *exon = & transcriptHashMap[gene->getTranscriptVector()[i]].getExonVector()[it4];
+                    importantPositions[(*exon).getStart()] = 0;
+                    importantPositions[(*exon).getEnd()] = 0;
+                }
+            }
+            if( transcriptHashMap[gene->getTranscriptVector()[i]].getFivePrimerUtr().size()>0 ){
+                for (int it4=0; it4< transcriptHashMap[gene->getTranscriptVector()[i]].getFivePrimerUtr().size(); ++it4) {
+                    importantPositions[transcriptHashMap[gene->getTranscriptVector()[i]].getFivePrimerUtr()[it4].getStart()] = 0;
+                    importantPositions[transcriptHashMap[gene->getTranscriptVector()[i]].getFivePrimerUtr()[it4].getEnd()] = 0;
+                }
+            }
+            if( transcriptHashMap[gene->getTranscriptVector()[i]].getThreePrimerUtr().size()>0 ){
+                for (int it4=0; it4< transcriptHashMap[gene->getTranscriptVector()[i]].getThreePrimerUtr().size(); ++it4) {
+                    importantPositions[transcriptHashMap[gene->getTranscriptVector()[i]].getThreePrimerUtr()[it4].getStart()] = 0;
+                    importantPositions[transcriptHashMap[gene->getTranscriptVector()[i]].getThreePrimerUtr()[it4].getEnd()] = 0;
+                }
+            }
+        }
+    }
+//    std::cout << "line 682" << std::endl;
+    int databasePosition = databaseStart - 1;
+    int newStart;
+    int queryPosition = 0;
+    for (size_t tp = 0; tp < alignQuerySequence.length(); ++tp) {
+        if (alignQuerySequence[tp] != '-') {
+            ++queryPosition;
+        }
+        if (alignDatabaseSequence[tp] != '-') {
+            ++databasePosition;
+            if( importantPositions.find(databasePosition) != importantPositions.end() ){
+                if (POSITIVE == alignmentMatch.getQueryStrand()) {
+                    newStart = queryStart + queryPosition - 1;
+                } else {
+                    newStart = queryEnd - queryPosition + 1;
+                }
+                if (newStart < 1) {
+                    newStart = 1;
+                } else if (newStart >
+                           querySequences[alignmentMatch.getQueryChr()].getSequence().length()) {
+                    newStart = querySequences[alignmentMatch.getQueryChr()].getSequence().length();
+                }
+                importantPositions[databasePosition] = newStart;
+            }
+        }
+    }
+}
+
+
+void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
+                                        std::map<std::string, Fasta> & databaseSequences,
+                                        std::map<std::string, Fasta> & querySequences,
+                                        std::vector<Gene*> & overLappedGenes, std::map<std::string, Transcript> & transcriptHashMap,
+                                        std::map<int, int> & importantPositions,
+                                        const int & slidingWindowSize, const int & startShitfDistance,
+                                        const int & endShiftDistance, std::map<std::string, std::string>& parameters,
+                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix){
+
+
+    int queryStart=alignmentMatch.getQueryStart();
+    int queryEnd= alignmentMatch.getQueryEnd();
+    int databaseStart=alignmentMatch.getDatabaseStart();
+    int databaseEnd=alignmentMatch.getDatabaseEnd();
+
+//    std::cout << "line 677" << std::endl;
+    std::string alignQuerySequence="";
+    std::string alignDatabaseSequence="";
+
+//    std::string alignQuerySequence1="";
+//    std::string alignDatabaseSequence1="";
+//
+//    std::string alignQuerySequence2="";
+//    std::string alignDatabaseSequence2="";
+
+    std::string querySequence0="";
+    std::string databaseSequence0="";
+
+    if(startShitfDistance>0){
+        databaseStart = alignmentMatch.getDatabaseStart()-startShitfDistance;
+        if( databaseStart < 1 ){
+            databaseStart = 1;
+        }
+        if( alignmentMatch.getDatabaseStart()>1 ) {
+            databaseSequence0 = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
+                                               databaseStart, alignmentMatch.getDatabaseStart() - 1);
+        }
+
+        if( POSITIVE == alignmentMatch.getQueryStrand() && alignmentMatch.getQueryStart()>1 ){
+            queryStart = alignmentMatch.getQueryStart()-startShitfDistance;
+            if( queryStart < 1 ){
+                queryStart=1;
+            }
+            querySequence0 = getSubsequence(querySequences, alignmentMatch.getQueryChr(), queryStart,
+                                            alignmentMatch.getQueryStart()-1);
+        } else if ( NEGATIVE == alignmentMatch.getQueryStrand() && alignmentMatch.getQueryEnd() < querySequences[alignmentMatch.getQueryChr()].getSequence().length() ) {
+            queryEnd = alignmentMatch.getQueryEnd()+startShitfDistance;
+            if( queryEnd > querySequences[alignmentMatch.getQueryChr()].getSequence().length() ){
+                queryEnd = querySequences[alignmentMatch.getQueryChr()].getSequence().length();
+            }
+            querySequence0 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
+                                            alignmentMatch.getQueryEnd()+1,
+                                            queryEnd, alignmentMatch.getQueryStrand());
+        }
+//        int longerLength = querySequence0.length();
+//        if( longerLength < databaseSequence0.length()){
+//            longerLength = databaseSequence0.length();
+//        }
+        //alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence, alignDatabaseSequence, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+    }
+    std::string querySequence1 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
+                                                alignmentMatch.getQueryStart(),
+                                                alignmentMatch.getQueryEnd(), alignmentMatch.getQueryStrand());
+    std::string databaseSequence1 = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
+                                                   alignmentMatch.getDatabaseStart(),
+                                                   alignmentMatch.getDatabaseEnd());
+
+    std::string querySequence2="";
+    std::string databaseSequence2="";
+    if( endShiftDistance>0 ){
+        databaseEnd = alignmentMatch.getDatabaseEnd()+endShiftDistance;
+        if( databaseEnd > databaseSequences[alignmentMatch.getDatabaseChr()].getSequence().length() ){
+            databaseEnd = databaseSequences[alignmentMatch.getDatabaseChr()].getSequence().length();
+        }
+        if( alignmentMatch.getDatabaseEnd() < databaseSequences[alignmentMatch.getDatabaseChr()].getSequence().length() ) {
+            databaseSequence2 = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
+                                               alignmentMatch.getDatabaseEnd()+1, databaseEnd);
+        }
+
+        if( POSITIVE == alignmentMatch.getQueryStrand() && alignmentMatch.getQueryEnd() < querySequences[alignmentMatch.getQueryChr()].getSequence().length() ) {
+            queryEnd = alignmentMatch.getQueryEnd() + endShiftDistance;
+            if (queryEnd > querySequences[alignmentMatch.getQueryChr()].getSequence().length() ) {
+                queryEnd = querySequences[alignmentMatch.getQueryChr()].getSequence().length();
+            }
+            querySequence2 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
+                                            alignmentMatch.getQueryEnd() + 1, queryEnd,
+                                            alignmentMatch.getQueryStrand());
+        } else if ( NEGATIVE == alignmentMatch.getQueryStrand() && alignmentMatch.getQueryStart()>1){
+            queryStart = alignmentMatch.getQueryStart() - endShiftDistance;
+            if (queryStart < 1 ) {
+                queryStart = 1;
+            }
+            querySequence2 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
+                                            queryStart, alignmentMatch.getQueryStart() - 1,
+                                            alignmentMatch.getQueryStrand());
+        }
+//        int longerLength = querySequence2.length();
+//        if( longerLength < databaseSequence2.length()){
+//            longerLength = databaseSequence2.length();
+//        }
+        //alignSlidingWindow(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+    }
+
+
+    std::string querySequence = querySequence0 + querySequence1 + querySequence2;
+    std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
+    alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
+
+
+//    alignQuerySequence = alignQuerySequence + alignQuerySequence1;
+//    alignQuerySequence = alignQuerySequence + alignQuerySequence2;
+//    alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence1;
+//    alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence2;
+
+//    std::cout << "alignQuerySequence: " << alignQuerySequence << std::endl;
+//    std::cout << "alignDatabaseSequence: " << alignDatabaseSequence << std::endl;
     //generate annotation according to sequence alignment begin
 //    std::cout << "line 661" << std::endl;
     for( Gene * gene : overLappedGenes ){
@@ -1182,13 +1369,14 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
             split(line, delim, elems);
             queryStart=stoi(elems[3]);
 //            if(databaseStart>0 && transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
-            if( transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
+            queryChr=elems[2];
+            if( queryChr.compare("*") != 0 && transcriptHashMap.find(elems[0])!=transcriptHashMap.end() ){ // ignore those none mapping records
                 //std::cout << "begain to analysis " << line << std::endl;
                 databaseChr=transcriptHashMap[elems[0]].getChromeSomeName();
-                queryChr=elems[2];
 
                 databaseStart = transcriptHashMap[elems[0]].getPStart();
-                //databaseEnd=databaseStart;
+                databaseEnd = transcriptHashMap[elems[0]].getPEnd();
+//                databaseEnd=databaseStart;
                 queryEnd=queryStart;
                 std::vector<std::string> cigarElems;
                 splitCIGAR(elems[5], cigarElems);
@@ -1196,36 +1384,38 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
                 for(int i=0;i<cigarElems.size();++i) {
                     std::string cVal = cigarElems[i];
                     char cLetter = cVal[cVal.length() - 1];
+                    int cLen = stoi(cVal.substr(0, cVal.length() - 1));
                     if( i == cigarElems.size()-1 && (cLetter == 'H' || cLetter == 'S' ) ){ // ignore the last soft/hard clipping
+                        databaseEnd -= cLen;
                         continue;
                     }
 //                    std::cout << cVal << std::endl;
 //                    std::cout << cLetter << std::endl;
-                    int cLen = stoi(cVal.substr(0, cVal.length() - 1));
+
 //                    std::cout << cLen << std::endl;
                     switch (cLetter) {
                         case 'H':
-                            //databaseStart += cLen;
-                            //databaseEnd = databaseStart;
+                            databaseStart += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case 'S':
-                            //databaseStart += cLen;
-                            //databaseEnd = databaseStart;
+                            databaseStart += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case 'M':
                             queryEnd += cLen;
-                            //databaseEnd += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case '=':
                             queryEnd += cLen;
-                            //databaseEnd += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case 'X':
                             queryEnd += cLen;
-                            //databaseEnd += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case 'I':
-                            //databaseEnd += cLen;
+//                            databaseEnd += cLen;
                             break;
                         case 'D':
                             queryEnd += cLen;
@@ -1240,7 +1430,7 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
                             break;
                     }
                 }
-                databaseEnd = transcriptHashMap[elems[0]].getPEnd();
+                //databaseEnd = transcriptHashMap[elems[0]].getPEnd();
                // std::cout << "cigar parsing done" << std::endl;
 //                --databaseEnd;
                 --queryEnd;
@@ -1262,13 +1452,13 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
 //                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 }
             }else{
-                std::cout << "could not analysis line: " << line << std::endl;
+//                std::cout << "could not analysis line: " << line << std::endl;
             }
         }
     }
     TransferAllExonWithNucmerResult( geneNameMap,
                                      geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment);
+                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "sam");
 }
 
 void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
@@ -1285,7 +1475,7 @@ void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std
 
     TransferAllExonWithNucmerResult( geneNameMap,
             geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment);
+            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "nuc");
 }
 
 void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::string> > & geneNameMap,
@@ -1293,10 +1483,8 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
         const std::string & databaseFastaFilePath,
         const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
         std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment){
-
+        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source){
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
-
     std::map<std::string, Fasta> databaseSequences;
     readFastaFile(databaseFastaFilePath, databaseSequences);
     CheckAndUpdateTranscriptsEnds( transcriptHashMap, databaseSequences, nucleotideCodeSubstitutionMatrix, minIntron);
@@ -1325,7 +1513,7 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                     //update algnmentMatch begin
                     std::vector<Gene*> overLappedGenes;
                     if( slowMode ){
-                        //std::cout << "line 1317" << std::endl;
+//                        std::cout << "line 1317" << std::endl;
                         getAlltheOverLappedGenes2( geneNameMap, geneHashMap, it1->first, alignmentMatch, overLappedGenes,
                                                    startShitfDistance, endShiftDistance);
                     }else{
@@ -1334,7 +1522,8 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                         //std::cout << "line 1323" << std::endl;
                     }
                     //std::exit(0);
-                    //std::cout << "line 982 overLappedGenes.size() " << overLappedGenes.size() << std::endl;
+//                    std::cout << "line 982 overLappedGenes.size() " << overLappedGenes.size() << std::endl;
+                    //std::cout << "startShitfDistance " << startShitfDistance << " endShiftDistance: " << endShiftDistance << std::endl;
                     if( overLappedGenes.size()>0 ) {
                         std::vector<NewGffRecord> newGffRecords;
 //                        std::cout << "line 984" << std::endl;
@@ -1343,26 +1532,36 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
 
                         std::map<int, int> importantPositions;
 //                        std::cout << "line 990" << std::endl;
-                        if( alignmentMatch.getWindowSize()>1 ){
+                        //windows size if a record specific sliding window size
+                        // if it is not set, then use slidingWindowSize
+                        if( source.compare("sam") == 0 ){
+                            slidingWinAlnAndGeneRateAnnotationSam( alignmentMatch, databaseSequences, querySequences,
+                                                                overLappedGenes, transcriptHashMap, importantPositions,
+                                                                slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+                        }else if( alignmentMatch.getWindowSize()>1 ){
+                            //std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
                                                                 alignmentMatch.getWindowSize(), startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
                         }else{
+                            //std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                             overLappedGenes, transcriptHashMap, importantPositions,
                                                             slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
                         }
-                        //std::cout << "genome sequence alignment done" << std::endl;
+//                        std::cout << "genome sequence alignment done" << std::endl;
                         if( POSITIVE == alignmentMatch.getQueryStrand() ) {
+//                            std::cout << "line 1554" << std::endl;
                             for( Gene * gene : overLappedGenes ) {
+//                                std::cout << "line 1556 " << gene->getName() << std::endl;
                                 NewGffRecord newGffRecord;
                                 newGffRecord.geneName=gene->getName();
                                 newGffRecord.strand=gene->getStrand();
 //                                std::cout << gene->getName() << " " << gene->getTranscriptVector().size() << std::endl;
                                 for (i=0; i<gene->getTranscriptVector().size();++i ) {
-//                                    std::cout << transcriptHashMap[gene->getTranscriptVector()[i]].getName() << std::endl;
+//                                    std::cout << "positive " + transcriptHashMap[gene->getTranscriptVector()[i]].getName() << std::endl;
                                     std::string referenceTranscriptId = gene->getTranscriptVector()[i];
-//                                    std::cout << referenceTranscriptId << " " << transcriptHashMap[referenceTranscriptId].getStrand() << std::endl;
+                                    //std::cout << referenceTranscriptId << " " << transcriptHashMap[referenceTranscriptId].getStrand() << std::endl;
                                     Transcript * referenceTranscript = & transcriptHashMap[referenceTranscriptId];
                                     Transcript newTranscript(referenceTranscriptId,
                                                              alignmentMatch.getQueryChr(),

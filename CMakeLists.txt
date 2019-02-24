@@ -152,6 +152,6 @@ add_executable(gean
         src/impl/deNovoGenomeVariantCalling.cpp
         src/impl/deNovoGenomeVariantCalling.h
         src/service/deNovoGenomeVariantCallingService.cpp
-        src/service/deNovoGenomeVariantCallingService.h src/myImportandFunction/hengAlign.cpp src/myImportandFunction/hengAlign.h src/cns.cpp src/song_cns.cpp src/song_cns.h )
+        src/service/deNovoGenomeVariantCallingService.h src/myImportandFunction/hengAlign.cpp src/myImportandFunction/hengAlign.h src/cns.cpp src/song_cns.cpp src/song_cns.h src/tests/service/TransferAllExonWithSpliceAlignmentResult_test.cpp)
 
 target_link_libraries(gean gtest gtest_main)
