@@ -48,5 +48,5 @@ do some duplication filtering
 ~/software/src/GEAN/gean purifygff -i mo17.gff -s Zm-Mo17-REFERENCE-CAU-1.0.fa -o mo17_purify.gff
 ````
 
-*this is pipeline to transform the gene structure annotation from reference genome sequence to another de novo assembly genome squence.
- This is not a complete pipeline to annotate the new assembly.*
+###### this is pipeline to transform the gene structure annotation from reference genome sequence to another de novo assembly genome squence. This is not a complete pipeline to annotate the new assembly.
+###### If you are doing genome assembly for a new accession using different genome sequence assembly pipelines. The number of successfully transformed transcripts (marked as ConservedFunction in the output gff file) could be used to measure the genome assembly quality.
