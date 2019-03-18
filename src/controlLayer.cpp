@@ -632,6 +632,140 @@ int PurifyGff( int argc, char** argv, std::map<std::string, std::string>& parame
     return 1;
 }
 
+int outPutORFConserveredTranscripts( int argc, char** argv, std::map<std::string, std::string>& parameters ){
+    std::stringstream usage;
+    usage <<  "Usage: "<<softwareName<<" orf -i inputGffFile -s inputGenome -o output GFF/GTF file " << std::endl<<
+          "Options" << std::endl <<
+          " -h        produce help message" << std::endl <<
+          " -i FILE   GFF/GTF file" << std::endl <<
+          " -s FILE   genome sequence" << std::endl <<
+          " -o FILE   output GFF/GTF file" << std::endl <<
+          " -m INT    minimum intron size" << std::endl << std::endl;
+
+    InputParser inputParser (argc, argv);
+    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
+        std::cerr << usage.str();
+    }else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-s") && inputParser.cmdOptionExists("-o") ){
+        std::string gffFilePath = inputParser.getCmdOption("-i");
+        std::string genomeFile = inputParser.getCmdOption("-s");
+        std::string outPutFilePath=inputParser.getCmdOption("-o");
+
+        int minIntron;
+        if( inputParser.cmdOptionExists("-m") ){
+            minIntron = std::stoi( inputParser.getCmdOption("-m") );
+        }else{
+            minIntron=5;
+        }
+        if( minIntron < 5 ){
+            std::cerr << "the intron size should be 5 at minimum" << std::endl;
+            exit(1);
+        }
+
+        outPutORFConserveredTranscripts( genomeFile, gffFilePath,
+                                         outPutFilePath ,  minIntron,
+                                         parameters );
+
+        return 0;
+    }else{
+        std::cerr << usage.str();
+    }
+    return 1;
+}
+
+int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string>& parameters ){
+    std::stringstream usage;
+    usage <<  "Usage: "<<softwareName<<" sinsyn -i referenceGffFile -s inputGenome -o output GFF/GTF file " << std::endl<<
+          "Options" << std::endl <<
+          " -h          produce help message" << std::endl <<
+          " -i FILE     reference GFF/GTF file" << std::endl <<
+          //" -r FILE     reference genome sequence" << std::endl <<
+          " -s FILE     target genome sequence" << std::endl <<
+          " -a FILE     target GFF/GTF file" << std::endl <<
+          " -o FILE     output GFF file" << std::endl << std::endl <<
+          " ADVANCED PARAMETERS" << std::endl <<
+          " -m INT      minimum intron size" << std::endl <<
+          //" -d        keep tandem duplication (default false) " <<
+          " -rt DOUBLE  reverse syntenic block threads hold (12.0)" << std::endl <<
+          " -rs DOUBLE  reverse syntenic match score (3.0)" << std::endl <<
+          " -rp DOUBLE  reverse syntenic mismatch penalty (-4.0)" << std::endl <<
+          " -ss DOUBLE  score for gene located in syntenic region (1.0)" << std::endl <<
+          " -so DOUBLE  score for gene with ORF conserved (1.5)" << std::endl <<
+          " -dl DOUBLE  length ratio to drop a gene transformation" << std::endl;
+    InputParser inputParser (argc, argv);
+    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
+        std::cerr << usage.str();
+    }else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-s") && inputParser.cmdOptionExists("-o") && inputParser.cmdOptionExists("-a") ){
+
+        std::string referenceGffFile = inputParser.getCmdOption("-i");
+//        std::string databaseFastaFilePath = inputParser.getCmdOption("-r");
+        std::string queryGenomeFile = inputParser.getCmdOption("-s");
+        std::string queryNewGffFile=inputParser.getCmdOption("-a");
+        std::string outputGffFile=inputParser.getCmdOption("-o");
+
+        int minIntron;
+        if( inputParser.cmdOptionExists("-m") ){
+            minIntron = std::stoi( inputParser.getCmdOption("-m") );
+        }else{
+            minIntron=5;
+        }
+        if( minIntron < 5 ){
+            std::cerr << "the intron size should be 5 at minimum" << std::endl;
+            exit(1);
+        }
+        int minGene;
+        if( inputParser.cmdOptionExists("-x") ){
+            minGene = std::stoi( inputParser.getCmdOption("-x") );
+        }else{
+            minGene=9;
+        }
+        if( minGene < 9 ){
+            std::cerr << "the gene size should be 9 at minimum" << std::endl;
+            exit(1);
+        }
+
+
+
+        bool keepTandemDuplication=false;
+//        if( inputParser.cmdOptionExists("-i"){
+//            keepTandemDuplication = true;
+//        }
+        double scoreThreshold=12;
+        if( inputParser.cmdOptionExists("-rt") ){
+            scoreThreshold = std::stoi( inputParser.getCmdOption("-rt") );
+        }
+        double score = 3.0;
+        if( inputParser.cmdOptionExists("-rs") ){
+            score = std::stoi( inputParser.getCmdOption("-rs") );
+        }
+        double penalty = -4.0;
+        if( inputParser.cmdOptionExists("-rp") ){
+            penalty = std::stoi( inputParser.getCmdOption("-rp") );
+        }
+
+        double syntenicScore=1.0;
+        if( inputParser.cmdOptionExists("-ss") ){
+            syntenicScore = std::stoi( inputParser.getCmdOption("-ss") );
+        }
+
+        double orfScore=1.5;
+        if( inputParser.cmdOptionExists("-so") ){
+            orfScore = std::stoi( inputParser.getCmdOption("-so") );
+        }
+        double dropLengthThredshold=0.2;
+        if( inputParser.cmdOptionExists("-dl") ){
+            dropLengthThredshold = std::stoi( inputParser.getCmdOption("-dl") );
+        }
+        generateLongestOutput( referenceGffFile,  queryNewGffFile, queryGenomeFile, outputGffFile,  minIntron,
+                               score, penalty,  scoreThreshold,  keepTandemDuplication, parameters, syntenicScore,
+                               orfScore, dropLengthThredshold);
+
+        return 0;
+    }else{
+        std::cerr << usage.str();
+    }
+    return 1;
+}
+
 int DenoveAssemblyVariantCalling( int argc, char** argv, std::map<std::string, std::string>& parameters ) {
     std::stringstream usage;
     usage << "Usage: " << softwareName

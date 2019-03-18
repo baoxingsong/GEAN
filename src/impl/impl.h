@@ -20,6 +20,7 @@ the methods under this folder only rely on code under model and util
 
 #ifndef ANNOTATIONLIFTOVER_IMPL_H
 #define ANNOTATIONLIFTOVER_IMPL_H
+
 #include "../model/model.h"
 #include "annotationLiftOver.h"
 #include "checkOrfState.h"
@@ -40,4 +41,7 @@ the methods under this folder only rely on code under model and util
 #include "CheckAndUpdateTranscriptsEnds.h"
 #include "organizeGffRecords.h"
 #include "deNovoGenomeVariantCalling.h"
+#include "longestPath.h"
+#include "outPutORFConserveredTranscripts.h"
+
 #endif //ANNOTATIONLIFTOVER_IMPL_H

@@ -142,7 +142,10 @@ add_executable(gean
         src/tests/myImportandFunction/alignTranscript.cpp
         src/tests/control/myGffCoordinateLiftOver_test.cpp
         src/tests/impl/readFastaFile_test.cpp
+        src/tests/impl/deNovoGenomeVariantCalling_test.cpp
+        src/tests/impl/longest_test.cpp
         src/tests/myImportandFunction/hengAlign_test.cpp
+        src/tests/impl/orf_test.cpp
         src/myImportandFunction/geneAnnotationAlignment.cpp
         src/myImportandFunction/geneAnnotationAlignment.h
         src/service/denovoGffLiftOverToUniqGffOutput.cpp
@@ -152,6 +155,17 @@ add_executable(gean
         src/impl/deNovoGenomeVariantCalling.cpp
         src/impl/deNovoGenomeVariantCalling.h
         src/service/deNovoGenomeVariantCallingService.cpp
-        src/service/deNovoGenomeVariantCallingService.h src/myImportandFunction/hengAlign.cpp src/myImportandFunction/hengAlign.h src/cns.cpp src/song_cns.cpp src/song_cns.h src/tests/service/TransferAllExonWithSpliceAlignmentResult_test.cpp)
+        src/service/deNovoGenomeVariantCallingService.h
+        src/myImportandFunction/hengAlign.cpp
+        src/myImportandFunction/hengAlign.h
+        src/cns.cpp src/song_cns.cpp
+        src/song_cns.h
+        src/tests/service/TransferAllExonWithSpliceAlignmentResult_test.cpp
+        src/model/OrthologPair.cpp
+        src/model/OrthologPair.h
+        src/impl/longestPath.cpp
+        src/impl/longestPath.h
+        src/impl/outPutORFConserveredTranscripts.cpp
+        src/impl/outPutORFConserveredTranscripts.h)
 
 target_link_libraries(gean gtest gtest_main)

@@ -740,7 +740,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                 } else if (ignoreTypes.find(elemetns[2]) != ignoreTypes.end()) { // ignore those elements
 
                 } else {
-                    std::cout << "we could analysis the line in the gff/gtf file " << line << std::endl;
+                    //std::cout << "we could not analysis the line in the gff/gtf file " << line << std::endl;
                 }
             }
         }

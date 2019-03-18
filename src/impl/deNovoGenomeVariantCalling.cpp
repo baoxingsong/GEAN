@@ -28,6 +28,7 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
             }
         }
     }
+    std::cout << "line 31" << std::endl;
     std::map <std::string, std::vector<int32_t>> refToRemoveVector;
     for( std::map <std::string, std::set<int32_t>>::iterator it0=refToRemove.begin(); it0!=refToRemove.end(); ++it0 ) { //remove non-coding gene and loss-of-function gene
         refToRemoveVector[it0->first]=std::vector<int32_t>();
@@ -38,20 +39,23 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
             return a < b;
         });
     }
+    std::cout << "line 41" << std::endl;
     for( std::map<std::string, std::vector<Gene> >::iterator it0=refGeneMap.begin(); it0!=refGeneMap.end(); ++it0 ){
         for( int j=refToRemoveVector[it0->first].size()-1; j>=0; --j ){
             refGeneMap[it0->first].erase(refGeneMap[it0->first].begin()+refToRemoveVector[it0->first][j]);
         }
     }
-
-
+    std::cout << "line 48" << std::endl;
     std::map <std::string, std::vector<Gene>> targetGeneMap;
     readGffFileWithEveryThing(targetGffFilePath, targetGeneMap);
     std::map <std::string, Fasta> targetSequences;
     readFastaFile(targetFastaFilePath, targetSequences);
+    std::cout << "line 53" << std::endl;
     updateGeneInformation(targetGeneMap, nucleotideCodeSubstitutionMatrix, minIntron, targetSequences);
     std::map <std::string, std::set<int32_t>> targetToRemove;
+    std::cout << "line 56" << std::endl;
     removeDuplication(targetGeneMap, minGene, targetToRemove);
+    std::cout << "line 58" << std::endl;
     for( std::map<std::string, std::vector<Gene> >::iterator it0=targetGeneMap.begin(); it0!=targetGeneMap.end(); ++it0 ){ //remove non-coding gene and loss-of-function gene
         for( int32_t it1=0; it1<it0->second.size(); ++it1 ){
             if( it0->second[it1].getTranscripts()[0].getCdsVector().size() == 0 || (it0->second[it1].getTranscripts()[0].getIfOrfShift()) ){
@@ -59,6 +63,7 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
             }
         }
     }
+    std::cout << "line 63" << std::endl;
     std::map <std::string, std::vector<int32_t>> targetToRemoveVector;
     for( std::map <std::string, std::set<int32_t>>::iterator it0=targetToRemove.begin(); it0!=targetToRemove.end(); ++it0 ) { //remove non-coding gene and loss-of-function gene
         targetToRemoveVector[it0->first]=std::vector<int32_t>();
@@ -69,12 +74,13 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
             return a < b;
         });
     }
-
+    std::cout << "line 74" << std::endl;
     for( std::map<std::string, std::vector<Gene> >::iterator it0=targetGeneMap.begin(); it0!=targetGeneMap.end(); ++it0 ){
         for( int j=targetToRemoveVector[it0->first].size()-1; j>=0; --j ){
             targetGeneMap[it0->first].erase(targetGeneMap[it0->first].begin()+targetToRemoveVector[it0->first][j]);
         }
     }
+    std::cout << "line 80" << std::endl;
     for( std::map<std::string, std::vector<Gene> >::iterator it0=targetGeneMap.begin(); it0!=targetGeneMap.end(); ++it0 ){
         int32_t maxScore = - pow(2, 31);
         std::string maxOne;
@@ -86,6 +92,7 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
             _alignment_q.clear();
             _alignment_d.clear();
             int32_t score = globalAlignment(it0->second, itr->second, _alignment_q, _alignment_d);
+            std::cout << "it0: " << it0->first << " itr: " << itr->first << " score: " << score << std::endl;
             if( score > maxScore ){
                 maxScore=score;
                 maxOne = itr->first;
@@ -93,6 +100,10 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
                 alignment_d=_alignment_d;
             }
         }
+
+        std::cout << " it0: " << it0->first << std::endl;
+        std::cout << " maxOne: " << maxOne << std::endl;
+
         size_t startRef = 1;
         size_t startQuery = 1;
         size_t endRef;
@@ -176,6 +187,7 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
                 ++refIndex;
             }
         }
+        std::cout << "line 186" << std::endl;
         endRef = refSequences[maxOne].getSequence().length();
         endQuery = targetSequences[it0->first].getSequence().length();
         std::string refSeq = getSubsequence( refSequences, maxOne, startRef, endRef);
@@ -202,8 +214,8 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
         temp.erase(std::remove(temp.begin(), temp.end(), '-'), temp.end());
         assert(temp.compare(querySeq)==0);
 
-        std::cout << refAlign.str() << std::endl;
-        std::cout << queryAlign.str() << std::endl;
+        //std::cout << refAlign.str() << std::endl;
+        //std::cout << queryAlign.str() << std::endl;
 
         temp = refAlign.str();
         temp.erase(std::remove(temp.begin(), temp.end(), '-'), temp.end());
@@ -215,10 +227,11 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
         std::cout << std::endl;
         std::string queryAlignSeq = queryAlign.str();
         std::string refAlignSeq = refAlign.str();
-
+        std::cout << "line 227 " << std::endl;
         FirstLastList sdiRecords;
         int refLetterNumber = 0;
         for (int ai = 0; ai < refAlignSeq.length(); ai++) {
+            //std::cout << "ai: " << ai << std::endl;
             if (refAlignSeq[ai] != '-') {
                 ++refLetterNumber;
             }

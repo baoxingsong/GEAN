@@ -1,0 +1,5 @@
+2019 Mar 18
+ add a function that take the GFF files with duplication gene ids as input and try to unify them by keep those records in the synetic region primarily
+ add a function to filter the GFF file and kepp only those transcript recorrds with ORF consered
+    those genes with no ORF conserved transcripts will be removed
+ 

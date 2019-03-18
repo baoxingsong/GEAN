@@ -33,17 +33,16 @@ int main(int argc, char** argv){
 //testing::InitGoogleTest(&argc, argv);
 //RUN_ALL_TESTS();
 //return 0;
-
     if( argc<=1 ){
         usage();
         return 1;
     }
-
     std::string program = argv[1];
     if( program.compare("-h") == 0 || program.compare("--help") == 0 ){
         usage();
         exit(1);
     }
+
     InputParser inputParser (argc, argv);
     string parameterFile;
     std::string exepath = getexepath(argv);
@@ -77,6 +76,10 @@ int main(int argc, char** argv){
         return spliceAlignmentToGff(--argc, ++argv, parameters);
     } else if( program.compare("purifygff") == 0 ) {
         return PurifyGff(--argc, ++argv, parameters);
+    } else if( program.compare("sinsyn") == 0 ) {
+        return syntenicSingleCopy(--argc, ++argv, parameters);
+    }else if( program.compare("orf") == 0 ) {
+        return outPutORFConserveredTranscripts(--argc, ++argv, parameters);
     } else if( program.compare("reanva") == 0 ) {
         return Reanva(--argc, ++argv, parameters);
     } else if( program.compare("varcall") == 0 ) {

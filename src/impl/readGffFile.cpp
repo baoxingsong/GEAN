@@ -28,6 +28,7 @@ void get_transcript_to_gene_map_from_gff (const std::string& filePath, std::map<
         }
     }
 }
+
 void readGffFile (const std::string& filePath, std::map<std::string, std::vector<Transcript> >& transcriptHashSet, const std::string& cdsParentRegex){
     std::map<std::string, Transcript> transcriptHashMap;
     std::ifstream infile(filePath);

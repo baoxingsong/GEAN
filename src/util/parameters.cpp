@@ -25,7 +25,14 @@
 #include "myutil.h"
 #include <fstream>
 #include <regex>
+#include <stdio.h>
 
+#include <cstdio>
+#include <iostream>
+#include <memory>
+#include <stdexcept>
+#include <string>
+#include <array>
 
 
 std::map<std::string, std::string> initialize_paramters(std::string parameters_file, std::string exepath){
@@ -102,17 +109,43 @@ std::string generateUUID(){
     return sole::uuid0().str();
 }
 
+std::string exec(const char* cmd) {
+    std::array<char, 128> buffer;
+    std::string result;
+    std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+    if (!pipe) {
+        throw std::runtime_error("popen() failed!");
+    }
+    if (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
+        result = buffer.data();
+    }
+    return result;
+}
+
 std::string generateUUID(std::string& prefix){
     return prefix + "." + sole::uuid0().str();
 }
 
 std::string getexepath(char** argv) {
     std::string exeFile = std::string(argv[0]);
-    std::regex e ("\\/[\\w._ ]+$");   // matches words beginning by "sub"
+    std::regex reg("\\/");
+    std::smatch match;
+    regex_search(exeFile, match, reg);
+    if( match.empty() ){
+        std::string command = "which " + exeFile;
+        exeFile = exec(command.c_str());
+        std::regex e ("\\s+$");
+        std::string temp="";
+        std::regex_replace(std::back_inserter(temp), exeFile.begin(), exeFile.end(), e, "");
+        exeFile = temp;
+        exeFile.pop_back();
+    }
+    std::regex e ("\\/[\\w._ ]+$");
     std::string result="";
     std::regex_replace(std::back_inserter(result), exeFile.begin(), exeFile.end(), e, "");
     return result;
 }
+
 std::string getexepath(std::map<std::string, std::string>& parameters){
     return parameters["exepath"];
 }

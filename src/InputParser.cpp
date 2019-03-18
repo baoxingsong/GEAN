@@ -84,5 +84,7 @@ void usage( ){
         "    transgff    trans reference gff/gtf to de novo assembly genome" <<  std::endl <<
         "    spltogff    trans reference gff/gtf to de novo assembly genome using splice alignment sam file" <<  std::endl <<
         "    purifygff   purify the result from transgff" <<  std::endl <<
+        "    sinsyn      purify by keeping syntenic genes priorly and single copy genes " <<  std::endl <<
+        "    orf         keep only ORF conserved genes " <<  std::endl <<
         "    varcall     perform variant calling for de novo genome sequence" <<  std::endl;
 }
