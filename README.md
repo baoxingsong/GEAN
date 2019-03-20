@@ -25,7 +25,7 @@ make
 ```
 
 this command will generate an executable file named gean
-
+<!--
 ## Run it
 ````
 Program gean
@@ -250,13 +250,15 @@ remove those duplication gene structure annotations generated from the transff f
   -x INT    minimum gene length
   -m INT    minimum intron size
 ````
-
+-->
 There are several functions are under testing and are included in the source code. The document for those functions will be released after testing.
-Best Practices for different aims are comming.
+Best Practices for different aims could be found under example.
 ### Contact
 Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
 Please feel free to send E-mail to songbaoxing168@163.com
 ### Acknowledgement
 Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\
 Thank Dr. Hequan Sun from MPIPZ for discussions\
-Thank Lukas Baumgarten from MPIPZ and Elad Oren from Hebrew University of Jerusalem for bug reporting.
+Thank Lukas Baumgarten from MPIPZ and Qiushi Li from University of UCalgary for bug reporting\
+Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of GEAN
+

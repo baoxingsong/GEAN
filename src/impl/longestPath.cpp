@@ -203,7 +203,7 @@ void outputGffRecords(Gene & gene, std::ofstream &ofile, std::set<std::string> &
                     if(thisTranscriptStart>it4->getStart()){
                         thisTranscriptStart=it4->getStart();
                     }
-                    if(thisTranscriptEnd<it4->getStart()){
+                    if(thisTranscriptEnd<it4->getEnd()){
                         thisTranscriptEnd=it4->getEnd();
                     }
                 }
@@ -229,7 +229,7 @@ void outputGffRecords(Gene & gene, std::ofstream &ofile, std::set<std::string> &
             if( thisStart> it->getStart() ){
                 thisStart = it->getStart();
             }
-            if( thisEnd> it->getEnd() ){
+            if( thisEnd< it->getEnd() ){
                 thisEnd = it->getEnd();
             }
         }
