@@ -959,7 +959,8 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
 
     std::string querySequence = querySequence0 + querySequence1 + querySequence2;
     std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
-    alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
+    alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
+            startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
 
 
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence1;

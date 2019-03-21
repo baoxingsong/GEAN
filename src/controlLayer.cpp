@@ -531,7 +531,7 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
 
 int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::string>& parameters ){
     std::stringstream usage;
-    usage <<  "Usage: "<<softwareName<<" transgff -i inputGffFile -r inputGenome -a similar segments -s new genome sequence -o output GFF/GTF file " << std::endl<<
+    usage <<  "Usage: "<<softwareName<<" spltogff -i inputGffFile -r inputGenome -a similar segments -s new genome sequence -o output GFF/GTF file " << std::endl<<
           "Options" << std::endl <<
           " -h        produce help message" << std::endl <<
           " -i FILE   reference GFF/GTF file" << std::endl <<

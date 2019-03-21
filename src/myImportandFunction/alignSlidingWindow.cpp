@@ -711,6 +711,108 @@ void alignSlidingWindow( const std::string& dna_q, const std::string& dna_d,
 //    std::cout << "sequence alignment done" << std::endl;
 }
 
+
+
+//void alignSlidingWindow_old_version( const std::string& dna_q, const std::string& dna_d,
+void alignSlidingWindow( const std::string& dna_q, const std::string& dna_d,
+                         std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
+                         const int & startShiftDistance, const int & endShiftDistance , std::map<std::string, std::string>& parameters,
+                         NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix ){
+////    std::cout << slidingWindowSize << " " << dna_q.length() << " " << dna_d.length() << std::endl;
+//    int8_t substitute_matrix[5][5] = {
+//            //  A,     T,     C,     G,     N
+//            {    1,    -1,    -1,    -1,    0} ,   //A
+//            {   -1,     1,    -1,    -1,    0} ,   //T
+//            {   -1,    -1,     1,    -1,    0} ,   //C
+//            {   -1,    -1,    -1,     1,    0},     //G
+//            {    0,     0,     0,     0,    0}     //N
+//    };
+//    int8_t ** _substitute_matrix = new int8_t*[5];
+//    for( i=0; i<5;++i ){
+//        _substitute_matrix[i] = new int8_t[5];
+//        for( j=0; j<5;++j ){
+//            _substitute_matrix[i][j] = substitute_matrix[i][j];
+//        }
+//    }
+//
+//    std::map<char , int8_t> _dna_acid_map;
+//    _dna_acid_map['A']=0;
+//    _dna_acid_map['a']=0;
+//    _dna_acid_map['T']=1;
+//    _dna_acid_map['t']=1;
+//    _dna_acid_map['C']=2;
+//    _dna_acid_map['c']=2;
+//    _dna_acid_map['G']=3;
+//    _dna_acid_map['g']=3;
+    int shiftdistance = startShiftDistance;
+    if( shiftdistance < endShiftDistance ){
+        shiftdistance = endShiftDistance;
+    }
+
+    int8_t _open_gap_penalty=stoi(get_parameters("alignmentOpenGapP", parameters));
+    int8_t _extend_gap_penalty=stoi(get_parameters("alignmentExtendGapP", parameters));
+    size_t _length_of_q=dna_q.size();
+    size_t _length_of_d=dna_d.size();
+
+    //2^15 = 32768
+    //of the maximum length of the windowSize of is about 32000/2 = 16000
+    size_t databaseStart=1;
+    size_t databaseEnd = 0;
+    size_t queryStart=1;
+    size_t queryEnd = 0;
+    int thisSlidingWindowSize = slidingWindowSize + shiftdistance; //give the first one a large window size
+    while( databaseStart<_length_of_d && queryStart< _length_of_q){
+        databaseEnd=databaseStart+thisSlidingWindowSize;
+        queryEnd=queryStart+thisSlidingWindowSize;
+        if( databaseEnd>_length_of_d ){
+            databaseEnd=_length_of_d;
+        }
+        if( queryEnd>_length_of_q ){
+            queryEnd=_length_of_q;
+        }
+        std::string qSeq = getSubsequence(dna_q, queryStart, queryEnd );
+        std::string dSeq = getSubsequence(dna_d, databaseStart, databaseEnd );
+//        std::cout << qSeq << std::endl << dSeq << std::endl;
+        std::stack<char> SQ;
+        std::stack<char> SD;
+        if( thisSlidingWindowSize>1073741824 ){
+            std::cout << "the windows size is too large" << std::endl;
+            exit(1);
+        }else if( thisSlidingWindowSize>16384 ){
+            alignment_avx_int32(qSeq, dSeq, SQ, SD, _open_gap_penalty, _extend_gap_penalty, nucleotideCodeSubstitutionMatrix);
+        } else if( thisSlidingWindowSize>65 ){
+            alignment_avx_int16(qSeq, dSeq, SQ, SD, _open_gap_penalty, _extend_gap_penalty, nucleotideCodeSubstitutionMatrix);
+        }else{
+            alignment_avx_int8(qSeq, dSeq, SQ, SD, _open_gap_penalty, _extend_gap_penalty, nucleotideCodeSubstitutionMatrix); // this function is not correct do not run it
+        }
+        while (!SQ.empty()) {
+            _alignment_q += SQ.top();
+            _alignment_d += SD.top();
+            if( SQ.top() != '-' ){
+                ++queryStart;
+            }
+            if( SD.top() != '-' ){
+                ++databaseStart;
+            }
+            SQ.pop();
+            SD.pop();
+        }
+        thisSlidingWindowSize=slidingWindowSize;
+//        std::cout << _alignment_q << std::endl << _alignment_d << std::endl;
+    }
+    while( databaseStart<=_length_of_d ){
+        _alignment_q += '-';
+        _alignment_d += dna_d[databaseStart-1];
+        ++databaseStart;
+    }
+    while( queryStart<=_length_of_q ){
+        _alignment_q += dna_q[queryStart-1];
+        _alignment_d += '-';
+        ++queryStart;
+    }
+//    std::cout << "sequence alignment done" << std::endl;
+}
+
 /*
  * currently, I still have some difficulty to use the minimap2 algorithm
  * **/

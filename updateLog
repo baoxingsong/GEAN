@@ -1,6 +1,8 @@
+2019 Mar 20
+    better sliding window alignment for the first one
 2019 Mar 19
-fix bugs for sinsyn and orf functions, which could not ouput the end position of transcript and gene correctly.
+    fix bugs for sinsyn and orf functions, which could not ouput the end position of transcript and gene correctly.
 2019 Mar 18
- add a function that take the GFF files with duplication gene ids as input and try to unify them by keep those records in the synetic region primarily
- add a function to filter the GFF file and kepp only those transcript recorrds with ORF consered
+    add a function that take the GFF files with duplication gene ids as input and try to unify them by keep those records in the synetic region primarily
+    add a function to filter the GFF file and kepp only those transcript recorrds with ORF consered
     those genes with no ORF conserved transcripts will be removed

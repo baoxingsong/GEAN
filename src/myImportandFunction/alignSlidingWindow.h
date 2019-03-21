@@ -15,6 +15,10 @@
 #include "hengAlign.h"
 void alignSlidingWindow( const std::string& dna_q, const std::string& dna_d,
                          std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
+                         const int & startShiftDistance, const int & endShiftDistance , std::map<std::string, std::string>& parameters,
+                         NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix );
+void alignSlidingWindow( const std::string& dna_q, const std::string& dna_d,
+                         std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
                          std::map<std::string, std::string>& parameters, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix );
 
 #endif //ANNOTATIONLIFTOVER_ALIGNSLIDINGWINDOW_H
