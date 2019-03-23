@@ -10,6 +10,7 @@ set(CMAKE_C_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -mavx2 -I ./ -pthread
 add_subdirectory(./googletest/googletest)
 include_directories(googletest/googletest/include googletest/googletest)
 
+
 add_executable(gean
         googletest
         googletest/googletest
