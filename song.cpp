@@ -78,7 +78,9 @@ int main(int argc, char** argv){
         return PurifyGff(--argc, ++argv, parameters);
     } else if( program.compare("sinsyn") == 0 ) {
         return syntenicSingleCopy(--argc, ++argv, parameters);
-    }else if( program.compare("orf") == 0 ) {
+    } else if( program.compare("sinsyn2") == 0 ) {
+        return syntenicSingleCopy2(--argc, ++argv, parameters);
+    } else if( program.compare("orf") == 0 ) {
         return outPutORFConserveredTranscripts(--argc, ++argv, parameters);
     } else if( program.compare("reanva") == 0 ) {
         return Reanva(--argc, ++argv, parameters);

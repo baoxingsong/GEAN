@@ -163,8 +163,8 @@ add_executable(gean
         src/tests/service/TransferAllExonWithSpliceAlignmentResult_test.cpp
         src/model/OrthologPair.cpp
         src/model/OrthologPair.h
-        src/impl/longestPath.cpp
-        src/impl/longestPath.h
+        src/impl/geneSyntenic.cpp
+        src/impl/geneSyntenic.h
         src/impl/outPutORFConserveredTranscripts.cpp
         src/impl/outPutORFConserveredTranscripts.h)
 

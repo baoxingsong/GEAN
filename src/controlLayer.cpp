@@ -674,7 +674,7 @@ int outPutORFConserveredTranscripts( int argc, char** argv, std::map<std::string
 
 int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string>& parameters ){
     std::stringstream usage;
-    usage <<  "Usage: "<<softwareName<<" sinsyn -i referenceGffFile -s inputGenome -o output GFF/GTF file " << std::endl<<
+    usage <<  "Usage: "<<softwareName<<" sinsyn -i referenceGffFile -s inputGenome -a inputGffFile -o output GFF/GTF file " << std::endl<<
           "Options" << std::endl <<
           " -h          produce help message" << std::endl <<
           " -i FILE     reference GFF/GTF file" << std::endl <<
@@ -684,13 +684,13 @@ int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string
           " -o FILE     output GFF file" << std::endl << std::endl <<
           " ADVANCED PARAMETERS" << std::endl <<
           " -m INT      minimum intron size" << std::endl <<
-          //" -d        keep tandem duplication (default false) " <<
+          " -d          keep tandem duplication (default false) " << std::endl <<
           " -rt DOUBLE  reverse syntenic block threads hold (12.0)" << std::endl <<
           " -rs DOUBLE  reverse syntenic match score (3.0)" << std::endl <<
           " -rp DOUBLE  reverse syntenic mismatch penalty (-4.0)" << std::endl <<
           " -ss DOUBLE  score for gene located in syntenic region (1.0)" << std::endl <<
           " -so DOUBLE  score for gene with ORF conserved (1.5)" << std::endl <<
-          " -dl DOUBLE  length ratio to drop a gene transformation" << std::endl;
+          " -dl DOUBLE  length ratio to drop a gene transformation (0.2)" << std::endl;
     InputParser inputParser (argc, argv);
     if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
         std::cerr << usage.str();
@@ -723,41 +723,139 @@ int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string
             exit(1);
         }
 
-
-
         bool keepTandemDuplication=false;
-//        if( inputParser.cmdOptionExists("-i"){
-//            keepTandemDuplication = true;
-//        }
+        if( inputParser.cmdOptionExists("-d")){
+            keepTandemDuplication = true;
+        }
         double scoreThreshold=12;
         if( inputParser.cmdOptionExists("-rt") ){
-            scoreThreshold = std::stoi( inputParser.getCmdOption("-rt") );
+            scoreThreshold = std::stod( inputParser.getCmdOption("-rt") );
         }
         double score = 3.0;
         if( inputParser.cmdOptionExists("-rs") ){
-            score = std::stoi( inputParser.getCmdOption("-rs") );
+            score = std::stod( inputParser.getCmdOption("-rs") );
         }
         double penalty = -4.0;
         if( inputParser.cmdOptionExists("-rp") ){
-            penalty = std::stoi( inputParser.getCmdOption("-rp") );
+            penalty = std::stod( inputParser.getCmdOption("-rp") );
         }
 
         double syntenicScore=1.0;
         if( inputParser.cmdOptionExists("-ss") ){
-            syntenicScore = std::stoi( inputParser.getCmdOption("-ss") );
+            syntenicScore = std::stod( inputParser.getCmdOption("-ss") );
         }
 
         double orfScore=1.5;
         if( inputParser.cmdOptionExists("-so") ){
-            orfScore = std::stoi( inputParser.getCmdOption("-so") );
+            orfScore = std::stod( inputParser.getCmdOption("-so") );
         }
         double dropLengthThredshold=0.2;
         if( inputParser.cmdOptionExists("-dl") ){
-            dropLengthThredshold = std::stoi( inputParser.getCmdOption("-dl") );
+            dropLengthThredshold = std::stod( inputParser.getCmdOption("-dl") );
         }
         generateLongestOutput( referenceGffFile,  queryNewGffFile, queryGenomeFile, outputGffFile,  minIntron,
                                score, penalty,  scoreThreshold,  keepTandemDuplication, parameters, syntenicScore,
                                orfScore, dropLengthThredshold);
+
+        return 0;
+    }else{
+        std::cerr << usage.str();
+    }
+    return 1;
+}
+
+int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::string>& parameters ){
+    std::stringstream usage;
+    usage <<  "Usage: "<<softwareName<<" sinsyn2 -i referenceGffFile -s inputGenome -a inputGffFile -o output GFF/GTF file " << std::endl<<
+          "Options" << std::endl <<
+          " -h          produce help message" << std::endl <<
+          " -i FILE     reference GFF/GTF file" << std::endl <<
+          //" -r FILE     reference genome sequence" << std::endl <<
+          " -s FILE     target genome sequence" << std::endl <<
+          " -a FILE     target GFF/GTF file" << std::endl <<
+          " -o FILE     output GFF file" << std::endl << std::endl <<
+          " ADVANCED PARAMETERS" << std::endl <<
+          " -m INT      minimum intron size" << std::endl <<
+          " -d          keep tandem duplication (default false) " << std::endl <<
+          " -md INT     maximum distance of syntenic block genes (default 20) " << std::endl <<
+          " -ms DOUBLE  minimum syntenic block score (default 8.0) " << std::endl <<
+          " -op DOUBLE  open gap penalty (default -0.1) " << std::endl <<
+          " -ep DOUBLE  extend gap penalty (default -0.05) " << std::endl <<
+          " -ss DOUBLE  score for gene located in syntenic region (1.0)" << std::endl <<
+          " -so DOUBLE  score for gene with ORF conserved (1.5)" << std::endl <<
+          " -dl DOUBLE  length ratio to drop a gene transformation (0.2)" << std::endl;
+    InputParser inputParser (argc, argv);
+    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
+        std::cerr << usage.str();
+    }else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-s") && inputParser.cmdOptionExists("-o") && inputParser.cmdOptionExists("-a") ){
+
+        std::string referenceGffFile = inputParser.getCmdOption("-i");
+//        std::string databaseFastaFilePath = inputParser.getCmdOption("-r");
+        std::string queryGenomeFile = inputParser.getCmdOption("-s");
+        std::string queryNewGffFile=inputParser.getCmdOption("-a");
+        std::string outputGffFile=inputParser.getCmdOption("-o");
+
+        int minIntron;
+        if( inputParser.cmdOptionExists("-m") ){
+            minIntron = std::stoi( inputParser.getCmdOption("-m") );
+        }else{
+            minIntron=5;
+        }
+        if( minIntron < 5 ){
+            std::cerr << "the intron size should be 5 at minimum" << std::endl;
+            exit(1);
+        }
+        int minGene;
+        if( inputParser.cmdOptionExists("-x") ){
+            minGene = std::stoi( inputParser.getCmdOption("-x") );
+        }else{
+            minGene=9;
+        }
+        if( minGene < 9 ){
+            std::cerr << "the gene size should be 9 at minimum" << std::endl;
+            exit(1);
+        }
+        bool keepTandemDuplication=false;
+        if( inputParser.cmdOptionExists("-d")){
+            keepTandemDuplication = true;
+        }
+        double syntenicScore=1.0;
+        if( inputParser.cmdOptionExists("-ss") ){
+            syntenicScore = std::stod( inputParser.getCmdOption("-ss") );
+        }
+
+        double orfScore=1.5;
+        if( inputParser.cmdOptionExists("-so") ){
+            orfScore = std::stod( inputParser.getCmdOption("-so") );
+        }
+        double dropLengthThredshold=0.2;
+        if( inputParser.cmdOptionExists("-dl") ){
+            dropLengthThredshold = std::stod( inputParser.getCmdOption("-dl") );
+        }
+
+        int MAX_DIST_BETWEEN_MATCHES=20;
+        if( inputParser.cmdOptionExists("-md") ){
+            MAX_DIST_BETWEEN_MATCHES = std::stoi( inputParser.getCmdOption("-md") );
+        }
+        int BP_GAP_SIZE=1; // this parameter maybe is not necessary
+
+        double INDEL_SCORE=-0.05;
+        if( inputParser.cmdOptionExists("-op") ){
+            INDEL_SCORE = std::stod( inputParser.getCmdOption("-op") );
+        }
+        double GAP_OPEN_PENALTY=-0.1;
+        if( inputParser.cmdOptionExists("-ep") ){
+            GAP_OPEN_PENALTY = std::stod( inputParser.getCmdOption("-ep") );
+        }
+        double MIN_ALIGNMENT_SCORE = 8;
+        if( inputParser.cmdOptionExists("-ms") ){
+            MIN_ALIGNMENT_SCORE = std::stod( inputParser.getCmdOption("-ms") );
+        }
+        generateDagChainerOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
+                                  parameters, syntenicScore, orfScore, dropLengthThredshold, MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
+                                  BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE);
+
+
 
         return 0;
     }else{

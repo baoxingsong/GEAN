@@ -41,7 +41,7 @@ the methods under this folder only rely on code under model and util
 #include "CheckAndUpdateTranscriptsEnds.h"
 #include "organizeGffRecords.h"
 #include "deNovoGenomeVariantCalling.h"
-#include "longestPath.h"
+#include "geneSyntenic.h"
 #include "outPutORFConserveredTranscripts.h"
 
 #endif //ANNOTATIONLIFTOVER_IMPL_H

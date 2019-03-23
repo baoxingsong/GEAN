@@ -16,4 +16,11 @@ void generateLongestOutput( const std::string & referenceGffFile, const std::str
                             double score, double penalty, double scoreThreshold, const bool & keepTandemDuplication,
                             std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore, const double & dropLengthThredshold );
 
+void generateDagChainerOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
+                               const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
+                               const bool & keepTandemDuplication,
+                               std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore,
+                               const double & dropLengthThredshold, int MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
+                               int BP_GAP_SIZE, double INDEL_SCORE, double GAP_OPEN_PENALTY, double MIN_ALIGNMENT_SCORE);
+
 #endif //GEAN_LONGESTPATH_H

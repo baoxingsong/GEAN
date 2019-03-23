@@ -51,6 +51,7 @@ int DenoveAssemblyVariantCalling( int argc, char** argv, std::map<std::string, s
 int annotationLiftOver( int argc, char** argv );
 int annotationLiftOverAndOrth( int argc, char** argv);
 int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string>& parameters );
+int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::string>& parameters );
 int outPutORFConserveredTranscripts( int argc, char** argv, std::map<std::string, std::string>& parameters);
 int reAnnotationAndExonerateAndNovo( int argc, char** argv, std::map<std::string, std::string>& parameters);
 int myCountNumberOfTwoneighborSNP( int argc, char** argv, std::map<std::string, std::string>& parameters);
