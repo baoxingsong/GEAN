@@ -4,6 +4,19 @@
 
 #include "geneSyntenic.h"
 
+int getIndexFromGffFile(std::map<std::string, std::vector<Gene> > & referenceGenes, std::string chr, std::string geneName){
+    int id = -1;
+    if( referenceGenes.find(chr) != referenceGenes.end() ){
+        int index = 0;
+        for( Gene g : referenceGenes[chr] ){
+            if( g.getName() == geneName ){
+                return index;
+            }
+            ++index;
+        }
+    }
+    return id;
+}
 
 
 /**
@@ -16,8 +29,8 @@
  */
 
 
-// this function put the forward entries in the increasing order and put the reversiob entries in a decrease order
-void myPOrthologPairsSort( std::vector<OrthologPair> & pairedSimilarFragments, const double & score, const double & penalty, const double & scoreThreshold, const bool & keepTandemDuplication){
+// this function put the forward entries in the increasing order and put the reversion entries in a decrease order
+void myOrthologPairsSort( std::vector<OrthologPair> & pairedSimilarFragments, const double & score, const double & penalty, const double & scoreThreshold, const bool & keepTandemDuplication){
     std::sort(pairedSimilarFragments.begin(), pairedSimilarFragments.end(), [](OrthologPair a, OrthologPair b) {
         return a < b;
     });
@@ -395,7 +408,7 @@ void generateLongestOutput( const std::string & referenceGffFile, const std::str
                     }
                 }
             }
-            myPOrthologPairsSort( orthologPairs, score, penalty,  scoreThreshold, keepTandemDuplication);
+            myOrthologPairsSort( orthologPairs, score, penalty,  scoreThreshold, keepTandemDuplication);
             std::vector<OrthologPair> sortedOrthologPairs;
             longestPath (orthologPairs, sortedOrthologPairs, keepTandemDuplication);
             for( OrthologPair orthologPair : sortedOrthologPairs ){
@@ -491,6 +504,348 @@ void generateLongestOutput( const std::string & referenceGffFile, const std::str
 
 
 /**
+ * my version of Quota-alignment using the longest alignment method
+ * This longest alignment is designed as a local alignment model
+ * And a lot of ideas were borrowed from the DAGchainder method
+ * */
+void myOrthologPairsSortQuota( std::vector<OrthologPair2> & pairedSimilarFragments){
+    std::sort(pairedSimilarFragments.begin(), pairedSimilarFragments.end(), [](OrthologPair2 a, OrthologPair2 b) {
+        return a < b;
+    });
+}
+
+struct Path{
+    double score;
+    int index;
+};
+
+// since we will change pairedSimilarFragments, so do not use reference here
+void longestPathQuota (std::vector<OrthologPair2> pairedSimilarFragments, std::vector<std::vector<OrthologPair2>> & sortedOrthologPairChains,
+        const bool & keepTandemDuplication, double & INDEL_SCORE, double & GAP_OPEN_PENALTY,
+        double & MIN_ALIGNMENT_SCORE, int & refMaximumTimes, int & queryMaximumTimes, std::map<std::string, int> & refTimes,
+        std::map<std::string, int> & queryTimes ){
+
+    double scoreArray [pairedSimilarFragments.size()]; // arrays of scores
+    int prev [pairedSimilarFragments.size()];  // index of previous node in longest path
+    scoreArray[0] = pairedSimilarFragments[0].getScore();
+    prev[0] = -1;
+    Path p;
+    std::vector <Path> high;
+    std::vector <int> ans;
+    bool done;
+    int n, i, j;
+    do{
+        done = true;
+        n=pairedSimilarFragments.size();
+        high.clear();
+        for (int idx = 0; idx < 0; ++idx) {
+            scoreArray[idx] = pairedSimilarFragments[idx].getScore();
+            prev[idx] = -1;
+        }
+        for (int idx = 1; idx < n; ++idx) {
+            int distance=0;
+            for (int jdx = idx - 1; jdx >= 0; --jdx) {// checking all previous nodes
+                // Because we swapped asm/query start position so that inversions were all increasing,
+                // we should always be on the diagonal.  If not, then we filter it.
+                // This gets rid of the noise, while preserving the inversions on
+                // the diagonal
+                // Are only looking at positions previous to our current "idx" position
+                if(  pairedSimilarFragments[idx].getQueryChr()==pairedSimilarFragments[jdx].getQueryChr()
+                    && pairedSimilarFragments[idx].getRefChr()==pairedSimilarFragments[jdx].getRefChr() ){
+                    if( pairedSimilarFragments[idx].getStrand() == pairedSimilarFragments[jdx].getStrand() ){
+                        // the node one the chain should be in the same STRAND, if not this is an INDEL
+                        if ( pairedSimilarFragments[idx].getStrand() == POSITIVE ) { //same strand
+                            double thisScore = 0.0;
+                            thisScore = scoreArray[jdx] + pairedSimilarFragments[idx].getScore();
+                            int ref_del = pairedSimilarFragments[idx].getRefId() - pairedSimilarFragments[jdx].getRefId()-1;
+                            int query_del = pairedSimilarFragments[idx].getQueryId() - pairedSimilarFragments[jdx].getQueryId()-1;
+                            distance = (int)(((ref_del+query_del)+abs(ref_del-query_del))/(2.5));
+                            if( distance > 0 ){
+                                thisScore = GAP_OPEN_PENALTY + INDEL_SCORE*distance;
+                            }
+                            if ( thisScore > scoreArray[idx] &&
+                                 pairedSimilarFragments[jdx].getQueryMiddlePos() < pairedSimilarFragments[idx].getQueryMiddlePos()){
+                                scoreArray[idx] = thisScore;
+                                prev[idx] = jdx;
+                            } else if ( thisScore > scoreArray[idx] &&
+                                       pairedSimilarFragments[jdx].getQueryMiddlePos() == pairedSimilarFragments[idx].getQueryMiddlePos()
+                                       && keepTandemDuplication) {
+                                scoreArray[idx] = thisScore;
+                                prev[idx] = jdx;
+                            }
+                        } else { // different STRAND
+                            double thisScore = 0.0;
+                            thisScore = scoreArray[jdx] + pairedSimilarFragments[idx].getScore();
+                            if( distance > 0 ){
+                                thisScore = GAP_OPEN_PENALTY + INDEL_SCORE*distance;
+                            }
+                            if ( thisScore > scoreArray[idx] &&
+                                 pairedSimilarFragments[jdx].getQueryMiddlePos() > pairedSimilarFragments[idx].getQueryMiddlePos()){
+                                scoreArray[idx] = thisScore;
+                                prev[idx] = jdx;
+                            }else if ( thisScore > scoreArray[idx] &&
+                                       pairedSimilarFragments[jdx].getQueryMiddlePos() == pairedSimilarFragments[idx].getQueryMiddlePos()
+                                       && keepTandemDuplication) {
+                                scoreArray[idx] = thisScore;
+                                prev[idx] = jdx;
+                            }
+                        }
+                    }
+                }
+                ++distance;
+            }
+
+            if ( scoreArray[idx] > MIN_ALIGNMENT_SCORE){
+                p.index=idx;
+                p.score=scoreArray[idx];
+                high.push_back(p);
+            }
+        }
+
+        std::sort(high.begin(), high.end(), [](Path a, Path b) {
+            return a.score > b.score;
+        });
+
+        for( i=0; i<high.size(); ++i ){
+            ans.clear();
+            for( j=high[i].index; prev[j]>=0; j=prev[j] ){
+                ans.push_back(j);
+            }
+            ans.push_back(j);
+            if( prev[j] == -2 ){
+                done = false;
+                break;
+            }else{
+                std::vector<OrthologPair2> chain;
+                sortedOrthologPairChains.push_back(chain);
+                reverse(ans.begin(), ans.end());
+                int s=ans.size();
+                std::string lastRef="";  // this is for keeping duplication purpose
+                std::string lastQuery="";
+                for( j=0; j<s; j++ ){
+                    prev[ans[j]]=-2;
+                    OrthologPair2 orthologPair2 = pairedSimilarFragments[ans[j]];
+                    sortedOrthologPairChains[sortedOrthologPairChains.size()-1].push_back(orthologPair2);
+
+                    //for quota begin
+                    if( pairedSimilarFragments[ans[j]].getReferenceGeneName() != lastRef ){  // do not count duplications
+                        if( refTimes.find(pairedSimilarFragments[ans[j]].getReferenceGeneName()) != refTimes.end() ){
+                            refTimes[pairedSimilarFragments[ans[j]].getReferenceGeneName()]=refTimes[pairedSimilarFragments[ans[j]].getReferenceGeneName()]+1;
+                        }else{
+                            refTimes[pairedSimilarFragments[ans[j]].getReferenceGeneName()]=1;
+                        }
+                    }
+                    if( pairedSimilarFragments[ans[j]].getQueryGeneName() != lastQuery ){
+                        if( queryTimes.find( pairedSimilarFragments[ans[j]].getQueryGeneName()) != queryTimes.end() ){
+                            queryTimes[ pairedSimilarFragments[ans[j]].getQueryGeneName()] = queryTimes[ pairedSimilarFragments[ans[j]].getQueryGeneName()] + 1;
+                        } else {
+                            queryTimes[ pairedSimilarFragments[ans[j]].getQueryGeneName()] = 1;
+                        }
+                    }
+                    lastRef = pairedSimilarFragments[ans[j]].getReferenceGeneName();
+                    lastQuery = pairedSimilarFragments[ans[j]].getQueryGeneName();
+                    //for quota end
+                }
+
+            }
+        }
+        if( !done ){
+            for( i=j=0; i<0; i++ ){
+                if( prev[i] != 2 &&
+                    ( refTimes.find(pairedSimilarFragments[i].getReferenceGeneName()) == refTimes.end() || refTimes[pairedSimilarFragments[i].getReferenceGeneName()]<refMaximumTimes ) &&
+                        (queryTimes.find(pairedSimilarFragments[i].getQueryGeneName()) ==queryTimes.end() || queryTimes[pairedSimilarFragments[i].getQueryGeneName()]<queryMaximumTimes )){
+                    if( i != j ){ // those elements should be maintained for next loop
+                        pairedSimilarFragments[j]=pairedSimilarFragments[i];
+                    }
+                    ++j;
+                }
+            }
+            pairedSimilarFragments.resize(j);
+        }
+    }while(! done);
+}
+
+
+void generateLongestQuotaOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
+                            const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
+                            const bool & keepTandemDuplication,
+                            std::map<std::string, std::string>& parameters, const double & syntenicScore,
+                            const double & orfScore, const double & dropLengthThredshold,
+                            double & INDEL_SCORE, double & GAP_OPEN_PENALTY, double & MIN_ALIGNMENT_SCORE,
+                            int & refMaximumTimes, int & queryMaximumTimes ){
+    std::cout << " line 676" << std::endl;
+    std::map<std::string, Fasta> queryGenome;
+    readFastaFile(queryGenomeFile, queryGenome);
+    std::cout << " line 679" << std::endl;
+    NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
+    std::map<std::string, std::vector<Gene> > queryGenes;
+    readGffFileWithEveryThing (queryNewGffFile, queryGenes);
+    std::cout << " line 683" << std::endl;
+    std::map<std::string, std::vector<std::string> > referenceGeneNameMap;
+    std::map<std::string, Gene > referenceGeneHashMap;
+    std::map<std::string, Transcript> referenceTranscriptHashMap;
+    readGffFileWithEveryThing ( referenceGffFile, referenceGeneNameMap, referenceGeneHashMap, referenceTranscriptHashMap);
+    std::cout << " line 688" << std::endl;
+    std::map<std::string, std::vector<Gene> > referenceGenes;
+    readGffFileWithEveryThing (referenceGffFile, referenceGenes);
+    std::cout << " line 691" << std::endl;
+    std::ofstream ofile;
+    ofile.open(outputGffFile);
+
+    std::map<std::string, std::vector<Gene>> keepGenes;
+    std::map<std::string, double> geneScores;
+    std::cout << " line 697" << std::endl;
+    std::vector<OrthologPair2> orthologPairs;
+    for(std::map<std::string, std::vector<Gene>>::iterator it1=queryGenes.begin(); it1!=queryGenes.end(); it1++){
+        if( queryGenome.find(it1->first)!=queryGenome.end() ){
+            for( int i=0; i< it1->second.size(); ++i ){
+                if( referenceGeneHashMap.find(it1->second[i].getName())!=referenceGeneHashMap.end() ){
+                    int targetIndex=i;
+                    uint32_t refStartPos=referenceGeneHashMap[it1->second[i].getName()].getStart();
+                    uint32_t refEndPos   =referenceGeneHashMap[it1->second[i].getName()].getEnd();
+                    uint32_t queryStartPos=it1->second[i].getStart();
+                    uint32_t queryEndPos  =it1->second[i].getEnd();
+                    double thisScore=0;
+                    for(  int index=0; index<it1->second[i].getTranscripts().size(); ++index ){
+                        Transcript transcript=it1->second[i].getTranscripts()[index];
+                        TranscriptUpdateCdsInformation(transcript, queryGenome);
+                        checkOrfState(transcript, queryGenome, nucleotideCodeSubstitutionMatrix, minIntron);
+                        if( transcript.getIfOrfShift() ){
+                            // this score is for gene, if there is one ORF conserved transcript, then give this gene a positive score
+                        }else{
+                            thisScore=orfScore;
+                        }
+                        it1->second[i].getTranscripts()[index]=transcript;
+                        //break;
+                    }
+                    double lengthRatio;
+                    if( it1->second[i].getEnd() == it1->second[i].getStart() ){
+                        lengthRatio=0.0;
+                    }else{
+                        lengthRatio=(double)((double)it1->second[i].getEnd()-(double)it1->second[i].getStart())/((double)referenceGeneHashMap[it1->second[i].getName()].getEnd()-(double)referenceGeneHashMap[it1->second[i].getName()].getStart());
+                    }
+                    if( lengthRatio > 1 ){
+                        lengthRatio=1/lengthRatio;
+                    }
+                    thisScore += lengthRatio;
+                    STRAND strand;
+                    if( it1->second[i].getStrand() == referenceGeneHashMap[it1->second[i].getName()].getStrand() ){
+                        strand=POSITIVE;
+                    }else{
+                        strand=NEGATIVE;
+                    }
+                    if( lengthRatio > dropLengthThredshold ){
+                        int indexj=getIndexFromGffFile( referenceGenes, it1->first, it1->second[i].getName() ); //because referenceGenes has been sorted, so it's index makes sense
+                        if( indexj >= 0 ){
+                            OrthologPair2 orthologPair( referenceGeneHashMap[it1->second[i].getName()].getChromeSomeName(), it1->first, targetIndex,
+                                refStartPos, refEndPos, queryStartPos, queryEndPos, thisScore, strand, indexj, i, it1->second[i].getName(), it1->second[i].getName() );
+                            orthologPairs.push_back(orthologPair);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    std::map<std::string, int> refTimes;
+    std::map<std::string, int> queryTimes;
+    std::cout << "line 749" << std::endl;
+    myOrthologPairsSortQuota( orthologPairs);
+    std::cout << "line 751" << std::endl;
+    std::vector<std::vector<OrthologPair2>> sortedOrthologPairChains;
+    longestPathQuota (orthologPairs, sortedOrthologPairChains, keepTandemDuplication, INDEL_SCORE, GAP_OPEN_PENALTY,
+            MIN_ALIGNMENT_SCORE, refMaximumTimes, queryMaximumTimes, refTimes, queryTimes);
+    std::cout << "line 753" << std::endl;
+
+    // output those syntenic region records
+    for( std::vector<OrthologPair2> sortedOrthologPairs : sortedOrthologPairChains ){
+        for( OrthologPair2 orthologPair : sortedOrthologPairs ) {
+            Gene g = queryGenes[orthologPair.getQueryChr()][orthologPair.getQueryIndex()];
+            double thisScore = orthologPair.getScore() + syntenicScore;
+            if (geneScores.find(g.getName()) != geneScores.end()) {
+                if( geneScores[g.getName()] < thisScore ){
+                    geneScores[g.getName()] = thisScore;
+                }
+                std::vector<Gene> gs;
+                gs.push_back(g);
+                keepGenes[g.getName()] = gs;
+            } else {
+                geneScores[g.getName()] = thisScore;
+                std::vector<Gene> gs;
+                gs.push_back(g);
+                keepGenes[g.getName()] = gs;
+            }
+        }
+    }
+
+    //for those genes not in syntenic region, only output once
+    for( std::map<std::string, std::vector<Gene>>::iterator it1=queryGenes.begin(); it1!=queryGenes.end(); ++it1 ){
+        for( Gene g : it1->second ){
+            double thisScore=0;
+            for(  int index=0; index<g.getTranscripts().size(); ++index ){
+                Transcript transcript=g.getTranscripts()[index];
+                //TranscriptUpdateCdsInformation(transcript, queryGenome);
+                //checkOrfState(transcript, queryGenome, nucleotideCodeSubstitutionMatrix, minIntron);
+                if( transcript.getIfOrfShift() ){
+                    // this score is for gene, if there is one ORF conserved transcript, then give this gene a positive score
+                }else{
+                    thisScore=orfScore;
+                }
+                //g.getTranscripts()[index]=transcript;
+            }
+
+            double lengthRatio;
+            if( g.getEnd() == g.getStart() ){
+                lengthRatio=0.0;
+            }else{
+                lengthRatio=(double)((double)g.getEnd()-(double)g.getStart())/((double)referenceGeneHashMap[g.getName()].getEnd()-(double)referenceGeneHashMap[g.getName()].getStart());
+            }
+            if( lengthRatio > 1 ){
+                lengthRatio=1/lengthRatio;
+            }
+            thisScore += lengthRatio;
+            if( geneScores.find(g.getName()) != geneScores.end() ){
+                if( geneScores[g.getName()] < thisScore ){
+                    geneScores[g.getName()] = thisScore;
+                    std::vector<Gene> gs;
+                    gs.push_back(g);
+                    keepGenes[g.getName()] = gs;
+                }/*else if( keepTandemDuplication && geneScores[g.getName()] == thisScore ){
+                    geneScores[g.getName()] = thisScore;
+                    keepGenes[g.getName()].push_back(g);
+                }*/
+            }else{
+                geneScores[g.getName()] = thisScore;
+                std::vector<Gene> gs;
+                gs.push_back(g);
+                keepGenes[g.getName()] = gs;
+            }
+        }
+    }
+    std::set<std::string> geneNames;
+    std::set<std::string> transcriptNames;
+    std::vector<Gene> outputGenes;
+    for( std::map<std::string, std::vector<Gene>>::iterator it = keepGenes.begin(); it!=keepGenes.end(); ++ it ){
+        for( Gene g : it->second ){
+            outputGenes.push_back(g);
+        }
+    }
+    std::sort(outputGenes.begin(), outputGenes.end(), [](Gene a, Gene b) {
+        if( a.getChromeSomeName() != b.getChromeSomeName() ){ return a.getChromeSomeName() < b.getChromeSomeName(); } else{return a.getStart() < b.getStart();}
+    });
+    for( Gene g : outputGenes ){
+        outputGffRecords(g, ofile, geneNames, transcriptNames  );
+    }
+    ofile.close();
+}
+
+
+
+
+
+
+
+
+/**
  * the DAGchainer algorithm
  * this is another syntenic method
  * reference https://academic.oup.com/bioinformatics/article-lookup/doi/10.1093/bioinformatics/bth397
@@ -556,7 +911,7 @@ static void chainer (std::vector<Score_t> & score, std::vector<std::vector<Score
                         if (num_gaps > 0) {
                             // Affine gap penalty:
                             // penalty = open + (num_gaps * extension_penalty)
-                            x += GAP_OPEN_PENALTY + (num_gaps * INDEL_SCORE);
+                            x += GAP_OPEN_PENALTY + (INDEL_SCORE*num_gaps);
                         }
                         if  (x > path_score [j]) {
                             path_score [j] = x;
@@ -588,7 +943,8 @@ static void chainer (std::vector<Score_t> & score, std::vector<std::vector<Score
                     ans.push_back(j);
                 }
                 ans.push_back(j);
-                if  (from[j] == -2)  { // todo rethink about here, here if and only if the last elements is used twice, drop off the whole chain
+                if  (from[j] == -2)  { // here if and only if the last elements is used twice, drop off the whole chain
+                    // for 1:1 ration this should be correct
                     done = false;
                     break;
                 } else {
@@ -621,21 +977,6 @@ static void chainer (std::vector<Score_t> & score, std::vector<std::vector<Score
             score.resize(j); // score is the real input, here we delete those things already on the chain
         }
     } while  (! done);
-}
-
-
-int getIndexFromGffFile(std::map<std::string, std::vector<Gene> > & referenceGenes, std::string chr, std::string geneName){
-    int id = -1;
-    if( referenceGenes.find(chr) != referenceGenes.end() ){
-        int index = 0;
-        for( Gene g : referenceGenes[chr] ){
-            if( g.getName() == geneName ){
-                return index;
-            }
-            ++index;
-        }
-    }
-    return id;
 }
 
 
@@ -730,7 +1071,7 @@ void generateDagChainerOutput( const std::string & referenceGffFile, const std::
                         s.score = thisScore;
 //                        map_score[score_id] = s;
 //                        ++score_id;
-                        if( s.idx > 0){
+                        if( s.idx >= 0){
                             score.push_back(s); //copy match to score list. // this is from the input file
                         }
                     }
@@ -849,4 +1190,3 @@ void generateDagChainerOutput( const std::string & referenceGffFile, const std::
     }
     ofile.close();
 }
-//todo, something like quota-alignment

@@ -16,6 +16,16 @@ void generateLongestOutput( const std::string & referenceGffFile, const std::str
                             double score, double penalty, double scoreThreshold, const bool & keepTandemDuplication,
                             std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore, const double & dropLengthThredshold );
 
+
+
+void generateLongestQuotaOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
+                                 const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
+                                 const bool & keepTandemDuplication,
+                                 std::map<std::string, std::string>& parameters, const double & syntenicScore,
+                                 const double & orfScore, const double & dropLengthThredshold,
+                                 double & INDEL_SCORE, double & GAP_OPEN_PENALTY, double & MIN_ALIGNMENT_SCORE,
+                                 int & refMaximumTimes, int & queryMaximumTimes );
+
 void generateDagChainerOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
                                const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
                                const bool & keepTandemDuplication,

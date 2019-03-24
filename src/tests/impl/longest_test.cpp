@@ -64,3 +64,27 @@ TEST(dagChainer, c1){
                                    BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE);
     ASSERT_EQ(0, 0);
 }
+
+
+TEST(longestQuotaOutput, c1){
+    std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
+    std::string referenceGffFile = "/Users/bs674/Zea_mays.AGPv3.31.gff3";
+    std::string queryNewGffFile = "/Users/bs674/M017.gff";
+    std::string queryGenomeFile = "/Users/bs674/Mo17.fa";
+    std::string outputGffFile="/Users/bs674/M017_quota_longestpath_GEAN.gff";
+    int minIntron = 5;
+    bool keepTandemDuplication=true;
+    double syntenicScore=1.0;
+    double orfScore=1.5;
+    double dropLengthThredshold=0.2;
+    double INDEL_SCORE=-0.05;
+    double GAP_OPEN_PENALTY=-0.1;
+    double MIN_ALIGNMENT_SCORE = 8;
+    int refMaximumTimes=2;  // if there is a query duplication, then the reference gene could appear twice, so this value should be set as 2
+    int queryMaximumTimes=2;
+    generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
+        parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE,
+        refMaximumTimes, queryMaximumTimes );
+    ASSERT_EQ(0, 0);
+}

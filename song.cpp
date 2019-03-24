@@ -80,6 +80,8 @@ int main(int argc, char** argv){
         return syntenicSingleCopy(--argc, ++argv, parameters);
     } else if( program.compare("sinsyn2") == 0 ) {
         return syntenicSingleCopy2(--argc, ++argv, parameters);
+    } else if( program.compare("quotasyn") == 0 ) {
+        return syntenicSingleCopy3(--argc, ++argv, parameters);
     } else if( program.compare("orf") == 0 ) {
         return outPutORFConserveredTranscripts(--argc, ++argv, parameters);
     } else if( program.compare("reanva") == 0 ) {
