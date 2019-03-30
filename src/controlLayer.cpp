@@ -685,6 +685,7 @@ int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string
           " ADVANCED PARAMETERS" << std::endl <<
           " -m INT      minimum intron size" << std::endl <<
           " -d          keep tandem duplication (default false) " << std::endl <<
+          " -on         only output syntenic bolck genes (default false) " << std::endl <<
           " -rt DOUBLE  reverse syntenic block threads hold (12.0)" << std::endl <<
           " -rs DOUBLE  reverse syntenic match score (3.0)" << std::endl <<
           " -rp DOUBLE  reverse syntenic mismatch penalty (-4.0)" << std::endl <<
@@ -753,9 +754,13 @@ int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string
         if( inputParser.cmdOptionExists("-dl") ){
             dropLengthThredshold = std::stod( inputParser.getCmdOption("-dl") );
         }
+        bool onlySyntenic = false;
+        if( inputParser.cmdOptionExists("-on") ){
+            onlySyntenic=true;
+        }
         generateLongestOutput( referenceGffFile,  queryNewGffFile, queryGenomeFile, outputGffFile,  minIntron,
                                score, penalty,  scoreThreshold,  keepTandemDuplication, parameters, syntenicScore,
-                               orfScore, dropLengthThredshold);
+                               orfScore, dropLengthThredshold, onlySyntenic);
 
         return 0;
     }else{
@@ -777,8 +782,9 @@ int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::strin
           " ADVANCED PARAMETERS" << std::endl <<
           " -m INT      minimum intron size" << std::endl <<
           " -d          keep tandem duplication (default false) " << std::endl <<
+          " -on         only output syntenic bolck genes (default false) " << std::endl <<
           " -md INT     maximum distance of syntenic block genes (default 20) " << std::endl <<
-          " -ms DOUBLE  minimum syntenic block score (default 8.0) " << std::endl <<
+          " -ms DOUBLE  minimum syntenic block score (default 6.0) " << std::endl <<
           " -op DOUBLE  open gap penalty (default -0.1) " << std::endl <<
           " -ep DOUBLE  extend gap penalty (default -0.05) " << std::endl <<
           " -ss DOUBLE  score for gene located in syntenic region (1.0)" << std::endl <<
@@ -847,13 +853,17 @@ int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::strin
         if( inputParser.cmdOptionExists("-ep") ){
             GAP_OPEN_PENALTY = std::stod( inputParser.getCmdOption("-ep") );
         }
-        double MIN_ALIGNMENT_SCORE = 8;
+        double MIN_ALIGNMENT_SCORE = 6.0;
         if( inputParser.cmdOptionExists("-ms") ){
             MIN_ALIGNMENT_SCORE = std::stod( inputParser.getCmdOption("-ms") );
         }
+        bool onlySyntenic = false;
+        if( inputParser.cmdOptionExists("-on") ){
+            onlySyntenic=true;
+        }
         generateDagChainerOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
                                   parameters, syntenicScore, orfScore, dropLengthThredshold, MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
-                                  BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE);
+                                  BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, onlySyntenic);
 
 
 
@@ -878,8 +888,9 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
           " -m  INT     minimum intron size" << std::endl <<
           " -mq INT     maximum gene copies in the query " << std::endl <<
           " -d          keep tandem duplication (default false) " << std::endl <<
+          " -on         only output syntenic bolck genes (default false) " << std::endl <<
           " -md INT     maximum distance of syntenic block genes (default 20) " << std::endl <<
-          " -ms DOUBLE  minimum syntenic block score (default 8.0) " << std::endl <<
+          " -ms DOUBLE  minimum syntenic block score (default 6.0) " << std::endl <<
           " -op DOUBLE  open gap penalty (default -0.1) " << std::endl <<
           " -ep DOUBLE  extend gap penalty (default -0.05) " << std::endl <<
           " -ss DOUBLE  score for gene located in syntenic region (1.0)" << std::endl <<
@@ -941,7 +952,7 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
         if( inputParser.cmdOptionExists("-ep") ){
             GAP_OPEN_PENALTY = std::stod( inputParser.getCmdOption("-ep") );
         }
-        double MIN_ALIGNMENT_SCORE = 8;
+        double MIN_ALIGNMENT_SCORE = 6;
         if( inputParser.cmdOptionExists("-ms") ){
             MIN_ALIGNMENT_SCORE = std::stod( inputParser.getCmdOption("-ms") );
         }
@@ -951,9 +962,13 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
         if( inputParser.cmdOptionExists("-mq") ){
             queryMaximumTimes = std::stoi( inputParser.getCmdOption("-mq") );
         }
+        bool onlySyntenic = false;
+        if( inputParser.cmdOptionExists("-on") ){
+            onlySyntenic=true;
+        }
         generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
                                     parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE,
-                                    refMaximumTimes, queryMaximumTimes );
+                                    refMaximumTimes, queryMaximumTimes, onlySyntenic );
 
         return 0;
     }else{

@@ -14,7 +14,8 @@
 void generateLongestOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
                             const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
                             double score, double penalty, double scoreThreshold, const bool & keepTandemDuplication,
-                            std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore, const double & dropLengthThredshold );
+                            std::map<std::string, std::string>& parameters, const double & syntenicScore,
+                            const double & orfScore, const double & dropLengthThredshold, const bool & onlySyntenic );
 
 
 
@@ -24,13 +25,13 @@ void generateLongestQuotaOutput( const std::string & referenceGffFile, const std
                                  std::map<std::string, std::string>& parameters, const double & syntenicScore,
                                  const double & orfScore, const double & dropLengthThredshold,
                                  double & INDEL_SCORE, double & GAP_OPEN_PENALTY, double & MIN_ALIGNMENT_SCORE,
-                                 int & refMaximumTimes, int & queryMaximumTimes );
+                                 int & refMaximumTimes, int & queryMaximumTimes, const bool & onlySyntenic );
 
 void generateDagChainerOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
                                const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
                                const bool & keepTandemDuplication,
                                std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore,
                                const double & dropLengthThredshold, int MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
-                               int BP_GAP_SIZE, double INDEL_SCORE, double GAP_OPEN_PENALTY, double MIN_ALIGNMENT_SCORE);
+                               int BP_GAP_SIZE, double INDEL_SCORE, double GAP_OPEN_PENALTY, double MIN_ALIGNMENT_SCORE, const bool & onlySyntenic);
 
 #endif //GEAN_LONGESTPATH_H

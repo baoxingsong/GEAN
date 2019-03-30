@@ -92,3 +92,21 @@ TEST(TransferAllExonWithNucmerResult, c4){
     TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
     ASSERT_EQ(0, 0);
 }
+
+TEST(TransferAllExonWithNucmerResult, c5){
+    std::string parameterFile = "/home/bs674/Dropbox/gean/configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/home/bs674/Dropbox/gean/");
+    std::string gffFilePath = "/media/bs674/genomeSequence/maize/Zea_mays.AGPv4.34.gff3";
+    std::string databaseFastaFilePath = "/media/bs674/genomeSequence/maize/Zea_mays.AGPv4.dna.toplevel.fa";
+    std::string queryFastaFilePath="/media/bs674/A1013-0002_annotation/gapclosed.fasta";
+    std::string nucmerFilePath="/media/bs674/A1013-0002_annotation/Zm00001d020160.sam";
+    std::string outPutFilePath="/media/bs674/A1013-0002_annotation/Zm00001d020160.gff";
+    std::cout << std::endl;
+    size_t maxLengthForStructureAlignment=10000;
+    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, 6000, maxLengthForStructureAlignment);
+
+//    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
+    ASSERT_EQ(0, 0);
+}
+
+

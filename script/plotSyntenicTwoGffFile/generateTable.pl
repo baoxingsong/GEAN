@@ -10,7 +10,7 @@ my %gene_position;
 
 open INPUT, "$refGff";
 while( my $line=<INPUT> ){
-    if( $line=~/^([\dMtP]+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
+    if( $line=~/^(\d+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
         $gene_chr{$3}=$1;
         $gene_position{$3}=$2;
     }
@@ -19,9 +19,15 @@ close INPUT;
 
 open INPUT, "$newGff";
 while( my $line=<INPUT> ){
-    if( $line=~/^([\dMtP]+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
-        if( exists $gene_chr{$3} ){
-            print "$gene_chr{$3}\t$gene_position{$3}\t$1\t$2\n";
+    if( $line=~/^(\d+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
+        my $chr=$1;
+        my $position=$2;
+        my $gene=$3;
+        $gene=~s/_\d+$//g;
+        if( exists $gene_chr{$gene} ){
+            print "$gene_chr{$gene}\t$gene_position{$gene}\t$chr\t$position\n";
+        }else{
+            print STDERR "$gene\n";
         }
     }
 }

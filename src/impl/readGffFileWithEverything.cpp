@@ -516,6 +516,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
     ignoreTypes.insert("transposable_element");
     ignoreTypes.insert("transposon_fragment");
     ignoreTypes.insert("miRNA_gene");
+//    std::cout << "line 519" << std::endl;
     readGffFileWithEveryThing (filePath, geneMap,
                                cdsParentRegex, transcriptParentRegex, transcriptIdRegex, geneIdRegex, transcriptNickNames, geneNickNames, ignoreTypes);
 }
@@ -583,13 +584,14 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                 if(geneMap.find(chromosomeName) == geneMap.end() ){
                     geneMap[chromosomeName]=std::vector<Gene>();
                 }
-
+//                std::cout << "line 587" << std::endl;
                 if (geneNickNames.find(elemetns[2]) != geneNickNames.end()) {
-                    //                std::cout << "line 119" << std::endl;
+//                    std::cout << "line 589" << line << std::endl;
                     matched = false;
                     for (std::regex regGene : regGeneIds) {
                         regex_search(lastColumnInformation, match, regGene);
                         if (!match.empty()) {
+//                            std::cout << "line 594" << line << std::endl;
                             std::string geneId = match[1];
                             Gene gene1(geneId, chromosomeName, strand);
                             geneMap[chromosomeName].push_back(gene1);
@@ -609,7 +611,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                 << std::endl << line << std::endl;
                     }
                 } else if (transcriptNickNames.find(elemetns[2]) != transcriptNickNames.end()) {
-                    //                std::cout << "line 141" << std::endl;
+//                                    std::cout << "line 141 " << line << std::endl;
                     matched = false;
                     std::string transcriptId = "";
                     for (std::regex regTranscriptId : regTranscriptIds) {
@@ -626,14 +628,16 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                 << std::endl << line << std::endl;
                         continue; //goto next line in the gff file
                     }
-                    //                std::cout << "line 156" << std::endl;
+//                                    std::cout << "line 156 " << lastColumnInformation << std::endl;
                     matched = false;
                     for (std::regex regTranscriptParent : regTranscriptParents) {
+//                        std::cout << "line 633" << std::endl;
                         regex_search(lastColumnInformation, match, regTranscriptParent);
+//                        std::cout << "line 635" << std::endl;
                         if (!match.empty()) {
                             std::string geneId = match[1];
-                            //std::cout << geneId << " " << geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getName() << std::endl;
-                            if( geneId.compare(geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getName()) == 0 ){
+                            if( geneMap.find(chromosomeName) != geneMap.end() &&  geneMap[chromosomeName].size()>0 && geneId.compare(geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getName()) == 0 ){
+//                                std::cout << geneId << " " << geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getName() << std::endl;
                                 Transcript transcript1(transcriptId, elemetns[0], strand);
                                 geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().push_back(transcript1);
                                 geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts()[geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().size()-1].setStart(start);
@@ -646,14 +650,16 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                             matched = true;
                             break; // jump out for loop
                         }
+//                        std::cout << "line 650" << std::endl;
                     }
+//                    std::cout << "line 651" << std::endl;
                     if (!matched) {
                         std::cout
                                 << "the transcript record does not fellow the regular expression provided for finding gene ID, please check"
                                 << std::endl << line << std::endl;
                     }
                 } else if (elemetns[2].compare("CDS") == 0) {
-                    //                std::cout << "line 188" << std::endl;
+//                                    std::cout << "line 188 " << line << std::endl;
                     matched = false;
                     for (std::regex regCdsParent : regCdsParents) {
                         regex_search(lastColumnInformation, match, regCdsParent);
@@ -675,13 +681,14 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                 << std::endl << line << std::endl;
                     }
                 } else if (elemetns[2].compare("exon") == 0 || elemetns[2].compare("pseudogenic_exon") == 0) {
-                    //                std::cout << "line 208 " << line << std::endl;
+//                    std::cout << "line 208 " << line << std::endl;
                     matched = false;
                     for (std::regex regCdsParent : regCdsParents) {
                         regex_search(lastColumnInformation, match, regCdsParent);
                         if (!match.empty()) {
                             std::string transcriptId = match[1];
-                            if( transcriptId.compare(geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts()[geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().size()-1].getName()) == 0 ){
+                            if( geneMap.find(chromosomeName)!=geneMap.end() && geneMap[chromosomeName].size()>0 && geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().size()>0 &&
+                                transcriptId.compare(geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts()[geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().size()-1].getName()) == 0 ){
                                 GenomeBasicFeature exon(start, end, score, elemetns[7], lastColumnInformation);
                                 exon.setType(elemetns[2]);
                                 geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts()[geneMap[chromosomeName][geneMap[chromosomeName].size()-1].getTranscripts().size()-1].addExon(exon);
@@ -696,7 +703,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                   << std::endl << line << std::endl;
                     }
                 } else if (elemetns[2].compare("five_prime_utr") == 0 || elemetns[2].compare("five_prime_UTR") == 0) {
-                    //                std::cout << "line 231" << std::endl;
+//                                    std::cout << "line 231" << std::endl;
                     matched = false;
                     for (std::regex regCdsParent : regCdsParents) {
                         regex_search(lastColumnInformation, match, regCdsParent);
@@ -717,7 +724,7 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                                 << std::endl << line << std::endl;
                     }
                 } else if (elemetns[2].compare("three_prime_utr") == 0 || elemetns[2].compare("three_prime_UTR") == 0) {
-                    //                std::cout << "line 255" << std::endl;
+//                                    std::cout << "line 255" << std::endl;
                     matched = false;
                     for (std::regex regCdsParent : regCdsParents) {
                         regex_search(lastColumnInformation, match, regCdsParent);
@@ -742,10 +749,11 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
                 } else {
                     //std::cout << "we could not analysis the line in the gff/gtf file " << line << std::endl;
                 }
+//                std::cout << "line 746" << std::endl;
             }
         }
     }
-
+//    std::cout << "749" << std::endl;
     for (std::map<std::string, std::vector<Gene>>::iterator it=geneMap.begin(); it!=geneMap.end(); ++it){
         std::sort(it->second.begin(), it->second.end(), [](Gene a, Gene b) {
             return a.getStart() < b.getStart();

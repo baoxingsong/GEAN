@@ -10,8 +10,12 @@ void outPutORFConserveredTranscripts( const std::string & genomeFile, const std:
      std::map<std::string, Fasta> genome;
      readFastaFile(genomeFile, genome);
      NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
+     std::cout << "line 13" << std::endl;
      std::map<std::string, std::vector<Gene> > genes;
+     std::cout << "line 15" << std::endl;
      readGffFileWithEveryThing (gffFile, genes);
+     std::cout << "line 16" << std::endl;
+
      std::ofstream ofile;
      ofile.open(outputGffFile);
      for( std::map<std::string, std::vector<Gene> >::iterator it=genes.begin(); it!=genes.end(); ++it ){

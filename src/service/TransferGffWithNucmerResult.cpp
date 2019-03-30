@@ -553,6 +553,7 @@ bool overlap2( const Gene & gene, const Range & range ){
     }
     return false;
 }
+
 void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> > & geneNameMap,
                                 std::map<std::string, Gene > & geneHashMap, const std::string & chr,
                                 const AlignmentMatch & alignmentMatch, std::vector<Gene*> & overLappedGenes,
@@ -595,7 +596,7 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
     if( j >= geneNameMap[chr].size() ){
         j = geneNameMap[chr].size()-1;
     }
-   // std::cout << "i " << i << " j " << j << std::endl;
+    std::cout << "i " << i << " j " << j << std::endl;
     for( ; i<=j; ++i ){
 //        std::cout << "line 599 i " << i << " geneNameMap[chr][i] " << geneNameMap[chr][i] << std::endl;
         if( overlap2(geneHashMap[geneNameMap[chr][i]], alignmentMatch.getDatabase()) ){
@@ -919,6 +920,7 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
     std::string databaseSequence1 = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
                                                    alignmentMatch.getDatabaseStart(),
                                                    alignmentMatch.getDatabaseEnd());
+    std::cout << "line 923 database: " <<  alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd() << std::endl << databaseSequence1 << std::endl;
 
     std::string querySequence2="";
     std::string databaseSequence2="";
@@ -959,6 +961,7 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
 
     std::string querySequence = querySequence0 + querySequence1 + querySequence2;
     std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
+    std::cout << "line 964 database: " <<  databaseSequence << std::endl;
     alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
             startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
 
@@ -1443,14 +1446,14 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
                     || (0 != samFlag % 32 && transcriptHashMap[elems[0]].getStrand()==NEGATIVE) ){
                     AlignmentMatch alignmentMatch(queryChr, queryStart, queryEnd, POSITIVE, databaseChr, databaseStart, databaseEnd, windowSize);
                     alignmentMatchsMap[databaseChr].push_back(alignmentMatch);
-//                    std::cout << "adding POSITIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
-//                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
+                    std::cout << "adding POSITIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
+                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 }else{
                     AlignmentMatch alignmentMatch(queryChr, queryStart, queryEnd, NEGATIVE, databaseChr, databaseStart, databaseEnd, windowSize);
                     alignmentMatchsMap[databaseChr].push_back(alignmentMatch);
 
-//                    std::cout << "adding NEGATIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
-//                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
+                    std::cout << "adding NEGATIVE " << alignmentMatch.getDatabaseChr() << " " << alignmentMatch.getDatabaseStart() << " " << alignmentMatch.getDatabaseEnd()
+                              << " " << alignmentMatch.getQueryChr() << " " << alignmentMatch.getQueryStart() << " " << alignmentMatch.getQueryEnd() << std::endl;
                 }
             }else{
 //                std::cout << "could not analysis line: " << line << std::endl;
@@ -1485,6 +1488,11 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
         const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
         std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
         const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source){
+
+    //todo set this as a command parameter
+    int outputTag = 2;  // 0 prefer to output the ZDP realignment result
+                        // 1 prefer output the standard alignment result
+                        // 2 prefer output the longer result
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
     std::map<std::string, Fasta> databaseSequences;
     readFastaFile(databaseFastaFilePath, databaseSequences);
@@ -1514,17 +1522,17 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                     //update algnmentMatch begin
                     std::vector<Gene*> overLappedGenes;
                     if( slowMode ){
-//                        std::cout << "line 1317" << std::endl;
+                        std::cout << "line 1317" << std::endl;
                         getAlltheOverLappedGenes2( geneNameMap, geneHashMap, it1->first, alignmentMatch, overLappedGenes,
                                                    startShitfDistance, endShiftDistance);
                     }else{
                         getAlltheOverLappedGenes( geneNameMap, geneHashMap, it1->first, alignmentMatch, overLappedGenes,
                                                   startShitfDistance, endShiftDistance);
-                        //std::cout << "line 1323" << std::endl;
+                        std::cout << "line 1323" << std::endl;
                     }
                     //std::exit(0);
-//                    std::cout << "line 982 overLappedGenes.size() " << overLappedGenes.size() << std::endl;
-                    //std::cout << "startShitfDistance " << startShitfDistance << " endShiftDistance: " << endShiftDistance << std::endl;
+                    std::cout << "line 982 overLappedGenes.size() " << overLappedGenes.size() << std::endl;
+                    std::cout << "startShitfDistance " << startShitfDistance << " endShiftDistance: " << endShiftDistance << std::endl;
                     if( overLappedGenes.size()>0 ) {
                         std::vector<NewGffRecord> newGffRecords;
 //                        std::cout << "line 984" << std::endl;
@@ -1593,7 +1601,16 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                                         checkOrfState(newTranscript2, querySequences,
                                                       nucleotideCodeSubstitutionMatrix, minIntron);
 //                                        std::cout << "line 990" << std::endl;
-                                        if (newTranscript2.getIfOrfShift() ) {
+
+                                        double newLengthRation=(double)newTranscript.getCdsSequence().size()/(double)transcriptHashMap[newTranscript.getName()].getCdsSequence().size();
+                                        double newLengthRation2=(double)newTranscript2.getCdsSequence().size()/(double)transcriptHashMap[newTranscript.getName()].getCdsSequence().size();
+                                        if( newLengthRation > 1 ){
+                                            newLengthRation=1/newLengthRation;
+                                        }
+                                        if( newLengthRation2>1 ){
+                                            newLengthRation2=1/newLengthRation2;
+                                        }
+                                        if (newTranscript2.getIfOrfShift() && ( outputTag==1 || ( outputTag==2 && newLengthRation> newLengthRation2 ) ) ) {
                                             updateNewTranscript( newTranscript, referenceTranscript, importantPositions );
                                             newGffRecord.transcripts.push_back(newTranscript);
                                         } else {
@@ -1734,7 +1751,16 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                                         TranscriptUpdateCdsInformation(newTranscript2, querySequences);
 //                                        std::cout << "line 1098" << std::endl;
                                         checkOrfState(newTranscript2, querySequences, nucleotideCodeSubstitutionMatrix, minIntron);
-                                        if (newTranscript2.getIfOrfShift()) {
+
+                                        double newLengthRation=(double)newTranscript.getCdsSequence().size()/(double)transcriptHashMap[newTranscript.getName()].getCdsSequence().size();
+                                        double newLengthRation2=(double)newTranscript2.getCdsSequence().size()/(double)transcriptHashMap[newTranscript.getName()].getCdsSequence().size();
+                                        if( newLengthRation > 1 ){
+                                            newLengthRation=1/newLengthRation;
+                                        }
+                                        if( newLengthRation2>1 ){
+                                            newLengthRation2=1/newLengthRation2;
+                                        }
+                                        if (newTranscript2.getIfOrfShift() && ( outputTag==1 || ( outputTag==2 && newLengthRation> newLengthRation2 ) ) ) {
                                             updateNewTranscript( newTranscript, referenceTranscript, importantPositions );
                                             newGffRecord.transcripts.push_back(newTranscript);
                                         } else {
