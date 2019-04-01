@@ -539,6 +539,10 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
           " -a FILE   sam file" << std::endl <<
           " -s FILE   target genome sequence" << std::endl <<
           " -o FILE   output GFF/GTF file" << std::endl <<
+          " -g INT    output tag, should be 0, 1 or 2 (default 1)" << std::endl <<
+          "           0 prefer to output the ZDP realignment result" << std::endl <<
+          "           1 prefer output the standard alignment result" << std::endl <<
+          "           2 prefer output the longer result" << std::endl <<
           " -w INT    sequence alignment window width (default: 60)" << std::endl <<
           " -l INT    longest transcript to align. default(50000)"<<std::endl <<
           " -m INT    minimum intron size" << std::endl << std::endl;
@@ -564,7 +568,6 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
             minIntron=5;
         }
 
-
         int lengthThreadhold;
         if( inputParser.cmdOptionExists("-l") ){
             lengthThreadhold = std::stoi( inputParser.getCmdOption("-l") );
@@ -575,7 +578,19 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
         if( inputParser.cmdOptionExists("-w") ){
             windowWidth = std::stoi( inputParser.getCmdOption("-w") );
         }
-        TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, minIntron, windowWidth, lengthThreadhold);
+        int outputTag=1;
+        if( inputParser.cmdOptionExists("-g") ){
+            outputTag = std::stoi( inputParser.getCmdOption("-g") );
+        }
+        if( outputTag!=0 && outputTag!=1 && outputTag!=2 ){
+            std::cerr << "output tag should be 0, 1 or 2" << std::endl;
+            return 1;
+        }
+        // outputTag, 0 prefer to output the ZDP realignment result
+        // 1 prefer output the standard alignment result
+        // 2 prefer output the longer result
+        TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath,
+                parameters, outPutFilePath, minIntron, windowWidth, lengthThreadhold, outputTag);
         return 0;
     }else{
         std::cerr << usage.str();
@@ -783,6 +798,7 @@ int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::strin
           " -m INT      minimum intron size" << std::endl <<
           " -d          keep tandem duplication (default false) " << std::endl <<
           " -on         only output syntenic bolck genes (default false) " << std::endl <<
+          " -r          whether sort output with coordinate (default: false, only make sense when -on set as true)"<<std::endl <<
           " -md INT     maximum distance of syntenic block genes (default 20) " << std::endl <<
           " -ms DOUBLE  minimum syntenic block score (default 6.0) " << std::endl <<
           " -op DOUBLE  open gap penalty (default -0.1) " << std::endl <<
@@ -861,9 +877,13 @@ int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::strin
         if( inputParser.cmdOptionExists("-on") ){
             onlySyntenic=true;
         }
+        bool  sortOutPutGffBycoordinate=false;
+        if( inputParser.cmdOptionExists("-r") ){
+            sortOutPutGffBycoordinate=true;
+        }
         generateDagChainerOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
                                   parameters, syntenicScore, orfScore, dropLengthThredshold, MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
-                                  BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, onlySyntenic);
+                                  BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, onlySyntenic, sortOutPutGffBycoordinate);
 
 
 
@@ -889,6 +909,7 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
           " -mq INT     maximum gene copies in the query " << std::endl <<
           " -d          keep tandem duplication (default false) " << std::endl <<
           " -on         only output syntenic bolck genes (default false) " << std::endl <<
+          " -r          whether sort output with coordinate (default: false, only make sense when -on set as true)"<<std::endl <<
           " -md INT     maximum distance of syntenic block genes (default 20) " << std::endl <<
           " -ms DOUBLE  minimum syntenic block score (default 6.0) " << std::endl <<
           " -op DOUBLE  open gap penalty (default -0.1) " << std::endl <<
@@ -966,9 +987,17 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
         if( inputParser.cmdOptionExists("-on") ){
             onlySyntenic=true;
         }
+        bool  sortOutPutGffBycoordinate=false;
+        if( inputParser.cmdOptionExists("-r") ){
+            sortOutPutGffBycoordinate=true;
+        }
+        int MAX_DIST_BETWEEN_MATCHES=20;
+        if( inputParser.cmdOptionExists("-md") ){
+            MAX_DIST_BETWEEN_MATCHES = std::stoi( inputParser.getCmdOption("-md") );
+        }
         generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
-                                    parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE,
-                                    refMaximumTimes, queryMaximumTimes, onlySyntenic );
+                                    parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, MAX_DIST_BETWEEN_MATCHES,
+                                    refMaximumTimes, queryMaximumTimes, onlySyntenic, sortOutPutGffBycoordinate );
 
         return 0;
     }else{

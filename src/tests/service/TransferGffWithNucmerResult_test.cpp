@@ -103,7 +103,7 @@ TEST(TransferAllExonWithNucmerResult, c5){
     std::string outPutFilePath="/media/bs674/A1013-0002_annotation/Zm00001d020160.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, 6000, maxLengthForStructureAlignment);
+    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, 6000, maxLengthForStructureAlignment, 1);
 
 //    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
     ASSERT_EQ(0, 0);

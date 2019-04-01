@@ -17,15 +17,19 @@ while( my $line=<INPUT> ){
 }
 close INPUT;
 
+my $group="";
 open INPUT, "$newGff";
 while( my $line=<INPUT> ){
+    if( $line=~/^#start chain (\d+)/){
+        $group = $1;
+    }
     if( $line=~/^(\d+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
         my $chr=$1;
         my $position=$2;
         my $gene=$3;
         $gene=~s/_\d+$//g;
         if( exists $gene_chr{$gene} ){
-            print "$gene_chr{$gene}\t$gene_position{$gene}\t$chr\t$position\n";
+            print "$gene_chr{$gene}\t$gene_position{$gene}\t$chr\t$position\t$group\n";
         }else{
             print STDERR "$gene\n";
         }

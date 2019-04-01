@@ -26,6 +26,6 @@ TEST(TransferAllExonWithSpliceAlignmentResult, c1){
     size_t maxLengthForStructureAlignment=60000;
     int minIntron = 5;
     int windowWidth = 20;
-    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, samFilePath, parameters, outPutFilePath, minIntron, windowWidth, maxLengthForStructureAlignment);
+    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, samFilePath, parameters, outPutFilePath, minIntron, windowWidth, maxLengthForStructureAlignment, 1);
     ASSERT_EQ(0, 0);
 }

@@ -84,9 +84,9 @@ void usage( ){
         "    transgff    trans reference gff/gtf to de novo assembly genome" <<  std::endl <<
         "    spltogff    trans reference gff/gtf to de novo assembly genome using splice alignment sam file" <<  std::endl <<
         "    purifygff   purify the result from transgff" <<  std::endl <<
-        "    sinsyn      (beta version) purify by keeping syntenic genes priorly and single copy genes (for inner species) " <<  std::endl <<
+        "    sinsyn      purify by keeping syntenic genes priorly and single copy genes (for inner species) " <<  std::endl <<
         "    sinsyn2     (beta version) purify by keeping syntenic genes priorly and single copy genes (for inter species) " <<  std::endl <<
-        //"    quotasyn    (beta version) quota syntenic blocks  " <<  std::endl <<
+        "    quotasyn    (beta version) quota syntenic blocks  " <<  std::endl <<
         "    orf         keep only ORF conserved genes " <<  std::endl <<
         "    varcall     variant calling for de novo genome sequence " <<  std::endl;
 }

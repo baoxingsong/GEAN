@@ -4,12 +4,12 @@
 
 #include "OrthologPair.h"
 
-OrthologPair2::OrthologPair2(const int & queryIndex, const uint32_t & refStartPos, const uint32_t & refEndPos,
+OrthologPair2::OrthologPair2(const uint32_t & refStartPos, const uint32_t & refEndPos,
         const uint32_t & queryStartPos, const uint32_t & queryEndPos, const double & score,
-        const STRAND & strand) : queryIndex(queryIndex), refStartPos(refStartPos), refEndPos(refEndPos),
+        const STRAND & strand) : refStartPos(refStartPos), refEndPos(refEndPos),
         queryStartPos(queryStartPos), queryEndPos(queryEndPos), score(score), strand(strand) {
-    refMiddlePos = (refStartPos+refEndPos)/2;
-    queryMiddlePos = (queryStartPos+queryEndPos)/2;
+//    refMiddlePos = (refStartPos+refEndPos)/2;
+//    queryMiddlePos = (queryStartPos+queryEndPos)/2;
 }
 OrthologPair2::OrthologPair2(){
 
@@ -30,14 +30,14 @@ uint32_t OrthologPair2::getRefEndPos() const {
 void OrthologPair2::setRefEndPos(uint32_t refEndPos) {
     OrthologPair2::refEndPos = refEndPos;
 }
-
-uint32_t OrthologPair2::getRefMiddlePos() const {
-    return refMiddlePos;
-}
-
-void OrthologPair2::setRefMiddlePos(uint32_t refMiddlePos) {
-    OrthologPair2::refMiddlePos = refMiddlePos;
-}
+//
+//uint32_t OrthologPair2::getRefMiddlePos() const {
+//    return refMiddlePos;
+//}
+//
+//void OrthologPair2::setRefMiddlePos(uint32_t refMiddlePos) {
+//    OrthologPair2::refMiddlePos = refMiddlePos;
+//}
 
 uint32_t OrthologPair2::getQueryStartPos() const {
     return queryStartPos;
@@ -54,14 +54,14 @@ uint32_t OrthologPair2::getQueryEndPos() const {
 void OrthologPair2::setQueryEndPos(uint32_t queryEndPos) {
     OrthologPair2::queryEndPos = queryEndPos;
 }
-
-uint32_t OrthologPair2::getQueryMiddlePos() const {
-    return queryMiddlePos;
-}
-
-void OrthologPair2::setQueryMiddlePos(uint32_t queryMiddlePos) {
-    OrthologPair2::queryMiddlePos = queryMiddlePos;
-}
+//
+//uint32_t OrthologPair2::getQueryMiddlePos() const {
+//    return queryMiddlePos;
+//}
+//
+//void OrthologPair2::setQueryMiddlePos(uint32_t queryMiddlePos) {
+//    OrthologPair2::queryMiddlePos = queryMiddlePos;
+//}
 
 double OrthologPair2::getScore() const {
     return score;
@@ -79,30 +79,22 @@ void OrthologPair2::setStrand(STRAND & strand) {
     OrthologPair2::strand = strand;
 }
 
-int OrthologPair2::getQueryIndex() const {
-    return queryIndex;
-}
-
-void OrthologPair2::setQueryIndex(int queryIndex) {
-    OrthologPair2::queryIndex = queryIndex;
-}
 
 OrthologPair2::OrthologPair2(const std::string &refChr, const std::string &queryChr,
-            const int & queryIndex, const uint32_t & refStartPos, const uint32_t & refEndPos,
+            const uint32_t & refStartPos, const uint32_t & refEndPos,
             const uint32_t & queryStartPos, const uint32_t & queryEndPos, const double & score,
             const STRAND & strand, const int & refId, const int & queryId, const std::string & referenceGeneName,
             const std::string & queryGeneName) : refChr(refChr), queryChr(queryChr),
-            queryIndex(queryIndex), refStartPos(refStartPos), refEndPos(refEndPos),
+            refStartPos(refStartPos), refEndPos(refEndPos),
             queryStartPos(queryStartPos), queryEndPos(queryEndPos), score(score), strand(strand), refId(refId),
             queryId(queryId), referenceGeneName(referenceGeneName), queryGeneName(queryGeneName) {
-    refMiddlePos = (refStartPos+refEndPos)/2;
-    queryMiddlePos = (queryStartPos+queryEndPos)/2;
+//    refMiddlePos = (refStartPos+refEndPos)/2;
+//    queryMiddlePos = (queryStartPos+queryEndPos)/2;
 }
 
 OrthologPair2::OrthologPair2( const OrthologPair2 & orthologPair )  {
     refChr=orthologPair.getRefChr();
     queryChr=orthologPair.getQueryChr();
-    queryIndex=orthologPair.getQueryIndex();
     refStartPos=orthologPair.getRefStartPos();
     refEndPos=orthologPair.getRefEndPos();
     queryStartPos=orthologPair.getQueryStartPos();
@@ -113,8 +105,8 @@ OrthologPair2::OrthologPair2( const OrthologPair2 & orthologPair )  {
     queryId=orthologPair.getQueryId();
     referenceGeneName=orthologPair.getReferenceGeneName();
     queryGeneName=orthologPair.getQueryGeneName();
-    refMiddlePos=orthologPair.getRefMiddlePos();
-    queryMiddlePos=orthologPair.getQueryMiddlePos();
+//    refMiddlePos=orthologPair.getRefMiddlePos();
+//    queryMiddlePos=orthologPair.getQueryMiddlePos();
 }
 
 const std::string &OrthologPair2::getRefChr() const {

@@ -24,14 +24,14 @@ void generateLongestQuotaOutput( const std::string & referenceGffFile, const std
                                  const bool & keepTandemDuplication,
                                  std::map<std::string, std::string>& parameters, const double & syntenicScore,
                                  const double & orfScore, const double & dropLengthThredshold,
-                                 double & INDEL_SCORE, double & GAP_OPEN_PENALTY, double & MIN_ALIGNMENT_SCORE,
-                                 int & refMaximumTimes, int & queryMaximumTimes, const bool & onlySyntenic );
+                                 double & INDEL_SCORE, double & GAP_OPEN_PENALTY, double & MIN_ALIGNMENT_SCORE, int & MAX_DIST_BETWEEN_MATCHES,
+                                 int & refMaximumTimes, int & queryMaximumTimes, const bool & onlySyntenic, const bool & sortOutPutGffBycoordinate );
 
 void generateDagChainerOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
                                const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
                                const bool & keepTandemDuplication,
                                std::map<std::string, std::string>& parameters, const double & syntenicScore, const double & orfScore,
                                const double & dropLengthThredshold, int MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
-                               int BP_GAP_SIZE, double INDEL_SCORE, double GAP_OPEN_PENALTY, double MIN_ALIGNMENT_SCORE, const bool & onlySyntenic);
+                               int BP_GAP_SIZE, double INDEL_SCORE, double GAP_OPEN_PENALTY, double MIN_ALIGNMENT_SCORE, const bool & onlySyntenic, const bool & sortOutPutGffBycoordinate);
 
 #endif //GEAN_LONGESTPATH_H

@@ -12,7 +12,7 @@
 void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                                const std::string & queryFastaFilePath, const std::string & samFile,
                                                std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                               const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment);
+                                               const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, int outputTag);
 
 void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                       const std::string & queryFastaFilePath, const std::string & nucmerFilePath,
@@ -25,13 +25,13 @@ void TransferGffWithNucmerResult( const std::string & gffFilePath, const std::st
 void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                                const std::string & queryFastaFilePath, const std::string & samFile,
                                                std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                               const size_t & minIntron, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment);
+                                               const size_t & minIntron, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, int outputTag);
 
 void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::string> > & geneNameMap,
                                        std::map<std::string, Gene> & geneHashMap, std::map<std::string, Transcript> &transcriptHashMap,
                                        const std::string & databaseFastaFilePath,
                                        const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
                                        std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                       const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source);
+                                       const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source, int outputTag);
 
 #endif //ANNOTATIONLIFTOVER_TRANSFERGFFWITHNUCMERRESULT_H

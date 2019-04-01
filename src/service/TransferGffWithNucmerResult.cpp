@@ -1342,7 +1342,7 @@ void splitCIGAR( std::string & cigarString, std::vector<std::string> & cigarElem
 void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                       const std::string & queryFastaFilePath, const std::string & samFile,
                                       std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                      const size_t & minIntron,  const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment){
+                                      const size_t & minIntron,  const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, int outputTag){
     const bool slowMode=true;
     std::ifstream infile(samFile);
     if( ! infile.good()){
@@ -1462,7 +1462,7 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
     }
     TransferAllExonWithNucmerResult( geneNameMap,
                                      geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "sam");
+                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "sam", outputTag);
 }
 
 void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
@@ -1479,7 +1479,7 @@ void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std
 
     TransferAllExonWithNucmerResult( geneNameMap,
             geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "nuc");
+            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "nuc", 1);
 }
 
 void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::string> > & geneNameMap,
@@ -1487,10 +1487,10 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
         const std::string & databaseFastaFilePath,
         const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
         std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source){
+        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source, int outputTag){
 
-    //todo set this as a command parameter
-    int outputTag = 2;  // 0 prefer to output the ZDP realignment result
+
+      // outputTag, 0 prefer to output the ZDP realignment result
                         // 1 prefer output the standard alignment result
                         // 2 prefer output the longer result
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
