@@ -10,7 +10,7 @@ my %gene_position;
 
 open INPUT, "$refGff";
 while( my $line=<INPUT> ){
-    if( $line=~/^(\d+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
+    if( $line=~/^(\S+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
         $gene_chr{$3}=$1;
         $gene_position{$3}=$2;
     }
@@ -23,12 +23,12 @@ while( my $line=<INPUT> ){
     if( $line=~/^#start chain (\d+)/){
         $group = $1;
     }
-    if( $line=~/^(\d+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
+    if( $line=~/^(\S+)\s+\S+\s+gene\s+(\d+).*ID=(.*?);/ ){
         my $chr=$1;
         my $position=$2;
         my $gene=$3;
         $gene=~s/_\d+$//g;
-        if( exists $gene_chr{$gene} ){
+        if( exists $gene_chr{$gene} && $position < 2147483646 ){
             print "$gene_chr{$gene}\t$gene_position{$gene}\t$chr\t$position\t$group\n";
         }else{
             print STDERR "$gene\n";

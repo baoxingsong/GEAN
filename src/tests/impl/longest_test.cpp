@@ -94,9 +94,6 @@ TEST(dagChainer, c1){
 
 
 TEST(dagChainer, c2){
-//    std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
-//    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
-
     std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
     std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
 
@@ -115,6 +112,33 @@ TEST(dagChainer, c2){
     double GAP_OPEN_PENALTY=-0.1;
     double MIN_ALIGNMENT_SCORE = 6.0;
     bool onlySyntenic = false;
+    generateDagChainerOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
+                              parameters, syntenicScore, orfScore, dropLengthThredshold, MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
+                              BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, onlySyntenic, false);
+    ASSERT_EQ(0, 0);
+}
+
+
+TEST(dagChainer, c3){
+    std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
+
+    std::string referenceGffFile = "/Users/bs674/Zea_mays.B73_RefGen_v4.42.gff3";
+    std::string queryNewGffFile = "/Users/bs674/maize_A1013.gff";
+    std::string queryGenomeFile = "/Users/bs674/gapclosed.fasta";
+    std::string outputGffFile="/Users/bs674/A1013_quota_dagChainer_true.gff";
+
+    int minIntron = 5;
+    bool keepTandemDuplication=true;
+    double syntenicScore=1.0;
+    double orfScore=1.5;
+    double dropLengthThredshold=0.2;
+    int MAX_DIST_BETWEEN_MATCHES=2000;
+    int BP_GAP_SIZE=1;
+    double INDEL_SCORE=-0.05;
+    double GAP_OPEN_PENALTY=-0.1;
+    double MIN_ALIGNMENT_SCORE = 6.0;
+    bool onlySyntenic = true;
     generateDagChainerOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
                               parameters, syntenicScore, orfScore, dropLengthThredshold, MAX_DIST_BETWEEN_MATCHES /*max gap in the term of number of genes*/,
                               BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, onlySyntenic, false);
@@ -174,3 +198,59 @@ TEST(longestQuotaOutput, c2){
                                 refMaximumTimes, queryMaximumTimes, onlySyntenic, false );
     ASSERT_EQ(0, 0);
 }
+
+
+
+TEST(longestQuotaOutput, c3){
+    std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
+    std::string referenceGffFile = "/Users/bs674/Zea_mays.B73_RefGen_v4.42.gff3";
+    std::string queryNewGffFile = "/Users/bs674/maize_A1013.gff";
+    std::string queryGenomeFile = "/Users/bs674/gapclosed.fasta";
+    std::string outputGffFile="/Users/bs674/A1013_quota_longestpath_quota_true.gff";
+    int minIntron = 5;
+    bool keepTandemDuplication=true;
+    double syntenicScore=1.0;
+    double orfScore=1.5;
+    double dropLengthThredshold=0.2;
+    int MAX_DIST_BETWEEN_MATCHES=20;
+    double INDEL_SCORE=-0.05;
+    double GAP_OPEN_PENALTY=-0.1;
+    double MIN_ALIGNMENT_SCORE = 6.0;
+    int refMaximumTimes=1;  // if there is a query duplication, then the reference gene could appear twice, so this value should be set as 2
+    int queryMaximumTimes=2;
+    bool onlySyntenic = true;
+    generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
+                                parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, MAX_DIST_BETWEEN_MATCHES,
+                                refMaximumTimes, queryMaximumTimes, onlySyntenic, false );
+    ASSERT_EQ(0, 0);
+}
+
+
+TEST(longestQuotaOutput, c4){
+    std::string parameterFile = "/Users/bs674/Dropbox/gean/configure";
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/Users/bs674/Dropbox/gean/");
+    std::string referenceGffFile = "/Users/bs674/Sorghum_bicolor.Sorghum_bicolor_NCBIv3.42.gff3";
+    std::string queryNewGffFile = "/Users/bs674/sorghun_A1013.gff";
+    std::string queryGenomeFile = "/Users/bs674/gapclosed.fasta";
+    std::string outputGffFile="/Users/bs674/sorghum_A1013_quota_longestpath_quota_true.gff";
+    int minIntron = 5;
+    bool keepTandemDuplication=true;
+    double syntenicScore=1.0;
+    double orfScore=1.5;
+    double dropLengthThredshold=0.2;
+    int MAX_DIST_BETWEEN_MATCHES=20;
+    double INDEL_SCORE=-0.05;
+    double GAP_OPEN_PENALTY=-0.1;
+    double MIN_ALIGNMENT_SCORE = 6.0;
+    int refMaximumTimes=20;  // if there is a query duplication, then the reference gene could appear twice, so this value should be set as 2
+    int queryMaximumTimes=20;
+    bool onlySyntenic = true;
+    generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
+                                parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, MAX_DIST_BETWEEN_MATCHES,
+                                refMaximumTimes, queryMaximumTimes, onlySyntenic, false );
+    ASSERT_EQ(0, 0);
+}
+
+
+

@@ -1175,6 +1175,7 @@ void generateDagChainerOutput( const std::string & referenceGffFile, const std::
         referenceGenesIndex[it->first]=gv;
         for( int id=0; id < it->second.size(); ++id ){
             referenceGenesIndex[it->first][it->second[id].getName()]=id;
+            //std::cout << "chr: " << it->first << " geneName " << it->second[id].getName() << " id " << id << std::endl;
         }
     }
 
@@ -1200,10 +1201,10 @@ void generateDagChainerOutput( const std::string & referenceGffFile, const std::
 
 
     for(std::map<std::string,std::vector<Gene>>::iterator it1=queryGenes.begin(); it1!=queryGenes.end(); it1++){
-        if( referenceGeneNameMap.find(it1->first) != referenceGeneNameMap.end() && queryGenome.find(it1->first)!=queryGenome.end() ){
+        if( queryGenome.find(it1->first)!=queryGenome.end() ){
             for( i=0; i< it1->second.size(); ++i ){
                 if( referenceGeneHashMap.find(it1->second[i].getName())!=referenceGeneHashMap.end() ){
-//                    std::cout << "line 1030 " << it1->second[i].getName() << std::endl;
+                    std::cout << "line 1207 " << it1->second[i].getName() << std::endl;
                     double thisScore=0;
                     for(  int index=0; index<it1->second[i].getTranscripts().size(); ++index ){
                         Transcript transcript=it1->second[i].getTranscripts()[index];
@@ -1272,9 +1273,9 @@ void generateDagChainerOutput( const std::string & referenceGffFile, const std::
     j++;
     score.resize (j);
     std::vector<std::vector<Score_t>> chains;
-    //std::cout << "line 1242 score.size(): " << score.size() << std::endl;
+    std::cout << "line 1242 score.size(): " << score.size() << std::endl;
     chainer (score, chains, MAX_DIST_BETWEEN_MATCHES, BP_GAP_SIZE, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, keepTandemDuplication);
-    //std::cout << "line 1244 chains.size : " << chains.size() << std::endl;
+    std::cout << "line 1244 chains.size : " << chains.size() << std::endl;
     std::map<std::string, std::vector<Gene>> keepGenes;
     std::map<std::string, double> geneScores;
     std::set<std::string> geneNames;
