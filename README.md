@@ -256,6 +256,7 @@ Best Practices for different aims could be found under example.
 ### Contact
 Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
 Please feel free to send E-mail to songbaoxing168@163.com
+
 ### Citing GEAN
 If you use GEAN, please cite:
 View ORCID ProfileBaoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
