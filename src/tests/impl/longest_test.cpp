@@ -239,18 +239,16 @@ TEST(longestQuotaOutput, c4){
     double syntenicScore=1.0;
     double orfScore=1.5;
     double dropLengthThredshold=0.2;
-    int MAX_DIST_BETWEEN_MATCHES=20;
+    int MAX_DIST_BETWEEN_MATCHES=200000;
     double INDEL_SCORE=-0.05;
     double GAP_OPEN_PENALTY=-0.1;
     double MIN_ALIGNMENT_SCORE = 6.0;
-    int refMaximumTimes=20;  // if there is a query duplication, then the reference gene could appear twice, so this value should be set as 2
-    int queryMaximumTimes=20;
+    int refMaximumTimes=1;  // if there is a query duplication, then the reference gene could appear twice, so this value should be set as 2
+    int queryMaximumTimes=1;
     bool onlySyntenic = true;
     generateLongestQuotaOutput( referenceGffFile, queryNewGffFile, queryGenomeFile, outputGffFile, minIntron, keepTandemDuplication,
                                 parameters, syntenicScore, orfScore, dropLengthThredshold, INDEL_SCORE, GAP_OPEN_PENALTY, MIN_ALIGNMENT_SCORE, MAX_DIST_BETWEEN_MATCHES,
                                 refMaximumTimes, queryMaximumTimes, onlySyntenic, false );
     ASSERT_EQ(0, 0);
 }
-
-
 

@@ -1,4 +1,4 @@
-Here I am showing how to transform the GFF file from B73 v3 reference to the M017 CAU assemblies.
+Here I am showing how to transform the GFF file from B73 v3 reference to the Mo17 CAU assemblies.
 In this example the minimap2 splice aware sequence alignment model is used, which is much much faster than Mummer
 
 Download the files

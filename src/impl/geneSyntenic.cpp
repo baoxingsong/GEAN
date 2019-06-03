@@ -139,6 +139,12 @@ void longestPath (std::vector<OrthologPair> & pairedSimilarFragments, std::vecto
     int prev [pairedSimilarFragments.size()];  // index of previous node in longest path
     scoreArray[0] = pairedSimilarFragments[0].getScore();
     prev[0] = -1;
+
+    if (scoreArray[0] > maxSore){
+        bestEnd = 0;
+        maxSore = scoreArray[0];
+    }
+
     for (int idx = 1; idx < pairedSimilarFragments.size(); ++idx) {
         scoreArray[idx] = pairedSimilarFragments[idx].getScore();
         prev[idx] = -1;
