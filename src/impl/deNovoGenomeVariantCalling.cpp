@@ -18,9 +18,11 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
     readGffFileWithEveryThing(refGffFilePath, refGeneMap);
     std::map <std::string, Fasta> refSequences;
     readFastaFile(refFastaFilePath, refSequences);
+    overlapGenomeAndGene(refGeneMap, refSequences);
     updateGeneInformation(refGeneMap, nucleotideCodeSubstitutionMatrix, minIntron, refSequences);
     std::map <std::string, std::set<int32_t>> refToRemove;
     removeDuplication(refGeneMap, minGene, refToRemove);
+
     for( std::map<std::string, std::vector<Gene> >::iterator it0=refGeneMap.begin(); it0!=refGeneMap.end(); ++it0 ){ //remove non-coding gene and loss-of-function gene
         for( int32_t it1=0; it1<it0->second.size(); ++it1 ){
             if( it0->second[it1].getTranscripts()[0].getCdsVector().size() == 0 || (it0->second[it1].getTranscripts()[0].getIfOrfShift()) ){
@@ -51,6 +53,7 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
     std::map <std::string, Fasta> targetSequences;
     readFastaFile(targetFastaFilePath, targetSequences);
     std::cout << "line 53" << std::endl;
+    overlapGenomeAndGene(targetGeneMap, targetSequences);
     updateGeneInformation(targetGeneMap, nucleotideCodeSubstitutionMatrix, minIntron, targetSequences);
     std::map <std::string, std::set<int32_t>> targetToRemove;
     std::cout << "line 56" << std::endl;
@@ -190,6 +193,8 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
         std::cout << "line 186" << std::endl;
         endRef = refSequences[maxOne].getSequence().length();
         endQuery = targetSequences[it0->first].getSequence().length();
+        std::cout << "startRef " << startRef << " endRef " << endRef << std::endl;
+        std::cout << "queryChr " << it0->first << " startQuery " << startQuery << " endQuery " << endQuery << std::endl;
         std::string refSeq = getSubsequence( refSequences, maxOne, startRef, endRef);
         std::string querySeq = getSubsequence( targetSequences, it0->first, startQuery, endQuery);
         /*

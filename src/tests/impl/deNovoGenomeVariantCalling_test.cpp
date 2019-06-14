@@ -13,10 +13,10 @@
 TEST(deNovoGenomeVariantCalling, c1){
     std::string parameterFile = "/home/bs674/Dropbox/gean/configure";
     std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/home/bs674/Dropbox/gean/");
-    std::string refGffFilePath = "/home/bs674/cbsulm15/protein_ml/b73.gff";
-    std::string referenceGenomeSequence = "/home/bs674/cbsulm15/protein_ml/b73.fa";
-    std::string targetGffFilePath = "/home/bs674/cbsulm15/protein_ml/Zm-CML247-DRAFT-PANZEA-1.0/cml247.gff";
-    std::string targetGenomeSequence = "/home/bs674/cbsulm15/protein_ml/Zm-CML247-DRAFT-PANZEA-1.0/cml247.fa";
+    std::string refGffFilePath = "/media/bs674/1_8t/protein_ml/b73.gff";
+    std::string referenceGenomeSequence = "/media/bs674/1_8t/protein_ml/b73.fa";
+    std::string targetGffFilePath = "/media/bs674/1_8t/protein_ml/Zm-CML247-DRAFT-PANZEA-1.0/cml247.gff";
+    std::string targetGenomeSequence = "/media/bs674/1_8t/protein_ml/Zm-CML247-DRAFT-PANZEA-1.0/cml247.fa";
     std::string outPutFilePath = "/home/bs674/temp_out";
 
     int minIntron = 5;

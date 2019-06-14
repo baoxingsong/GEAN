@@ -51,7 +51,7 @@ int getGenomeSequence(int argc, char** argv, std::map<std::string, std::string>&
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int getChangedFromReference( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -83,7 +83,7 @@ int getChangedFromReference( int argc, char** argv, std::map<std::string, std::s
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 
@@ -116,7 +116,7 @@ int getReferenceFromChanged( int argc, char** argv, std::map<std::string, std::s
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int gffCoordinateLiftOver( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -146,7 +146,7 @@ int gffCoordinateLiftOver( int argc, char** argv, std::map<std::string, std::str
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int revGffCoordinateLiftOver( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -176,7 +176,7 @@ int revGffCoordinateLiftOver( int argc, char** argv, std::map<std::string, std::
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int Reanva( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -221,7 +221,7 @@ int Reanva( int argc, char** argv, std::map<std::string, std::string>& parameter
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int getSequences( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -261,7 +261,7 @@ int getSequences( int argc, char** argv, std::map<std::string, std::string>& par
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 
@@ -344,7 +344,7 @@ int myPrepareForMsa( int argc, char** argv, std::map<std::string, std::string>& 
         return 0;
     } else{
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }
 
@@ -397,7 +397,7 @@ int myConstructSdiFromMsa( int argc, char** argv, std::map<std::string, std::str
         return 0;
     } else{
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }
 
@@ -467,7 +467,7 @@ int reAnnotationAndExonerateAndNovo( int argc, char** argv, std::map<std::string
         return 0;
     } else{
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }
 
@@ -526,7 +526,7 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -595,7 +595,7 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int PurifyGff( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -644,7 +644,7 @@ int PurifyGff( int argc, char** argv, std::map<std::string, std::string>& parame
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int outPutORFConserveredTranscripts( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -684,7 +684,7 @@ int outPutORFConserveredTranscripts( int argc, char** argv, std::map<std::string
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -781,7 +781,7 @@ int syntenicSingleCopy( int argc, char** argv, std::map<std::string, std::string
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::string>& parameters ){
@@ -891,7 +891,7 @@ int syntenicSingleCopy2( int argc, char** argv, std::map<std::string, std::strin
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 
@@ -1003,7 +1003,7 @@ int syntenicSingleCopy3( int argc, char** argv, std::map<std::string, std::strin
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 
@@ -1064,7 +1064,7 @@ int DenoveAssemblyVariantCalling( int argc, char** argv, std::map<std::string, s
     }else{
         std::cerr << usage.str();
     }
-    return 1;
+    return 0;
 }
 
 //
@@ -1213,7 +1213,7 @@ int myCountNumberOfTwoneighborSNP( int argc, char** argv, std::map<std::string, 
         return 0;
     }else {
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }
 
@@ -1246,7 +1246,7 @@ int mycountNumberSNPAndIndel( int argc, char** argv, std::map<std::string, std::
         return 0;
     }else {
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }
 
@@ -1271,6 +1271,6 @@ int myGenerateRandomSdi( int argc, char** argv, std::map<std::string, std::strin
         return 0;
     }else {
         std::cerr << usage.str();
-        return 1;
+        return 0;
     }
 }

@@ -39,15 +39,18 @@ bool transcriptRealignment( Transcript& targetTranscript, int& startTarget, int 
                     spliceSitePositions.push_back(spliceSitePosition);
                 }
             }
-            alignNeedlemanForTranscript_simd_avx2int32 nw (refGenomeSequence, dna_b, startCodonPosition, stopCodonPosition, spliceSitePositions, parameters, nucleotideCodeSubstitutionMatrix);
+            std::string alignment_q;
+            std::string alignment_d;
+            std::string alignment_infor;
+            alignNeedlemanForTranscript_simd_avx2int32(refGenomeSequence, dna_b, startCodonPosition, stopCodonPosition, spliceSitePositions, parameters, nucleotideCodeSubstitutionMatrix, alignment_q, alignment_d, alignment_infor);
             /*if(referenceTranscript.getCdsVector().size()>1){
                 nw.print_results();
             }*/
-            for( size_t tp = 0; tp<nw.getAlignment_q().length(); ++tp ){
-                if( nw.getAlignment_q()[tp] != '-' ){
+            for( size_t tp = 0; tp<alignment_q.length(); ++tp ){
+                if( alignment_q[tp] != '-' ){
                     ++targetPosition;
                 }
-                if( nw.getAlignment_d()[tp] != '-' ){
+                if( alignment_d[tp] != '-' ){
                     ++referencePosition;
                     for( std::vector<GenomeBasicFeature>::iterator it4=referenceTranscript.getCdsVector().begin();
                          it4!=referenceTranscript.getCdsVector().end(); ++it4){

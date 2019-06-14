@@ -73,6 +73,7 @@ public:
     ~alignNeedlemanForTranscript_simd_avx2int16();
     std::string getAlignment_q();
     std::string getAlignment_d();
+    std::string getInfor();
     void print_results();
 };
 

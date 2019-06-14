@@ -94,19 +94,19 @@ TEST(alignTranscript, c1){
 
                         if (nw.getAlignment_d().compare(nw2.getAlignment_d()) != 0) {
                             std::cerr << "error d" << it2->getName() << std::endl;
-                            nw.print_results();
+                            //nw.print_results();
                             nw2.print_results();
                         } else if (nw.getAlignment_q().compare(nw2.getAlignment_q()) != 0) {
                             std::cerr << "error q" << it2->getName() << std::endl;
-                            nw.print_results();
+                            //nw.print_results();
                             nw2.print_results();
                         } else if (rq.compare(dna_b) != 0) {
                             std::cerr << "error rq" << it2->getName() << std::endl;
-                            nw.print_results();
+                            //nw.print_results();
                             nw2.print_results();
                         } else if (rd.compare(refGenomeSequence) != 0) {
                             std::cerr << "error rd" << it2->getName() << std::endl;
-                            nw.print_results();
+                            //nw.print_results();
                             nw2.print_results();
                         }
                     }

@@ -16,17 +16,17 @@
 
 TEST(alignNeedlemanForTranscript_simd_avx2int32, c1){
     std::string parameterFile = "configure";
-    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "./");
+    std::map<std::string, std::string> parameters = initialize_paramters(parameterFile, "/home/bs674/Dropbox/gean/");
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
     int minIntron = 5;
 
-    std::string referenceGenomeFilePath = "/home/song/Dropbox/tair11/Col.fa";
+    std::string referenceGenomeFilePath = "/media/bs674/2t/testGean/tair10.fa";
     std::map<std::string, Fasta> referenceGenome;
 
     readFastaFile(referenceGenomeFilePath, referenceGenome);
     std::cout << "reference genome sequence reading done" << std::endl;
 
-    std::string referenceGffFilePath = "/home/song/Dropbox/tair11/TAIR10_GFF3_genes_no_UM.gff";
+    std::string referenceGffFilePath = "/media/bs674/2t/testGean/TAIR10_GFF3_genes.gff";
     std::map<std::string, std::vector<Transcript> > referenceTranscriptHashSet;
     std::string regex = get_parameters("cdsParentRegex", parameters);
     readGffFile (referenceGffFilePath, referenceTranscriptHashSet, regex);
@@ -34,7 +34,7 @@ TEST(alignNeedlemanForTranscript_simd_avx2int32, c1){
     CheckAndUpdateTranscriptsEnds( referenceTranscriptHashSet, referenceGenome, nucleotideCodeSubstitutionMatrix, minIntron);
     std::cout << "gff file reading done" << std::endl;
     std::map<std::string, std::vector<Variant> > variantsMaps;
-    std::string sdiFile = "/home/song/Dropbox/tair11/PA9996.sdi";
+    std::string sdiFile = "/media/bs674/2t/testGean/PA9996.sdi";
     readSdiFile (sdiFile, variantsMaps, "", referenceGenome);
     std::cout << "variant tables reading done" << std::endl;
 
@@ -68,6 +68,7 @@ TEST(alignNeedlemanForTranscript_simd_avx2int32, c1){
                 int endTarget = targetTranscript.getPEnd() + refGenomeSequence.length();
 
                 std::string dna_b = getSubsequence(targetGenome, it->first, startTarget, endTarget, thisStrand);
+                //std::cout << "line 71" << std::endl;
                 if (referenceTranscript.getStrand() == POSITIVE && referenceTranscript.getCdsVector().size() > 1) {
                     if (referenceTranscript.getCdsVector().size() > 1) {
                         for (size_t i = 1; i < referenceTranscript.getCdsVector().size(); ++i) {
@@ -79,39 +80,62 @@ TEST(alignNeedlemanForTranscript_simd_avx2int32, c1){
                         }
                     }
                     if (dna_b.length() < 10000) {
-                        alignNeedlemanForTranscript_simd_avx2int32 nw(refGenomeSequence, dna_b, startCodonPosition,
+                        std::string alignment_q;
+                        std::string alignment_d;
+                        std::string alignment_infor;
+                        //std::cout << "line 86" << std::endl;
+                        alignNeedlemanForTranscript_simd_avx2int32 (refGenomeSequence, dna_b, startCodonPosition,
                                                                       stopCodonPosition, spliceSitePositions,
                                                                       parameters,
-                                                                      nucleotideCodeSubstitutionMatrix);
-//                        std::cout << "standard " << referenceTranscript.getName() << " begin" << std::endl;
+                                                                      nucleotideCodeSubstitutionMatrix, alignment_q, alignment_d, alignment_infor);
+                        std::cout << "standard " << referenceTranscript.getName() << " begin" << std::endl;
                         NeedlemanWunschForTranscript nw2(refGenomeSequence, dna_b, startCodonPosition,
                                                          stopCodonPosition,
                                                          spliceSitePositions, parameters,
                                                          nucleotideCodeSubstitutionMatrix);
-                        std::string rq = nw.getAlignment_q();
+                        std::string rq = alignment_q;
                         rq.erase(std::remove(rq.begin(), rq.end(), '-'), rq.end());
-                        std::string rd = nw.getAlignment_d();
+                        std::string rd = alignment_d;
                         rd.erase(std::remove(rd.begin(), rd.end(), '-'), rd.end());
 
-                        if (nw.getAlignment_d().compare(nw2.getAlignment_d()) != 0) {
+                        if (alignment_d.compare(nw2.getAlignment_d()) != 0) {
                             std::cout << "error d" << it2->getName() << std::endl;
-                            nw.print_results();
+
+                            std::cout << alignment_q << std::endl;
+                            std::cout << alignment_d << std::endl;
+                            std::cout << alignment_infor << std::endl;
                             nw2.print_results();
-                        } else if (nw.getAlignment_q().compare(nw2.getAlignment_q()) != 0) {
+                        } else if (alignment_q.compare(nw2.getAlignment_q()) != 0) {
                             std::cout << "error q" << it2->getName() << std::endl;
-                            nw.print_results();
+
+                            std::cout << alignment_q << std::endl;
+                            std::cout << alignment_d << std::endl;
+                            std::cout << alignment_infor << std::endl;
+
                             nw2.print_results();
                         } else if (rq.compare(dna_b) != 0) {
                             std::cout << "error rq" << it2->getName() << std::endl;
-                            nw.print_results();
+
+                            std::cout << alignment_q << std::endl;
+                            std::cout << alignment_d << std::endl;
+                            std::cout << alignment_infor << std::endl;
+
                             nw2.print_results();
                         } else if (rd.compare(refGenomeSequence) != 0) {
                             std::cout << "error rd" << it2->getName() << std::endl;
-                            nw.print_results();
+
+                            std::cout << alignment_q << std::endl;
+                            std::cout << alignment_d << std::endl;
+                            std::cout << alignment_infor << std::endl;
+
                             nw2.print_results();
                         }else{
                             std::cout << "good" << it2->getName() << std::endl;
-                            nw.print_results();
+
+                            std::cout << alignment_q << std::endl;
+                            std::cout << alignment_d << std::endl;
+                            std::cout << alignment_infor << std::endl;
+
                             nw2.print_results();
                         }
                     }
@@ -190,10 +214,16 @@ TEST(alignNeedlemanForTranscript_simd_avx2int32, c2){
                         }
                     }
                     if (dna_b.length() < 5000) {
-                        alignNeedlemanForTranscript_simd_avx2int32 nw(refGenomeSequence, dna_b, startCodonPosition,
+
+                        std::string alignment_q;
+                        std::string alignment_d;
+                        std::string alignment_infor;
+
+                        alignNeedlemanForTranscript_simd_avx2int32(refGenomeSequence, dna_b, startCodonPosition,
                                                                       stopCodonPosition, spliceSitePositions,
                                                                       parameters,
-                                                                      nucleotideCodeSubstitutionMatrix);
+                                                                      nucleotideCodeSubstitutionMatrix,
+                                                                      alignment_q, alignment_d, alignment_infor);
                     }
                 }
             }

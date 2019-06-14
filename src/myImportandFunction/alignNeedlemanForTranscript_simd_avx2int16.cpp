@@ -490,6 +490,11 @@ void alignNeedlemanForTranscript_simd_avx2int16::print_results() {
 std::string alignNeedlemanForTranscript_simd_avx2int16::getAlignment_q(){
     return _alignment_q;
 }
+
 std::string alignNeedlemanForTranscript_simd_avx2int16::getAlignment_d(){
     return _alignment_d;
+}
+
+std::string alignNeedlemanForTranscript_simd_avx2int16::getInfor(){
+    return _infor;
 }

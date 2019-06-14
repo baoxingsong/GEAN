@@ -7,46 +7,32 @@
 AlignTranscript::AlignTranscript(std::string& dna_d, std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
         std::vector<SpliceSitePosition>& splitSitePositions, std::map<std::string, std::string>& parameters, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix){
     if( dna_d.length() > 3270 || dna_q.length()>3270 ){
-        avx32 = new alignNeedlemanForTranscript_simd_avx2int32(dna_d, dna_q, startCodonPosition, stopCodonPosition, splitSitePositions, parameters, nucleotideCodeSubstitutionMatrix);
+        alignNeedlemanForTranscript_simd_avx2int32(dna_d, dna_q, startCodonPosition, stopCodonPosition, splitSitePositions, parameters, nucleotideCodeSubstitutionMatrix,alignment_q, alignment_d, infor);
     }else{
         avx16 = new alignNeedlemanForTranscript_simd_avx2int16(dna_d, dna_q, startCodonPosition, stopCodonPosition, splitSitePositions, parameters, nucleotideCodeSubstitutionMatrix);
+        alignment_q = avx16->getAlignment_q();
+        alignment_d = avx16->getAlignment_d();
+        infor = avx16->getInfor();
     }
 }
 
 AlignTranscript::~AlignTranscript(){
-    if( avx32 != NULL ){
-        delete(avx32);
-    }
     if( avx16 != NULL ){
         delete(avx16);
     }
 }
 
 std::string AlignTranscript::getAlignment_q(){
-    if( avx32 != NULL ){
-        return avx32->getAlignment_q();
-    }
-    if( avx16 != NULL ){
-        return avx16->getAlignment_q();
-    }
-    return "";
+    return this->alignment_q;
 }
 
 std::string AlignTranscript::getAlignment_d(){
-    if( avx32 != NULL ){
-        return avx32->getAlignment_d();
-    }
-    if( avx16 != NULL ){
-        return avx16->getAlignment_d();
-    }
-    return "";
+    return this->alignment_d;
 }
-
-void AlignTranscript::print_results(){
-    if( avx32 != NULL ){
-        avx32->print_results();
-    }else if( avx16 != NULL ){
-        avx16->print_results();
-    }
-}
-
+//
+//void AlignTranscript::print_results(){
+//    std::cout << alignment_q << std::endl;
+//    std::cout << alignment_d << std::endl;
+//    std::cout << infor << std::endl;
+//}
+//

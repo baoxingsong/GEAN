@@ -1,0 +1,146 @@
+---
+title: "GEAN manual"
+author: "Baoxing Song"
+date: "June 12, 2019"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# GEAN
+Here we provide a solution for inconsistent alignment problem which could lead to false positive splice sites disturb or ORF-shift predication. And whole genome MSA is all developped basing on the genetic features. GEAN could also use to transform the well annotated genetics feature of model species to phylogenetically nearby species with whole genome newly sequenced.
+
+
+
+## Install
+### Dependencies
+CPU support avx2
+GNU GCC >=6.0 
+Cmake >= 3.0
+Due to the high computational density of weighted sequence alignment algorithm, GEAN only fullly works on hadware platform with CPU support AVX2 constructions.
+Other functions could work on most of hardware plarform.
+### Installation
+```{bash eval = FALSE}
+git clone https://github.com/baoxingsong/GEAN.git
+cd GEAN
+cmake CMakeLists.txt
+make
+```
+
+## Usage
+
+```{bash}
+/home/bs674/software/bin/gean
+```
+### variant calling
+Those functions are designed for whole-genome resequencing variant calling data. It works very for sdi file, which is a very simple file format.<br />
+For VCF format, you should make sure there is no heterozygous variant calling result. If your are working heterozygous line, you could do phasing and seperate your variant calling result into two or more VCF files. please make sure you have only those variants records pass quanlity control in the input file.<br />
+Since the VCF file format really diverse from different variant calling software, we could not make our software work with all the VCF files, it is highly recommanded to reform yoyr vcf file into sdi file.
+
+
+#### pseudogeno
+
+```{bash}
+/home/bs674/software/bin/gean pseudogeno
+```
+
+** -prefix is the prefix of chromosome name for vcf/sdi variant records. Like the chromosome in TAIR10 reference genome is Chr1, Chr2, Chr3, Chr4 and Chr5. While the chromosomes in vcf files from the 1001 genomes project were indicated with 1, 2, 3, 4 and 5.
+So `-prefix Chr` should be set to make the software work properly. If this parameter is not set correctly, the software would act as no variant records in the input vcf/sdi file.   
+
+#### lift
+Project/liftover a certain reference genome-sequence coordinate to re-sequencing accession/line pseudo-genome-sequence.
+```{bash}
+/home/bs674/software/bin/gean lift
+```
+
+
+#### revlift
+Project/liftover a certain coordinate of re-sequencing accession/line pseudo-genome-sequence to reference genome-sequence.
+```{bash}
+/home/bs674/software/bin/gean revlift
+```
+
+
+#### liftgff
+Inference the gene structure (gtf/gff file) annotation of re-sequencing accession/line by purely coordinate liftover.
+```{bash}
+/home/bs674/software/bin/gean liftgff
+```
+
+#### revliftgff
+Project/liftover the gene structure (gtf/gff file) annotation of re-sequencing accession/line to reference genome-sequence by purely coordinate liftover.
+```{bash}
+/home/bs674/software/bin/gean revliftgff
+```
+
+
+#### reanva
+Realign the sequence using ZDP algorithm to solve the inconsistent INDEL alignment problem and recall all variants which could cause false positive ORF-state shit predication.
+```{bash}
+/home/bs674/software/bin/gean reanva
+```
+ * By ORF-states, this software has following criteria:
+     1) Splicing sites is one of motif in "SpliceSites", which is included in the release
+     2) The minimum length of intron is larger than a certain value
+     3) CDS sequence length is larger than a certain value
+     4) The length of CDS sequence is divisible by 3
+     5) No premature stop codon
+     6) End with end codon
+     7) Start with start codon
+     The IUPAC Codes of DNA sequence could be well dealt with. 
+     The result of ORF-states are included in the CDS sequence
+
+#### gff2seq
+Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state)
+```{bash}
+/home/bs674/software/bin/gean gff2seq
+```
+
+#### annowgr
+Transform the reference gene structure annotation to re-sequencing accession/lines with several complementary methods.
+```{bash}
+/home/bs674/software/bin/gean annowgr
+```
+
+#### randomVar
+Assign a random position for each variant in a variant calling result file, which could be used to compare the different between observed variant calling and random variants.
+```{bash}
+/home/bs674/software/bin/gean generateRandomSdi
+```
+
+### Whole genome wide multiple sequence alignment pipeline
+#### premsa
+cut the genome sequence of a population of individuals into fragments to perform multiple sequence alignment for each fragment.
+```{bash}
+/home/bs674/software/bin/gean premsa
+```
+
+#### msatosdi
+perform variant calling from the multiple sequence alignment of sequence fragments of a population of genome sequences
+```{bash}
+/home/bs674/software/bin/gean msatosdi
+```
+
+### pipeline to project the reference gene structure annotation to a de novo assembly genome sequence highly similar with the reference genome sequence
+#### transgff
+Project project reference gene structure annotation to a de novo genome sequence basing the whole genome sequence alignment.
+The result file contains duplication gene annotations records, which might do not compile with other software and could be purified with the following function.
+```{bash}
+/home/bs674/software/bin/gean transgff
+```
+ 
+#### purifygff   
+remove those duplication gene structure annotations generated from the transff function
+```{bash}
+/home/bs674/software/bin/gean purifygff
+```
+
+
+### Citing GEAN
+If you use GEAN, please cite: <br />
+********Baoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
+

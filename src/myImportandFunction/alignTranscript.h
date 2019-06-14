@@ -11,9 +11,10 @@
 
 class AlignTranscript {
     private:
-        alignNeedlemanForTranscript_simd_avx2int32 * avx32 = NULL;
         alignNeedlemanForTranscript_simd_avx2int16 * avx16 = NULL;
-        std::string model;
+        std::string alignment_d;
+        std::string alignment_q;
+        std::string infor;
     public:
         AlignTranscript(std::string& dna_d, std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
                         std::vector<SpliceSitePosition>& splitSitePositions, std::map<std::string, std::string>& parameters,
@@ -21,7 +22,7 @@ class AlignTranscript {
         ~AlignTranscript();
         std::string getAlignment_q();
         std::string getAlignment_d();
-        void print_results();
+        //void print_results();
 };
 
 

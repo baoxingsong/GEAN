@@ -53,6 +53,7 @@ bool caseInsensitiveStringCompare(const std::string& str1, const std::string& st
 //for MSA
 void getSdiList(const std::string& list_file, std::map<std::string, std::string>& sdiLists);
 
+void overlapGenomeAndGene(std::map <std::string, std::vector<Gene>> & geneMap, std::map <std::string, Fasta> & sequences);
 
 #endif
 

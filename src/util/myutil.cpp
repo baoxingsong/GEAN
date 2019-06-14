@@ -255,3 +255,29 @@ void getSdiList(const std::string& list_file, std::map<std::string, std::string>
     }
 }
 
+
+
+void overlapGenomeAndGene(std::map <std::string, std::vector<Gene>> & geneMap, std::map <std::string, Fasta> & sequences){
+
+    // remove those chrs not shared by the fasta file and gff file begin
+    std::set <std::string> refChrToRemove;
+    for( std::map<std::string, std::vector<Gene> >::iterator it0=geneMap.begin(); it0!=geneMap.end(); ++it0 ){
+        if ( sequences.find(it0->first) == sequences.end() ){
+            refChrToRemove.insert(it0->first);
+        }
+    }
+    for( std::map<std::string, Fasta >::iterator it0=sequences.begin(); it0!=sequences.end(); ++it0 ){
+        if ( geneMap.find(it0->first) == geneMap.end() ){
+            refChrToRemove.insert(it0->first);
+        }
+    }
+    for( std::string chr : refChrToRemove ){
+        if( geneMap.find(chr) != geneMap.end() ){
+            geneMap.erase(chr);
+        }
+        if( sequences.find(chr) != sequences.end() ){
+            sequences.erase(chr);
+        }
+    }
+    // remove those chrs not shared by the fasta file and gff file end
+}
