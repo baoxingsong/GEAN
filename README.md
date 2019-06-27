@@ -253,13 +253,19 @@ remove those duplication gene structure annotations generated from the transff f
 -->
 There are several functions are under testing and are included in the source code. The document for those functions will be released after testing.
 Best Practices for different aims could be found under example.
+### Manual
+[gean_manual](gean_manual.pdf)
+### examples
+[whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
+[genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
+[transform maize reference genome annotation to de novo assembly](example/transformMaizeGFFannotation.md)
 ### Contact
 Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
 Please feel free to send E-mail to songbaoxing168@163.com
 
 ### Citing GEAN
-If you use GEAN, please cite:
-********Baoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
+If you use GEAN, please cite: <br />
+Baoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
 
 ### Acknowledgement
 Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\

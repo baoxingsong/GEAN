@@ -24,16 +24,16 @@ align1.tbl is based on the result from reference publication 1 and it is only im
 ## Liftover the reference gene structure annotation to the de novo assembly genome sequence
 run the following commands in parallel
 ```
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align1.tbl -s ler.fa -o ler1.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align2.tbl -s ler.fa -o ler2.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align3.tbl -s ler.fa -o ler3.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align4.tbl -s ler.fa -o ler4.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align5.tbl -s ler.fa -o ler5.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align6.tbl -s ler.fa -o ler6.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align7.tbl -s ler.fa -o ler7.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align8.tbl -s ler.fa -o ler8.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align9.tbl -s ler.fa -o ler9.gff -w 50000 -l
-gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align10.tbl -s ler.fa -o ler10.gff -w 50000 -l
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align1.tbl -s ler.fa -o ler1.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align2.tbl -s ler.fa -o ler2.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align3.tbl -s ler.fa -o ler3.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align4.tbl -s ler.fa -o ler4.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align5.tbl -s ler.fa -o ler5.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align6.tbl -s ler.fa -o ler6.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align7.tbl -s ler.fa -o ler7.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align8.tbl -s ler.fa -o ler8.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align9.tbl -s ler.fa -o ler9.gff -w 50000 -sl
+gean transgff -i TAIR10_GFF3_genes_no_UM.gff -r tair10.fa -a align10.tbl -s ler.fa -o ler10.gff -w 50000 -sl
 ```
 Merge those annotations files and remove duplication gene annotations
 ```
