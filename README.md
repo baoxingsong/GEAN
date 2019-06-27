@@ -256,9 +256,9 @@ Best Practices for different aims could be found under example.
 ### Manual
 [gean_manual](gean_manual.pdf)
 ### examples
-[whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
-[genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
-[transform maize reference genome annotation to de novo assembly](example/transformMaizeGFFannotation.md)
+* [whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
+* [genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
+* [transform maize reference genome annotation to de novo assembly](example/transformMaizeGFFannotation.md)
 ### Contact
 Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
 Please feel free to send E-mail to songbaoxing168@163.com
