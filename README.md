@@ -254,7 +254,7 @@ remove those duplication gene structure annotations generated from the transff f
 There are several functions are under testing and are included in the source code. The document for those functions will be released after testing.
 Best Practices for different aims could be found under example.
 ### Manual
-[gean_manual](gean_manual.pdf)
+[gean_manual](gean-manual.pdf)
 ### examples
 * [whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
 * [genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
