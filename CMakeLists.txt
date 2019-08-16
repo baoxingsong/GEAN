@@ -1,10 +1,30 @@
 cmake_minimum_required(VERSION 3.0)
 project(GEAN)
-#=SET (CMAKE_C_COMPILER "/usr/bin/clang")
-#SET (CMAKE_CXX_COMPILER "/usr/bin/clang++")
-set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
-set(CMAKE_CXX_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -mavx2 -I ./ -std=c++11 -pthread")
-set(CMAKE_C_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -mavx2 -I ./ -pthread")
+
+include(CheckCXXCompilerFlag)
+set(CMAKE_CXX_STANDARD 14)
+
+if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
+    set(MACOSX TRUE)
+else()
+    set(CMAKE_EXE_LINKER_FLAGS "-static-libgcc -static-libstdc++")
+endif()
+
+
+
+CHECK_CXX_COMPILER_FLAG("-mavx2" COMPILER_OPT_ARCH_AVX2_SUPPORTED)
+CHECK_CXX_COMPILER_FLAG("-msse2" COMPILER_OPT_ARCH_SSE2_SUPPORTED)
+if(COMPILER_OPT_ARCH_AVX2_SUPPORTED)
+    set(CMAKE_CXX_FLAGS "-Wall -g3 -O3 -funroll-all-loops -mavx2 -I ./ -std=gnu++14 -pthread")
+    set(CMAKE_C_FLAGS "-Wall -g3 -O3 -funroll-all-loops -mavx2 -I ./ -std=gnu++14 -pthread")
+elseif( COMPILER_OPT_ARCH_SSE2_SUPPORTED)
+    set(CMAKE_CXX_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
+    set(CMAKE_C_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
+else()
+    set(CMAKE_CXX_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
+    set(CMAKE_C_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
+endif()
+
 
 #for google unit test
 add_subdirectory(./googletest/googletest)
