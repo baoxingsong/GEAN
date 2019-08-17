@@ -273,3 +273,5 @@ Thank Dr. Hequan Sun from MPIPZ for discussions\
 Thank Lukas Baumgarten from MPIPZ and Qiushi Li from University of UCalgary for bug reporting\
 Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of GEAN
 
+### Founding
+We acquired founding to continue the development of GEAN until 2022 Dec.
