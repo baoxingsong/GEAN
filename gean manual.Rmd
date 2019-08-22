@@ -158,12 +158,12 @@ Assign a random position for each variant in a variant calling result file, whic
 ```
 
 ### Whole genome wide multiple sequence alignment pipeline
-The function implemented here is an updated version of the functions implemented in (Irisas)[https://github.com/baoxingsong/Irisas/].
+The function implemented here is an updated version of the functions implemented in [Irisas](https://github.com/baoxingsong/Irisas/).
 The functions implemented are faster and consider genome annotations.
 Fistly, cut the whole genome sequence into fragments.
 Secnodly, Perform MSA on each fragments.
 Finally, GEAN merge all the MSA alignment fragments into whole genome level, perform variant calling and output sdi files.
-Please reference (Iriasa document) [https://github.com/baoxingsong/Irisas/tree/master/testData] for the whole pipeline.
+Please reference [Iriasa document]( [https://github.com/baoxingsong/Irisas/tree/master/testData) for the whole pipeline.
 
 #### Cut the (pseudo-)genome sequence of a population of individuals into fragments to perform multiple sequence alignment for each fragment.
 
@@ -191,7 +191,7 @@ The result file contains duplication gene annotations records, which might do no
 
 #### Liftover reference genome annotation to a de novo assembly genome using CDS sequence mapping
 This function implemented similar function as the above on, but it takes the minimap2 sam output as input.
-Usage exmple is (valiable)[https://github.com/baoxingsong/GEAN/blob/master/example/transformMaizeGFFannotation.md].
+Usage exmple is [avaliable](https://github.com/baoxingsong/GEAN/blob/master/example/transformMaizeGFFannotation.md).
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean spltogff
 ```
@@ -199,7 +199,7 @@ Usage exmple is (valiable)[https://github.com/baoxingsong/GEAN/blob/master/examp
 
 #### Liftover reference genome annotation to a de novo assembly genome using CDS sequence mapping
 This function implemented similar function as the above on, but it takes the minimap2 sam output as input.
-Usage exmple is (valiable)[https://github.com/baoxingsong/GEAN/blob/master/example/transformMaizeGFFannotation.md].
+Usage exmple is [avaliable](https://github.com/baoxingsong/GEAN/blob/master/example/transformMaizeGFFannotation.md).
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean spltogff
 ```
@@ -212,14 +212,18 @@ Remove those duplication gene structure annotations generated from the transff f
 
 
 #### Syntenic protein coding gene analysis for the whole chromosome
-This function perform syntenic analysis for the whole chromosome for the whole genome using the longest path approach. It tried to align all the genes on the whole chromosome and good for the analysis that assume no large genome re-arrangement happened.
-And it ware used for the syntenic Arabidopsis col-0 and ler-0.
+This function perform syntenic analysis for the whole chromosome for the whole genome using the longest path approach. It tried to align all the genes on the whole chromosome and good for the analysis that assume no large scale genome re-arrangement. The algorith works very well for a few of reversions.
+The algorithm implemented here is a modified version of [longest path](https://www.geeksforgeeks.org/find-longest-path-directed-acyclic-graph/).
+The same algorithm has been implemented in the [Practical Haplotype Graph](https://bitbucket.org/bucklerlab/practicalhaplotypegraph/src/master/src/main/java/net/maizegenetics/pangenome/processAssemblyGenomes/) by us.
+And it was used for the syntenic Arabidopsis col-0 and ler-0 in our manuscript.
+
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean sinsyn
 ```
 
 #### Syntenic protein coding gene analysis for local regions
 Perform syntenic analysis for the local regions. It assumes large scale genome re-arrangements. And the output syntenic are more fragmented.
+This function is an re-implementation of [DAGchainer](https://www.ncbi.nlm.nih.gov/pubmed/15247098)
 This fucntion was used to the syntenic analysis of Arabidopsis and Cardamine hirsuta.
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean sinsyn
