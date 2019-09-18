@@ -56,6 +56,7 @@ cd GEAN
 cmake CMakeLists.txt
 make
 ```
+If you would like to move the generated `gean` excusable file to a different path, please put `configure` file and `SpliceSites` under the same folder with the `gean` excusable file.
 
 ## Usage
 
@@ -76,6 +77,23 @@ Assume you have a vcf download from 1001 Arabidopsis thaliana website (http://10
 
 ```cat intersection_10001.vcf | grep -v "#" | awk '{print "Chr"$1"\t"$2"\t"length($5)-length($4)"\t"$4"\t"$5}'  > 10001.sdi```
 
+
+#### The sdi (Snps, Deletions and Insertions) file format
+Each line of an sdi file consists of the columns chromosome, position, length, reference base, consensus base. The quality value [\\*0-9] (* or numeric value from 0-255) is optional for GEAN, and will not be used.
+
+* **chromosome** The same name as the chromosome id in reference fasta file
+* **position**	1-based leftmost position
+* **length**	the length difference of the changed sequence against reference (0 for SNPs, negative for deletions, positive for insertions)
+* **reference base** [-A-Z]+ (regular expression range)
+* **consensus base** [-A-Z]+ ((regular expression range), IUPAC code is used for heterozygous sites
+* **quality value**	* means no value available; [0-9]+ shows the quality of this variant. It is not necessary Phred quality.
+Some examples are:
+Chr1    723      0      C           T       2
+Chr1    2719    -4      TGCA        -       1
+Chr1    6786     1      -           T       1
+Chr1    16786   -4      AGGCA       T       1
+The columns after the 6th are optional. In the IMR/DENOM output, 7-9th column means: HMQ coverage (the coverage from reads with mapq >=30), SNP Phred score, HMQ consensus base(the consensus base when considering reads with mapq>=30),
+
 <br />
 <br />
 
@@ -90,19 +108,19 @@ So `-prefix Chr` should be set to make the software work properly. If this param
 
 #### Liftover reference coordinate to pseudo-genome-sequence
 Project/liftover a certain reference genome-sequence coordinate to re-sequencing accession/line with pseudo-genome-sequence avaliable aquired by the above command (pseudogeno). The lift over of the reference genomic coordinates to the pseudo-genome sequences of re-sequenced individuals is performed by counting the number of base pairs shifted by the upstream variants.
-Use case: I am interested in the haplotype sequence of [RDO5 gene](http://www.plantphysiol.org/content/171/4/2659) in resequenced Arabidopsis population. I got the pseudo-genome-sequence for each individual, and liftover the start codon and stop codon coordinates of Col-0 RDO5 to all other individuals. And extract the haplotype sequence from each pseudo-genome-sequence, then I could perform a multiple sequence alignment.
+Use case: I was interested in the haplotype sequence of [RDO5 gene](http://www.plantphysiol.org/content/171/4/2659) in resequenced Arabidopsis population. I got the pseudo-genome-sequence for each individual, and liftover the start codon and stop codon coordinates of Col-0 RDO5 to all other individuals. And extract the haplotype sequence from each pseudo-genome-sequence, then I could perform a multiple sequence alignment.
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean lift
 ```
 
 #### Liftover pseudo-genome-sequence coordinate to reference genome sequence
-Project/liftover a certain coordinate of re-sequencing accession/line pseudo-genome-sequence to reference genome-sequence.
+Project/liftover a certain coordinate of re-sequencing accession/line pseudo-genome-sequence to reference genome-sequence by counting the number of base pairs shifted by the upstream variants. 
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean revlift
 ```
 
 #### Liftover reference gff/gtf/gff3 annotation to pseudo-genome-sequence
-Lift over the reference genome annotation (gtf/gff file) to a re-sequencing accession/line pseudo-genome-sequence by purely coordinate liftover.
+Lift over the reference genome annotation (gtf/gff file) to a re-sequencing accession/line pseudo-genome-sequence by purely coordinate liftover of each boundary coordinate.
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean liftgff
 ```
@@ -114,24 +132,26 @@ Project/liftover the gene structure (gtf/gff file) annotation of re-sequencing a
 ```
 
 #### Recall variants by align the genic region sequencing and keep the completeness of ORF
-Realign the pseudo-genome sequence using ZDP algorithm to solve the inconsistent INDEL alignment problem and recall all variants to avoid false positive ORF-state shit predication.
+Realign the pseudo-genome sequence using ZDP algorithm to solve the inconsistent INDEL alignment problem and recall all variants to avoid false positive ORF-state shift predication.
 This function assummes all the coordinates are 1-based. Except that point, it works well with bed files
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean reanva
 ```
  * By ORF-states, this software has following criteria:
-     1) Splicing sites is one of motif in "SpliceSites" file, which is included in the release
-     2) The minimum length of intron is larger than a certain value
-     3) CDS sequence length is larger than a certain value
-     4) The length of CDS sequence is divisible by 3
-     5) No premature stop codon
-     6) End with end codon
-     7) Start with start codon
+ 
+*     1) Splicing sites is one of motif in "SpliceSites" file, which is included in the release
+*     2) The minimum length of intron is larger than a certain value
+*     3) CDS sequence length is larger than a certain value
+*     4) The length of CDS sequence is divisible by 3
+*     5) No premature stop codon
+*     6) End with end codon
+*     7) Start with start codon
+
      The IUPAC Codes of DNA sequence could be well dealt with. 
      The result of ORF-states are included in the CDS sequence
 
 #### Extract sequece using genome sequence and annotation file
-Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state)
+Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state). In the output CDS sequence fasta file, could tell the ORF-state, and why predicte it as ORF-state conserved/shift.
 ```{bash, size="tiny"}
 /home/bs674/software/bin/gean gff2seq
 ```
@@ -139,11 +159,12 @@ Extract CDS sequence, C-DNA sequence and protein sequence for each protein-codin
 #### Annotate the pseudo-genome-sequence
 Transform the reference gene structure annotation to re-sequencing accession/lines with several complementary methods.
 The approaches embed in this function are:
-1) standard coordinate coordinate liftover.
-2) ZDP approach.
-3) exonerate CDS alignment
-4) exonerate protein alignment
-5) other genome annotation (you could obtain is using ab initio annotation [like Augustus](https://github.com/Gaius-Augustus/Augustus), or RNA-seq guided genome annotation )
+
+* 1) standard coordinate coordinate liftover.
+* 2) ZDP approach.
+* 3) exonerate CDS alignment
+* 4) exonerate protein alignment
+* 5) other genome annotation (you could obtain is using ab initio annotation like [Augustus](https://github.com/Gaius-Augustus/Augustus), or RNA-seq guided genome annotation )
 
 For the first 4 approach, the gene structure predicated by the upstream module would be adapted firstly, and the region predicted as ORF-state shift would be handled by the below modules.
 The genes mode in 5th module located in region that could not find a ORF-state conserved region in the first 4 modules will be ingegreted into the finall output.
@@ -160,9 +181,11 @@ Assign a random position for each variant in a variant calling result file, whic
 ### Whole genome wide multiple sequence alignment pipeline
 The function implemented here is an updated version of the functions implemented in [Irisas](https://github.com/baoxingsong/Irisas/).
 The functions implemented are faster and consider genome annotations.
-Fistly, cut the whole genome sequence into fragments.
-Secnodly, Perform MSA on each fragments.
-Finally, GEAN merge all the MSA alignment fragments into whole genome level, perform variant calling and output sdi files.
+
+* Fistly, cut the whole genome sequence into fragments.
+* Secnodly, Perform MSA on each fragments.
+* Finally, GEAN merge all the MSA alignment fragments into whole genome level, perform variant calling and output sdi files.
+
 Please reference [Iriasa document]( [https://github.com/baoxingsong/Irisas/tree/master/testData) for the whole pipeline.
 
 #### Cut the (pseudo-)genome sequence of a population of individuals into fragments to perform multiple sequence alignment for each fragment.

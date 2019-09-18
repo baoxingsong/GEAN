@@ -71,17 +71,26 @@ if( length($name2) > 0  ){
 }
 
 while( my ($k, $v) = each %seqs1  ){
-    if( $seqs2{$k} eq $v  ){
+    if ( exists $seqs2{$k} ){
+        if( $seqs2{$k} eq $v  ){
 
+        }else{
+            print "$ARGV[0]\t$k\n";
+        }
     }else{
-        print "$ARGV[0]\t$k\n";
+        print "could not find $k in $ARGV[1]\n";
     }
 }
 while( my ($k, $v) = each %seqs2  ){
-    if( $seqs1{$k} eq $v  ){
+    if ( exists $seqs1{$k} ) {
+        if ($seqs1{$k} eq $v) {
 
+        }
+        else {
+            print "$ARGV[0]\t$k\n";
+        }
     }else{
-        print "$ARGV[0]\t$k\n";
+        print "could not find $k in $ARGV[0]\n";
     }
 }
 
