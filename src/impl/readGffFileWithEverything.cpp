@@ -34,6 +34,8 @@ void readGffFileWithEveryThing (const std::string& filePath, std::map<std::strin
     geneIdRegex.insert();
     end */
 
+    transcriptParentRegex.insert("Parent=([-_0-9:a-zA-Z.]*?)$");
+
     std::set<std::string> transcriptNickNames;
     transcriptNickNames.insert("transcript");
     transcriptNickNames.insert("pseudogenic_transcript");

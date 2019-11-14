@@ -609,7 +609,7 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
 //                    std::cout << "geneHashMap[geneNameMap[chr][i]].getStart(): " << geneHashMap[geneNameMap[chr][i]].getStart() <<
 //                    " alignmentMatch.getDatabase().getStart(): " << alignmentMatch.getDatabase().getStart() <<
 //                    " geneHashMap[geneNameMap[chr][i]].getEnd(): " << geneHashMap[geneNameMap[chr][i]].getEnd() << std::endl;
-                    newStartShitfDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart());
+                    newStartShitfDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart())/2;
                 }
             }
 //            std::cout << "geneHashMap[geneNameMap[chr][i]].getEnd() " << geneHashMap[geneNameMap[chr][i]].getEnd() <<
@@ -617,7 +617,7 @@ void getAlltheOverLappedGenes2( std::map<std::string, std::vector<std::string> >
             if( geneHashMap[geneNameMap[chr][i]].getEnd() > alignmentMatch.getDatabase().getEnd() ){
                 if( endShiftDistance < (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart()) ){
                     //std::cout << "line 612" << std::endl;
-                    newEndShiftDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart());
+                    newEndShiftDistance = (geneHashMap[geneNameMap[chr][i]].getEnd()-geneHashMap[geneNameMap[chr][i]].getStart())/2;
                 }
             }
 //            std::cout << "newStartShitfDistance: " << newStartShitfDistance << " newEndShiftDistance: " << newEndShiftDistance << std::endl;
@@ -696,8 +696,8 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
     int databaseEnd=alignmentMatch.getDatabaseEnd();
 
 //    std::cout << "line 677" << std::endl;
-    std::string alignQuerySequence="";
-    std::string alignDatabaseSequence="";
+    std::string alignQuerySequence0="";
+    std::string alignDatabaseSequence0="";
 
     std::string alignQuerySequence1="";
     std::string alignDatabaseSequence1="";
@@ -739,7 +739,7 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
         if( longerLength < databaseSequence0.length()){
             longerLength = databaseSequence0.length();
         }
-        alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence, alignDatabaseSequence, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+        alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence0, alignDatabaseSequence0, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
     }
     std::string querySequence1 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
                                                alignmentMatch.getQueryStart(),
@@ -786,10 +786,8 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
 
     alignSlidingWindow(querySequence1, databaseSequence1, alignQuerySequence1, alignDatabaseSequence1, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
 
-    alignQuerySequence = alignQuerySequence + alignQuerySequence1;
-    alignQuerySequence = alignQuerySequence + alignQuerySequence2;
-    alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence1;
-    alignDatabaseSequence = alignDatabaseSequence + alignDatabaseSequence2;
+    std::string alignQuerySequence = alignQuerySequence0 + alignQuerySequence1 + alignQuerySequence2;
+    std::string alignDatabaseSequence = alignDatabaseSequence0 + alignDatabaseSequence1 + alignDatabaseSequence2;
 //    std::cout << "alignQuerySequence: " << alignQuerySequence << std::endl;
 //    std::cout << "alignDatabaseSequence: " << alignDatabaseSequence << std::endl;
     //generate annotation according to sequence alignment begin
@@ -909,15 +907,11 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
                                             alignmentMatch.getQueryEnd()+1,
                                             queryEnd, alignmentMatch.getQueryStrand());
         }
-//        int longerLength = querySequence0.length();
-//        if( longerLength < databaseSequence0.length()){
-//            longerLength = databaseSequence0.length();
-//        }
-        //alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence, alignDatabaseSequence, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
     }
     std::string querySequence1 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
                                                 alignmentMatch.getQueryStart(),
                                                 alignmentMatch.getQueryEnd(), alignmentMatch.getQueryStrand());
+
     std::string databaseSequence1 = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
                                                    alignmentMatch.getDatabaseStart(),
                                                    alignmentMatch.getDatabaseEnd());
@@ -952,20 +946,15 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
                                             queryStart, alignmentMatch.getQueryStart() - 1,
                                             alignmentMatch.getQueryStrand());
         }
-//        int longerLength = querySequence2.length();
-//        if( longerLength < databaseSequence2.length()){
-//            longerLength = databaseSequence2.length();
-//        }
-        //alignSlidingWindow(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
     }
 
 
     std::string querySequence = querySequence0 + querySequence1 + querySequence2;
     std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
-    //std::cout << "line 964 database: " <<  databaseSequence << std::endl;
+    std::cout << "querySequence: " << querySequence << " databaseSequence: " <<  databaseSequence << std::endl;
     alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
             startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
-
+    std::cout << "alignQuerySequence: " << alignQuerySequence << " alignDatabaseSequence: " <<  alignDatabaseSequence << std::endl;
 
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence1;
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence2;
@@ -1545,16 +1534,17 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                         //windows size if a record specific sliding window size
                         // if it is not set, then use slidingWindowSize
                         if( source.compare("sam") == 0 ){
+                            std::cout << "line 1546" << std::endl;
                             slidingWinAlnAndGeneRateAnnotationSam( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
                                                                 slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
                         }else if( alignmentMatch.getWindowSize()>1 ){
-                            //std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
+                            std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
                                                                 alignmentMatch.getWindowSize(), startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
                         }else{
-                            //std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
+                            std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                             overLappedGenes, transcriptHashMap, importantPositions,
                                                             slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);

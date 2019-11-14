@@ -5,6 +5,7 @@
 #include "getSubsequence.h"
 
 std::string getSubsequence( std::map<std::string, Fasta>& sequences,const  std::string& seqName, const int& _start, const int& _end){
+    std::cout << seqName << " : " <<_start << "-" << _end  << std::endl;
     if( sequences.find(seqName)!=sequences.end() ){
         size_t start = _start;
         size_t end = _end;

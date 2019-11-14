@@ -3,11 +3,11 @@
 #You could just remove this parameter and run the interesting function. If the removed function does mater for the interesting function, the software would give waring message and stop.
 # parameters for gene structure realignment scoring begin
 
-alignmentOpenGapP   -3
+alignmentOpenGapP   -4
 alignmentExtendGapP -2
 
 alignmentExonMatchP 6
-alignmentExonMismatchP  -1
+alignmentExonMismatchP  -9
 alignmentExonOpenGapP   -4
 alignmentExonExtendGapP -2
 alignmentIntronMatchP   1

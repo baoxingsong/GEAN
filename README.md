@@ -265,7 +265,7 @@ Please feel free to send E-mail to songbaoxing168@163.com
 
 ### Citing GEAN
 If you use GEAN, please cite: <br />
-Baoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
+BSong B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
 
 ### Acknowledgement
 Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\

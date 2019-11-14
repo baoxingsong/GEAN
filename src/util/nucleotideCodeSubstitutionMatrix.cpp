@@ -108,10 +108,10 @@ NucleotideCodeSubstitutionMatrix::NucleotideCodeSubstitutionMatrix( std::map<std
 
     int8_t m[5][5] = {
             //  A,     T,     C,     G,     N
-            {    1,    -1,    -1,    -1,    0} ,   //A
-            {   -1,     1,    -1,    -1,    0} ,   //T
-            {   -1,    -1,     1,    -1,    0} ,   //C
-            {   -1,    -1,    -1,     1,    0},     //G
+            {    2,    -4,    -4,    -4,    0} ,   //A
+            {   -4,     2,    -4,    -4,    0} ,   //T
+            {   -4,    -4,     2,    -4,    0} ,   //C
+            {   -4,    -4,    -4,     2,    0},     //G
             {    0,     0,     0,     0,    0}     //N
     };
     int i, j;
@@ -134,16 +134,18 @@ NucleotideCodeSubstitutionMatrix::NucleotideCodeSubstitutionMatrix( std::map<std
 
     for( i=0; i<5; i++){
         for( j=0; j<5; j++){
-            if( this->nucleotide_substitution_matrix[i][j] > 0 ){
-                this->_exon_subsitition_matrix[i][j] = this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentExonMatchP", parameters));
-                this->_intron_subsitition_matrix[i][j] = this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentIntronMatchP", parameters));
-                this->_splice_sites_subsitition_matrix[i][j] = this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentSpliceSitesMatchP", parameters));
-                this->_start_stop_codon_subsitition_matrix[i][j] = this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentStartStopCodonMatchP", parameters));
+            if( i==4 || j==4 ){
+                this->_exon_subsitition_matrix[i][j] = 0;
+            }else if( i==j ){
+                this->_exon_subsitition_matrix[i][j] = stoi(get_parameters("alignmentExonMatchP", parameters));
+                this->_intron_subsitition_matrix[i][j] = stoi(get_parameters("alignmentIntronMatchP", parameters));
+                this->_splice_sites_subsitition_matrix[i][j] = stoi(get_parameters("alignmentSpliceSitesMatchP", parameters));
+                this->_start_stop_codon_subsitition_matrix[i][j] = stoi(get_parameters("alignmentStartStopCodonMatchP", parameters));
             }else{
-                this->_exon_subsitition_matrix[i][j] = -(this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentExonMismatchP", parameters)));
-                this->_intron_subsitition_matrix[i][j] = -(this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentIntronMismatchP", parameters)));
-                this->_splice_sites_subsitition_matrix[i][j] = -(this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentSpliceSitesMismatchP", parameters)));
-                this->_start_stop_codon_subsitition_matrix[i][j] = -(this->nucleotide_substitution_matrix[i][j] * stoi(get_parameters("alignmentStartStopCodonMismatchP", parameters)));
+                this->_exon_subsitition_matrix[i][j] = stoi(get_parameters("alignmentExonMismatchP", parameters));
+                this->_intron_subsitition_matrix[i][j] = stoi(get_parameters("alignmentIntronMismatchP", parameters));
+                this->_splice_sites_subsitition_matrix[i][j] = stoi(get_parameters("alignmentSpliceSitesMismatchP", parameters));
+                this->_start_stop_codon_subsitition_matrix[i][j] = stoi(get_parameters("alignmentStartStopCodonMismatchP", parameters));
             }
         }
     }
