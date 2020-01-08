@@ -6,6 +6,7 @@
 
 AlignTranscript::AlignTranscript(std::string& dna_d, std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
         std::vector<SpliceSitePosition>& splitSitePositions, std::map<std::string, std::string>& parameters, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix){
+#ifdef __AVX2__
     if( dna_d.length() > 3270 || dna_q.length()>3270 ){
         alignNeedlemanForTranscript_simd_avx2int32(dna_d, dna_q, startCodonPosition, stopCodonPosition, splitSitePositions, parameters, nucleotideCodeSubstitutionMatrix,alignment_q, alignment_d, infor);
     }else{
@@ -14,6 +15,9 @@ AlignTranscript::AlignTranscript(std::string& dna_d, std::string& dna_q, int & s
         alignment_d = avx16->getAlignment_d();
         infor = avx16->getInfor();
     }
+#else
+    alignNeedlemanForTranscript(dna_d, dna_q, startCodonPosition, stopCodonPosition, splitSitePositions, parameters, nucleotideCodeSubstitutionMatrix,alignment_q, alignment_d, infor);
+#endif
 }
 
 AlignTranscript::~AlignTranscript(){
@@ -29,10 +33,3 @@ std::string AlignTranscript::getAlignment_q(){
 std::string AlignTranscript::getAlignment_d(){
     return this->alignment_d;
 }
-//
-//void AlignTranscript::print_results(){
-//    std::cout << alignment_q << std::endl;
-//    std::cout << alignment_d << std::endl;
-//    std::cout << infor << std::endl;
-//}
-//

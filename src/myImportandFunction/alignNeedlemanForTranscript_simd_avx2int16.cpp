@@ -498,3 +498,8 @@ std::string alignNeedlemanForTranscript_simd_avx2int16::getAlignment_d(){
 std::string alignNeedlemanForTranscript_simd_avx2int16::getInfor(){
     return _infor;
 }
+
+
+
+
+

@@ -28,7 +28,9 @@
 #include <map>
 #include <vector>
 #include "../util/nucleotideCodeSubstitutionMatrix.h"
+#include "../model/model.h"
 #include <stack>
+
 
 enum ELEMENTS {
     START, STOP, EXON, INTRON, SPLICEDONOR, SPLICEACCEPTOR
@@ -94,4 +96,11 @@ class NeedlemanWunschForTranscript {
         ELEMENTS checkElements( int & position );
         void print_results();
 };
+
+void alignNeedlemanForTranscript(std::string& dna_d,
+                                 std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
+                                 std::vector<SpliceSitePosition>& spliceSitePositions,
+                                 std::map<std::string, std::string>& parameters,
+                                 NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix,
+                                 std::string & alignment_q, std::string & alignment_d, std::string & infor);
 #endif

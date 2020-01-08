@@ -825,9 +825,9 @@ void bandAlign( const std::string& dna_q, const std::string& dna_d,
     int sw=slidingWindowSize;
     sw = slidingWindowSize>startShiftDistance?slidingWindowSize:startShiftDistance;
     sw = slidingWindowSize>endShiftDistance?slidingWindowSize:endShiftDistance;
+
     bandAlign( dna_q, dna_d, _alignment_q, _alignment_d, sw, parameters, nucleotideCodeSubstitutionMatrix );
 }
-
 void bandAlign( const std::string& dna_q, const std::string& dna_d,
                          std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
                          std::map<std::string, std::string>& parameters,

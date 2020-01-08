@@ -523,10 +523,10 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
         if( inputParser.cmdOptionExists("-w") ){
             windowWidth = std::stoi( inputParser.getCmdOption("-w") );
         }
-        int alignmentApproach = 0;
+        int alignmentApproach = 1;
         if( inputParser.cmdOptionExists("-n") ){
             if( inputParser.getCmdOption("-n").compare("sliding") == 0 ){
-
+                alignmentApproach = 0;
             }else if ( inputParser.getCmdOption("-n").compare("band") == 0 ){
                 alignmentApproach = 1;
             }else{
@@ -602,10 +602,10 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
             return 1;
         }
 
-        int alignmentApproach = 0;
+        int alignmentApproach = 1;
         if( inputParser.cmdOptionExists("-n") ){
             if( inputParser.getCmdOption("-n").compare("sliding") == 0 ){
-
+                alignmentApproach = 0;
             }else if ( inputParser.getCmdOption("-n").compare("band") == 0 ){
                 alignmentApproach = 1;
             }else{
