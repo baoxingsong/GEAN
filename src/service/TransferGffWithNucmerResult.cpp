@@ -176,7 +176,7 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
                                         std::string & alignQuerySequence,
                                         std::string & alignDatabaseSequence, std::map<int, int> & importantPositions,
                                         std::map<std::string, std::string>& parameters,
-                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix){
+                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & alignmentApproach){
     int newStart;
     int queryPosition = 0;
     std::string databaseSequence = getSubsequence(databaseSequences, alignmentMatch.getDatabaseChr(),
@@ -185,7 +185,15 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
     std::string querySequence = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
                                                alignmentMatch.getQueryStart(),
                                                alignmentMatch.getQueryEnd(), alignmentMatch.getQueryStrand());
-    alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, 50, parameters, nucleotideCodeSubstitutionMatrix);
+    if( alignmentApproach == 0 ){
+        alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, 50, parameters, nucleotideCodeSubstitutionMatrix);
+    }else if( alignmentApproach == 1 ){
+        bandAlign(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, 50, parameters, nucleotideCodeSubstitutionMatrix);
+    }else{
+        std::cout << "invalid sequence alignment parameter" << std::endl;
+        std::exit(1024);
+    }
+
     //generate annotation according to sequence alignment begin
 
     for (Transcript *referenceTranscript : overLappedTranscripts) {
@@ -380,7 +388,7 @@ void newTranscriptAddCds(Transcript & referenceTranscript, Transcript & newTrans
 void TransferGffWithNucmerResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                   const std::string & queryFastaFilePath, const std::string & nucmerFilePath,
                                   std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                  const size_t & maxLengthForStructureAlignment  ){
+                                  const size_t & maxLengthForStructureAlignment, const int & alignmentApproach  ){
 
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
     size_t minIntron = 5;
@@ -426,7 +434,7 @@ void TransferGffWithNucmerResult( const std::string & gffFilePath, const std::st
                         std::map<int, int> importantPositions;
                         slidingWinAlnAndGeneRateAnnotation(alignmentMatch, databaseSequences, querySequences,
                                                            overLappedTranscripts,
-                                                           alignQuerySequence, alignDatabaseSequence, importantPositions, parameters, nucleotideCodeSubstitutionMatrix);
+                                                           alignQuerySequence, alignDatabaseSequence, importantPositions, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
 //                        std::cout << "line 366" << std::endl;
                         if( POSITIVE == alignmentMatch.getQueryStrand() ) {
                             for ( i=0; i<overLappedTranscripts.size(); ++i) {
@@ -687,7 +695,7 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
                                         std::map<int, int> & importantPositions,
                                         const int & slidingWindowSize, const int & startShitfDistance,
                                         const int & endShiftDistance, std::map<std::string, std::string>& parameters,
-                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix){
+                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & alignmentApproach){
 
 
     int queryStart=alignmentMatch.getQueryStart();
@@ -739,7 +747,15 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
         if( longerLength < databaseSequence0.length()){
             longerLength = databaseSequence0.length();
         }
-        alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence0, alignDatabaseSequence0, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+
+        if( alignmentApproach == 0 ){
+            alignSlidingWindow(querySequence0, databaseSequence0, alignQuerySequence0, alignDatabaseSequence0, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+        }else if( alignmentApproach == 1 ){
+            bandAlign(querySequence0, databaseSequence0, alignQuerySequence0, alignDatabaseSequence0, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+        }else{
+            std::cout << "invalid sequence alignment parameter" << std::endl;
+            std::exit(1024);
+        }
     }
     std::string querySequence1 = getSubsequence(querySequences, alignmentMatch.getQueryChr(),
                                                alignmentMatch.getQueryStart(),
@@ -781,10 +797,28 @@ void slidingWinAlnAndGeneRateAnnotation(AlignmentMatch & alignmentMatch,
         if( longerLength < databaseSequence2.length()){
             longerLength = databaseSequence2.length();
         }
-        alignSlidingWindow(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+
+        if( alignmentApproach == 0 ){
+            alignSlidingWindow(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+        }else if( alignmentApproach == 1 ){
+            bandAlign(querySequence2, databaseSequence2, alignQuerySequence2, alignDatabaseSequence2, longerLength, parameters, nucleotideCodeSubstitutionMatrix);
+        }else {
+            std::cout << "invalid sequence alignment parameter" << std::endl;
+            std::exit(1024);
+        }
     }
 
-    alignSlidingWindow(querySequence1, databaseSequence1, alignQuerySequence1, alignDatabaseSequence1, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
+    if( alignmentApproach == 0 ){
+        alignSlidingWindow(querySequence1, databaseSequence1, alignQuerySequence1, alignDatabaseSequence1, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
+    }else if( alignmentApproach == 1 ){
+        bandAlign(querySequence1, databaseSequence1, alignQuerySequence1, alignDatabaseSequence1, slidingWindowSize, parameters, nucleotideCodeSubstitutionMatrix);
+    }else{
+        std::cout << "invalid sequence alignment parameter" << std::endl;
+        std::exit(1024);
+    }
+
+
+
 
     std::string alignQuerySequence = alignQuerySequence0 + alignQuerySequence1 + alignQuerySequence2;
     std::string alignDatabaseSequence = alignDatabaseSequence0 + alignDatabaseSequence1 + alignDatabaseSequence2;
@@ -860,7 +894,7 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
                                         std::map<int, int> & importantPositions,
                                         const int & slidingWindowSize, const int & startShitfDistance,
                                         const int & endShiftDistance, std::map<std::string, std::string>& parameters,
-                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix){
+                                        NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & alignmentApproach){
 
 
     int queryStart=alignmentMatch.getQueryStart();
@@ -952,8 +986,22 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
     std::string querySequence = querySequence0 + querySequence1 + querySequence2;
     std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
     std::cout << "querySequence: " << querySequence << " databaseSequence: " <<  databaseSequence << std::endl;
-    alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
-            startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+
+    if( alignmentApproach == 0 ){
+        alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
+                           startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+    }else if( alignmentApproach == 1 ){
+
+        bandAlign(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
+                           startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+
+
+    }else{
+        std::cout << "invalid sequence alignment parameter" << std::endl;
+        std::exit(1024);
+    }
+
+
     std::cout << "alignQuerySequence: " << alignQuerySequence << " alignDatabaseSequence: " <<  alignDatabaseSequence << std::endl;
 
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence1;
@@ -1332,7 +1380,7 @@ void splitCIGAR( std::string & cigarString, std::vector<std::string> & cigarElem
 void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                       const std::string & queryFastaFilePath, const std::string & samFile,
                                       std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                      const size_t & minIntron,  const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, int outputTag){
+                                      const size_t & minIntron,  const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, int outputTag, const int & alignmentApproach){
     const bool slowMode=true;
     std::ifstream infile(samFile);
     if( ! infile.good()){
@@ -1452,15 +1500,15 @@ void TransferAllExonWithSpliceAlignmentResult( const std::string & gffFilePath, 
     }
     TransferAllExonWithNucmerResult( geneNameMap,
                                      geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "sam", outputTag);
+                                     outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "sam", outputTag,  alignmentApproach);
 }
 
 void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std::string & databaseFastaFilePath,
                                       const std::string & queryFastaFilePath, const std::string & nucmerFilePath,
                                       std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-                                      const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment){
+                                      const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const int & alignmentApproach){
     std::map<std::string, std::vector<AlignmentMatch>> alignmentMatchsMap;
-    nucmerRead(nucmerFilePath, alignmentMatchsMap);
+    nucmerRead(nucmerFilePath, alignmentMatchsMap); // set alignmentMatchsMap
 
     std::map<std::string, std::vector<std::string> > geneNameMap;
     std::map<std::string, Gene> geneHashMap;
@@ -1469,7 +1517,7 @@ void TransferAllExonWithNucmerResult( const std::string & gffFilePath, const std
 
     TransferAllExonWithNucmerResult( geneNameMap,
             geneHashMap, transcriptHashMap, databaseFastaFilePath, queryFastaFilePath, alignmentMatchsMap, parameters,
-            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "nuc", 1);
+            outPutFilePath, minIntron, slowMode, slidingWindowSize, maxLengthForStructureAlignment, "nuc", 1, alignmentApproach);
 }
 
 void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::string> > & geneNameMap,
@@ -1477,7 +1525,8 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
         const std::string & databaseFastaFilePath,
         const std::string & queryFastaFilePath, std::map<std::string, std::vector<AlignmentMatch>> & alignmentMatchsMap,
         std::map<std::string, std::string>& parameters, const std::string & outPutFilePath,
-        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source, int outputTag){
+        const size_t & minIntron , const bool & slowMode, const int & slidingWindowSize, const size_t & maxLengthForStructureAlignment, const std::string source, int outputTag,
+        const int & alignmentApproach){
 
 
       // outputTag, 0 prefer to output the ZDP realignment result
@@ -1537,17 +1586,17 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                             std::cout << "line 1546" << std::endl;
                             slidingWinAlnAndGeneRateAnnotationSam( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
-                                                                slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+                                                                slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
                         }else if( alignmentMatch.getWindowSize()>1 ){
                             std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
-                                                                alignmentMatch.getWindowSize(), startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+                                                                alignmentMatch.getWindowSize(), startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
                         }else{
                             std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                             overLappedGenes, transcriptHashMap, importantPositions,
-                                                            slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix);
+                                                            slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
                         }
 //                        std::cout << "genome sequence alignment done" << std::endl;
                         if( POSITIVE == alignmentMatch.getQueryStrand() ) {

@@ -18,7 +18,7 @@ TEST(TransferGffWithNucmerResult, c1){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/wholeGenomeAlignment/ler.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferGffWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, maxLengthForStructureAlignment);
+    TransferGffWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -32,7 +32,7 @@ TEST(TransferAllExonWithNucmerResult, c1){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/wholeGenomeAlignment/ler.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5 , false, 60, maxLengthForStructureAlignment);
+    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5 , false, 60, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -46,7 +46,7 @@ TEST(TransferAllExonWithNucmerResult, c1_1){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/wholeGenomeAlignment/ler.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5 , true, 60, maxLengthForStructureAlignment);
+    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5 , true, 60, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -61,7 +61,7 @@ TEST(TransferAllExonWithNucmerResult, c2){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/zbl/haiwang/Mo17.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
+    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -75,7 +75,7 @@ TEST(TransferAllExonWithNucmerResult, c3){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/wholeGenomeAlignment/test_chi.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
+    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -89,7 +89,7 @@ TEST(TransferAllExonWithNucmerResult, c4){
     std::string outPutFilePath="/netscratch/dep_tsiantis/grp_gan/song/wholeGenomeAlignment/chi.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
+    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment, 0);
     ASSERT_EQ(0, 0);
 }
 
@@ -103,7 +103,7 @@ TEST(TransferAllExonWithNucmerResult, c5){
     std::string outPutFilePath="/media/bs674/A1013-0002_annotation/Zm00001d020160.gff";
     std::cout << std::endl;
     size_t maxLengthForStructureAlignment=10000;
-    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, 6000, maxLengthForStructureAlignment, 1);
+    TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, 6000, maxLengthForStructureAlignment, 1, 0);
 
 //    TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, 5, false, 60, maxLengthForStructureAlignment);
     ASSERT_EQ(0, 0);

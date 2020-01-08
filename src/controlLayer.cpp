@@ -481,9 +481,11 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
           " -a FILE   similar segments" << std::endl <<
           " -s FILE   target genome sequence" << std::endl <<
           " -o FILE   output GFF/GTF file" << std::endl <<
+          " -n        genome sequence alignment approach"
+          "           `sliding` (sliding window) or `band` ( default: sliding)" << std::endl <<
           " -w INT    sequence alignment window width (default: 60)" << std::endl <<
           " -sl       run in slow model (default false)" << std::endl <<
-          " -l INT    longest transcript to align. default(50000)"<< std::endl <<
+          " -l INT    longest transcript to align. (default: 50000)"<< std::endl <<
           " -m INT    minimum intron size" << std::endl << std::endl;
 
     InputParser inputParser (argc, argv);
@@ -521,7 +523,18 @@ int TransGff( int argc, char** argv, std::map<std::string, std::string>& paramet
         if( inputParser.cmdOptionExists("-w") ){
             windowWidth = std::stoi( inputParser.getCmdOption("-w") );
         }
-        TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, minIntron, slowMode, windowWidth, lengthThreadhold );
+        int alignmentApproach = 0;
+        if( inputParser.cmdOptionExists("-n") ){
+            if( inputParser.getCmdOption("-n").compare("sliding") == 0 ){
+
+            }else if ( inputParser.getCmdOption("-n").compare("band") == 0 ){
+                alignmentApproach = 1;
+            }else{
+                std::cout << "invalid sequence alignment approach parameter" << std::endl;
+                std::exit(1024);
+            }
+        }
+        TransferAllExonWithNucmerResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath, parameters, outPutFilePath, minIntron, slowMode, windowWidth, lengthThreadhold, alignmentApproach );
         return 0;
     }else{
         std::cerr << usage.str();
@@ -543,6 +556,8 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
           "           0 prefer to output the ZDP realignment result" << std::endl <<
           "           1 prefer output the standard alignment result" << std::endl <<
           "           2 prefer output the longer result" << std::endl <<
+          " -n        genome sequence alignment approach"
+          "           `sliding` (sliding window) or `band` ( default: sliding)" << std::endl <<
           " -w INT    sequence alignment window width (default: 60)" << std::endl <<
           " -l INT    longest transcript to align. default(50000)"<<std::endl <<
           " -m INT    minimum intron size" << std::endl << std::endl;
@@ -586,11 +601,24 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
             std::cerr << "output tag should be 0, 1 or 2" << std::endl;
             return 1;
         }
+
+        int alignmentApproach = 0;
+        if( inputParser.cmdOptionExists("-n") ){
+            if( inputParser.getCmdOption("-n").compare("sliding") == 0 ){
+
+            }else if ( inputParser.getCmdOption("-n").compare("band") == 0 ){
+                alignmentApproach = 1;
+            }else{
+                std::cout << "invalid sequence alignment approach parameter" << std::endl;
+                std::exit(1024);
+            }
+        }
+
         // outputTag, 0 prefer to output the ZDP realignment result
         // 1 prefer output the standard alignment result
         // 2 prefer output the longer result
         TransferAllExonWithSpliceAlignmentResult( gffFilePath, databaseFastaFilePath, queryFastaFilePath, nucmerFilePath,
-                parameters, outPutFilePath, minIntron, windowWidth, lengthThreadhold, outputTag);
+                parameters, outPutFilePath, minIntron, windowWidth, lengthThreadhold, outputTag, alignmentApproach);
         return 0;
     }else{
         std::cerr << usage.str();

@@ -813,6 +813,171 @@ void alignSlidingWindow( const std::string& dna_q, const std::string& dna_d,
 //    std::cout << "sequence alignment done" << std::endl;
 }
 
+
+
+static const int32_t SCORE_OUT_BANDED_ALIGNMENT_REGION = -536870912;
+
+
+void bandAlign( const std::string& dna_q, const std::string& dna_d,
+                         std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
+                         const int & startShiftDistance, const int & endShiftDistance , std::map<std::string, std::string>& parameters,
+                         NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix ){
+    int sw=slidingWindowSize;
+    sw = slidingWindowSize>startShiftDistance?slidingWindowSize:startShiftDistance;
+    sw = slidingWindowSize>endShiftDistance?slidingWindowSize:endShiftDistance;
+    bandAlign( dna_q, dna_d, _alignment_q, _alignment_d, sw, parameters, nucleotideCodeSubstitutionMatrix );
+}
+
+void bandAlign( const std::string& dna_q, const std::string& dna_d,
+                         std::string & _alignment_q, std::string & _alignment_d, const int & slidingWindowSize,
+                         std::map<std::string, std::string>& parameters,
+                         NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix ){
+
+    int8_t _open_gap_penalty=stoi(get_parameters("alignmentOpenGapP", parameters));
+    int8_t _extend_gap_penalty=stoi(get_parameters("alignmentExtendGapP", parameters));
+
+    int length1 = dna_d.length();
+    int length2 = dna_q.length();
+    int32_t i=0, j=0, mscore=0;
+
+    uint8_t d=0;
+
+    Matrix T(length1+1, length2+1);
+
+    int32_t * t;
+    int32_t * M1 = new int32_t [length2 + 1]; //M1 and M2 is for the previous column and the current column
+    int32_t * M2 = new int32_t [length2 + 1];
+
+    int32_t * F = new int32_t [length2 + 1];
+
+    std::fill_n(M1, length2+1, SCORE_OUT_BANDED_ALIGNMENT_REGION);
+    std::fill_n(M2, length2+1, SCORE_OUT_BANDED_ALIGNMENT_REGION);
+    std::fill_n(F, length2+1, SCORE_OUT_BANDED_ALIGNMENT_REGION);
+    M1[0]=0;
+    M2[0]=0;
+
+    int32_t e;
+    int32_t  start, end, h, f;
+    for ( i=1; i<=length1; ++i ){
+        start = i - slidingWindowSize;
+        if ( start < 1 ){
+            start = 1;
+        }
+        end = i + slidingWindowSize;
+        if( end > length2 ){
+            end = length2;
+        }
+        e = SCORE_OUT_BANDED_ALIGNMENT_REGION;
+        F[end] = SCORE_OUT_BANDED_ALIGNMENT_REGION;
+        for (j = start; j <= end; ++j) {
+            mscore = M1[j - 1] + nucleotideCodeSubstitutionMatrix.nucleotide_substitution_matrix[nucleotideCodeSubstitutionMatrix.get_dna_acid_map(dna_d[i-1])][nucleotideCodeSubstitutionMatrix.get_dna_acid_map(dna_q[j-1])];
+
+            d = mscore > F[j] ? 0 : 1;
+            mscore = mscore > F[j] ? mscore : F[j];
+
+            d = mscore > e ? d : 2;
+            mscore = mscore > e ? mscore : e;
+
+            M2[j] = mscore;
+
+            h = mscore + _open_gap_penalty;
+            f = F[j] + _extend_gap_penalty;
+            d |= f >= h ? 1 << 3 : 0;
+            f = f >= h ? f : h;
+            F[j] = f;
+
+            e += _extend_gap_penalty;
+            d |= e >= h ? 1 << 4 : 0;
+            e = e >= h ? e : h;
+
+            T.set(i, j, d);
+        }
+
+        t = M1; // this pointer switch, should be very fast
+        M1 = M2;
+        M2 = t;
+    }
+    std::vector<uint32_t> cigar;
+
+    uint32_t op = 0;
+    uint32_t length = 1;
+    // trace back begin
+    // For speed up and RAM saving purpose, this is just am approximation tracing back implementation
+    int32_t ii = length1;
+    int32_t jj = length2;
+    int tmp, state=0;
+    while (ii>0 && jj>0) {
+        tmp = T.get(ii, jj);
+        if (state == 0) state = tmp & 7; // if requesting the H state, find state one maximizes it.
+        else if (!(tmp >> (state + 2) & 1)) state = 0; // if requesting other states, _state_ stays the same if it is a continuation; otherwise, set to H
+        if (state == 0) state = tmp & 7;
+        if (state == 0){
+            op=0;
+            --ii;
+            --jj;
+        }else if (state == 1 || state == 3){
+            op =2;
+            --ii;
+        }else{
+            op =1;
+            --jj;
+        }
+
+        if( cigar.size() == 0 || op != (cigar[cigar.size() - 1]&0xf) ){
+            cigar.push_back(length << 4 | op);
+        }else{
+            cigar[cigar.size()-1] += length<<4;
+        }
+    }
+    while( ii>0 ){
+        op =2;
+        --ii;
+        if( cigar.size() == 0 || op != (cigar[cigar.size() - 1]&0xf) ){
+            cigar.push_back(length << 4 | op);
+        }else{
+            cigar[cigar.size()-1] += length<<4;
+        }
+    }
+    while( jj>0 ){
+        op =1;
+        --jj;
+        if( cigar.size() == 0 || op != (cigar[cigar.size() - 1]&0xf) ){
+            cigar.push_back(length << 4 | op);
+        }else{
+            cigar[cigar.size()-1] += length<<4;
+        }
+    }
+
+    delete[] M1;
+    delete[] M2;
+    delete[] F;
+
+    int32_t refPosition = 0;
+    int32_t queryPostion = 0;
+
+    for( i=cigar.size()-1; i >= 0; --i ){
+        uint32_t cigarLength = cigar[i]>>4;
+        uint32_t cigarType = cigar[i]&0xf;
+        // "MID"
+        if( 0 == cigarType ){
+            _alignment_d += dna_d.substr( refPosition, cigarLength );
+            _alignment_q += dna_q.substr( queryPostion, cigarLength );
+            refPosition += cigarLength;
+            queryPostion += cigarLength;
+        } else if ( 1 == cigarType ){
+            _alignment_d += std::string(cigarLength, '-');
+            _alignment_q += dna_q.substr( queryPostion, cigarLength );
+            queryPostion += cigarLength;
+        }else if (2 == cigarType){
+            _alignment_d += dna_d.substr( refPosition, cigarLength );
+            _alignment_q += std::string(cigarLength, '-');
+            refPosition += cigarLength;
+        }else{
+            std::cout << "some thing unknown happened with the cigar vector parser" << std::endl;
+        }
+    }
+}
+
 /*
  * currently, I still have some difficulty to use the minimap2 algorithm
  * **/

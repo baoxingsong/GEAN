@@ -64,6 +64,8 @@ add_executable(gean
         src/model/Transcript.h
         src/model/Gene.cpp
         src/model/Gene.h
+        src/model/Matrix.cpp
+        src/model/Matrix.h
         src/model/MsaWindow.cpp
         src/model/MsaWindow.h
         src/model/MsaSingleRecord.cpp
