@@ -265,7 +265,7 @@ Please feel free to send E-mail to songbaoxing168@163.com
 
 ### Citing GEAN
 If you use GEAN, please cite: <br />
-BSong B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
+Song B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
 
 ### Acknowledgement
 Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\

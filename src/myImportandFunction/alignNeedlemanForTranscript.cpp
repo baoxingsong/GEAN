@@ -390,7 +390,7 @@ void NeedlemanWunschForTranscript::print_results() {
 
 
 
-int checkElements( const int & startCodonPosition, const int & stopCodonPosition, const std::vector<SpliceSitePosition>& spliceSitePositions, const int & position ){
+int checkElements_temp( const int & startCodonPosition, const int & stopCodonPosition, const std::vector<SpliceSitePosition>& spliceSitePositions, const int & position ){
     if( position < startCodonPosition || position > stopCodonPosition+2  ){
         return 1;//INTRON;
     }
@@ -524,7 +524,7 @@ void alignNeedlemanForTranscript(std::string& dna_d,
     int32_t _extend_gap_penalty;
     for ( i=1; i<=length_of_d; ++i ){
         e = SCORE_OUT_BANDED_ALIGNMENT_REGION;
-        int8_t ref_element = checkElements(startCodonPosition, stopCodonPosition, spliceSitePositions, i + 1);
+        int8_t ref_element = checkElements_temp(startCodonPosition, stopCodonPosition, spliceSitePositions, i + 1);
 //        match_score = _match_score[ref_element];
 //        mis_match_score = _mis_match_score[ref_element];
         _open_gap_penalty = _open_gap_penaltys[ref_element];
