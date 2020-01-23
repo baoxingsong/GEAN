@@ -89,33 +89,33 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
     for(std::map<std::string, std::vector<Transcript> >::iterator it=referenceTranscriptHashSet.begin();
         it!=referenceTranscriptHashSet.end(); ++it) {
         if( variantsMaps.find(it->first) != variantsMaps.end() ){
-            std::cout << "line 86" << std::endl;
+//            std::cout << "line 86" << std::endl;
             FirstLastList sdiRecords;
             for ( int it2 =0; it2<variantsMaps[it->first].size(); ++it2 ){
                 Data *data = new Data(variantsMaps[it->first][it2]);
                 sdiRecords.insertLast(data);
             }
-            std::cout << "line 92" << std::endl;
+  //          std::cout << "line 92" << std::endl;
 
             int lastRefEnd = 0; // since the variants have been update, so the getBasementFromChanged etc. functions do not work well anymore
             int lastIt2=0;
             for (int it2 =0; it2<it->second.size(); ++it2) {
                 Transcript *t2 = &targetTranscriptsHashMap[it->second[it2].getName()];
-                std::cout << "line 95" << std::endl;
+//                std::cout << "line 95" << std::endl;
                 if ( (*t2).getIfOrfShift() && ( it2==0|| ( !overlapIgnoreStrand(&targetTranscriptsHashMap[it->second[it2-1].getName()], t2)) && (!overlapIgnoreStrand(&it->second[it2], &it->second[it2-1])) ) ) {
-                    std::cout << "line 99" << std::endl;
+//                    std::cout << "line 99" << std::endl;
                     std::string refGenomeSequence = it->second[it2].getGeneomeSequence();
                     int startTarget = t2->getPStart() - refGenomeSequence.length();
                     if (startTarget < 1) {
                         startTarget = 1;
                     }
-                    std::cout << "line 105" << std::endl;
+//                    std::cout << "line 105" << std::endl;
                     if (it2>0 && startTarget <= targetTranscriptsHashMap[it->second[it2-1].getName()].getPEnd()) { //so this does not affect the structure of last transcript
                         startTarget = targetTranscriptsHashMap[it->second[it2-1].getName()].getPEnd() + 1;
                     }
-                    std::cout << "line 109 " << startTarget << std::endl;
+//                    std::cout << "line 109 " << startTarget << std::endl;
                     int startReference = getBasementFromChanged( it->first, startTarget, variantsMaps );
-                    std::cout << "line 111" << std::endl;
+//                    std::cout << "line 111" << std::endl;
                     if( it2>0 && startReference <= it->second[it2-1].getPEnd() ){
                         startReference = it->second[it2-1].getPEnd()+1;
                     }
@@ -124,7 +124,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                         startTarget = targetTranscriptsHashMap[it->second[lastIt2].getName()].getPEnd() + 1;
                     }else{
                     //std::vector<Variant> overlappedVariants;
-                        std::cout << "line 117" << std::endl;
+//                        std::cout << "line 117" << std::endl;
                         Data *thisData = sdiRecords.getFirst();
                         while ( thisData!= NULL) {
                             while (   (thisData->getMapSingleRecord().getPosition() - 2) <= startReference &&
@@ -136,7 +136,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                         }
                         startTarget = getChangedFromBasement( it->first, startReference, variantsMaps );
                     }
-                    std::cout << "line 122" << std::endl;
+//                    std::cout << "line 122" << std::endl;
                     if (startTarget < t2->getPStart() && startReference < it->second[it2].getPStart()) { // else this transcript could not be realigned
                         int endTarget = t2->getPEnd() + refGenomeSequence.length();
                         if (endTarget > targetGenome[it->first].getSequence().length()) {
@@ -148,7 +148,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                         }
 
                         Data * thisData = sdiRecords.getLast();
-                        std::cout << "line 130" << std::endl;
+//                        std::cout << "line 130" << std::endl;
                         while (thisData != NULL) {
                             while (  (thisData->getMapSingleRecord().getPosition() - 2) <= endReference &&
                                    (endReference <= (thisData->getMapSingleRecord().getPosition() +
@@ -159,7 +159,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                             thisData = thisData->getPrev();
                         }
                         endTarget = getChangedFromBasement(it->first, endReference, variantsMaps);
-                        std::cout << "line 141" << std::endl;
+//                        std::cout << "line 141" << std::endl;
                         if(endReference > it->second[it2].getPEnd() && endTarget > t2->getPEnd()){
                             std::string dna_b = getSubsequence(targetGenome, it->first, startTarget, endTarget,
                                                                it->second[it2].getStrand());
@@ -177,7 +177,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                             std::vector<SpliceSitePosition> spliceSitePositions;
                             int targetPosition = 0;
                             int referencePosition = 0;
-                            std::cout << "line 159" << std::endl;
+//                            std::cout << "line 159" << std::endl;
                             if (it->second[it2].getStrand() == POSITIVE) {
                                 if (it->second[it2].getCdsVector().size() > 1) {
                                     for (size_t i = 1; i < it->second[it2].getCdsVector().size(); ++i) {
@@ -242,7 +242,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                     }
                                 }
                             }
-                            std::cout << "line 234" << std::endl;
+//                            std::cout << "line 234" << std::endl;
                             Transcript targetTranscript(t2->getName(), t2->getChromeSomeName(), it->second[it2].getStrand());
                             for (std::vector<GenomeBasicFeature>::iterator it4 = it->second[it2].getCdsVector().begin();
                                  it4 != it->second[it2].getCdsVector().end(); ++it4) {
@@ -252,7 +252,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                             }
                             TranscriptUpdateCdsInformation(targetTranscript, targetGenome);
                             checkOrfState(targetTranscript, targetGenome, nucleotideCodeSubstitutionMatrix, minIntron);
-                            std::cout << "line 244" << std::endl;
+//                            std::cout << "line 244" << std::endl;
                             if ( (!targetTranscript.getIfOrfShift())) {
                                 lastRefEnd = endReference;
                                 lastIt2 = it2;
@@ -266,7 +266,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                 if (langerSeqLength < targetUpStream.length()) {
                                     langerSeqLength = targetUpStream.length();
                                 }
-                                std::cout << "line 256" << std::endl;
+//                                std::cout << "line 256" << std::endl;
                                 alignSlidingWindow(refUpStream, targetUpStream, _alignment_refUpStream,
                                                    _alignment_targetUpStream,
                                                    langerSeqLength, parameters, nucleotideCodeSubstitutionMatrix);
@@ -280,7 +280,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                 if (langerSeqLength < targetDownStream.length()) {
                                     langerSeqLength = targetDownStream.length();
                                 }
-                                std::cout << "line 270" << std::endl;
+//                                std::cout << "line 270" << std::endl;
                                 alignSlidingWindow(refDownStream, targetDownStream, _alignment_refDownStream,
                                                    _alignment_targetDownStream, langerSeqLength, parameters,
                                                    nucleotideCodeSubstitutionMatrix);
@@ -302,7 +302,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                         }
                                     }
                                 }
-                                std::cout << "line 292" << std::endl;
+//                                std::cout << "line 292" << std::endl;
                                 //trim queryAlignmentResult end
                                 databaseAlignmentResult =
                                         _alignment_refUpStream + databaseAlignmentResult + _alignment_refDownStream;
@@ -329,7 +329,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                 Data *theOneUpstream = sdiRecords.getFirst(); // todo think more about the extreme case about the variants chain, length, the position of the fisrt one and the last one
                                 Data *theOneDownstream = sdiRecords.getLast();
                                 Data *theRealLastOne = sdiRecords.getLast();
-                                std::cout << "line 319" << std::endl;
+//                                std::cout << "line 319" << std::endl;
                                 while (theOneUpstream->getNext() != NULL &&
                                        theOneUpstream->getMapSingleRecord().getPosition() < startReference) {
                                     theOneUpstream = theOneUpstream->getNext();
@@ -353,7 +353,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                 theOneDownstream = theOneDownstream->getNext();
                                 // if the last one is falling into the target region
                                 // then theOneDownstream == NULL
-                                std::cout << "line 343" << std::endl;
+//                                std::cout << "line 343" << std::endl;
                                 if( theOneUpstream!=NULL ){
                                     std::cout << "theOneUpstream " << theOneUpstream->getMapSingleRecord().getPosition() << " " << theOneUpstream->getMapSingleRecord().getChanginglength() << " "
                                           << theOneUpstream->getMapSingleRecord().getReference() << " " << theOneUpstream->getMapSingleRecord().getAlternative() << std::endl;
@@ -380,11 +380,11 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                     delete (tempData);
                                 }
                                 //clean RAM end
-                                std::cout << "line 365" << std::endl;
+//                                std::cout << "line 365" << std::endl;
                                 sdiRecords.setLast(theOneUpstream);
-                                std::cout << "line 367" << std::endl;
+//                                std::cout << "line 367" << std::endl;
                                 //end re-orginize the chain data structure
-                                std::cout << "line 368" << std::endl;
+//                                std::cout << "line 368" << std::endl;
                                 //then replace all the variants in the vector with all the new variants begin
                                 int refLetterNumber = 0;
                                 for (int ai = 0; ai < databaseAlignmentResult.length(); ai++) {
@@ -453,7 +453,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                                         }
                                     }
                                 }
-                                std::cout << "line 437" << std::endl;
+//                                std::cout << "line 437" << std::endl;
                                 //re-join the chain data structure
                                 if (theOneDownstream != NULL) {
                                     theOneDownstream->setPrev(sdiRecords.getLast());
@@ -465,9 +465,9 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                     }
                 }
             }
-            std::cout << "line 449" << std::endl;
+//            std::cout << "line 449" << std::endl;
             for( int runingCound = 0; runingCound<2; ++runingCound){
-                std::cout << "round " << runingCound << std::endl;
+//                std::cout << "round " << runingCound << std::endl;
                 if( (sdiRecords.getFirst() != NULL)
                     && (sdiRecords.getFirst()->getNext() != NULL ) ){
                     Data* prevOne = sdiRecords.getFirst();
@@ -570,7 +570,7 @@ void updateVariants( const std::string & referenceGffFilePath, const std::string
                 }
             }
             //end: merge link data structure
-            std::cout << "line 554" << std::endl;
+//            std::cout << "line 554" << std::endl;
             std::vector<Variant> sdiRecordsThisOne;
             if( sdiRecords.getFirst()!=NULL ){
                 Data* thisone = sdiRecords.getFirst();

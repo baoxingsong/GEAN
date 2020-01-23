@@ -985,7 +985,7 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
 
     std::string querySequence = querySequence0 + querySequence1 + querySequence2;
     std::string databaseSequence = databaseSequence0 + databaseSequence1 + databaseSequence2;
-    std::cout << "querySequence: " << querySequence << " databaseSequence: " <<  databaseSequence << std::endl;
+//    std::cout << "querySequence: " << querySequence << " databaseSequence: " <<  databaseSequence << std::endl;
 
     if( alignmentApproach == 0 ){
         alignSlidingWindow(querySequence, databaseSequence, alignQuerySequence, alignDatabaseSequence, slidingWindowSize,
@@ -1002,7 +1002,7 @@ void slidingWinAlnAndGeneRateAnnotationSam(AlignmentMatch & alignmentMatch,
     }
 
 
-    std::cout << "alignQuerySequence: " << alignQuerySequence << " alignDatabaseSequence: " <<  alignDatabaseSequence << std::endl;
+//    std::cout << "alignQuerySequence: " << alignQuerySequence << " alignDatabaseSequence: " <<  alignDatabaseSequence << std::endl;
 
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence1;
 //    alignQuerySequence = alignQuerySequence + alignQuerySequence2;
@@ -1583,17 +1583,17 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
                         //windows size if a record specific sliding window size
                         // if it is not set, then use slidingWindowSize
                         if( source.compare("sam") == 0 ){
-                            std::cout << "line 1546" << std::endl;
+//                            std::cout << "line 1546" << std::endl;
                             slidingWinAlnAndGeneRateAnnotationSam( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
                                                                 slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
                         }else if( alignmentMatch.getWindowSize()>1 ){
-                            std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
+//                            std::cout << "line 1352 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                                 overLappedGenes, transcriptHashMap, importantPositions,
                                                                 alignmentMatch.getWindowSize(), startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
                         }else{
-                            std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
+//                            std::cout << "line 1357 alignmentMatch.getWindowSize() " << alignmentMatch.getWindowSize() << std::endl;
                             slidingWinAlnAndGeneRateAnnotation( alignmentMatch, databaseSequences, querySequences,
                                                             overLappedGenes, transcriptHashMap, importantPositions,
                                                             slidingWindowSize, startShitfDistance, endShiftDistance, parameters, nucleotideCodeSubstitutionMatrix, alignmentApproach);
@@ -1916,5 +1916,6 @@ void TransferAllExonWithNucmerResult(  std::map<std::string, std::vector<std::st
             std::cout << "could not find" << it1->first << " in the database genome sequence" << std::endl;
         }
     }
+    ofile << "#liftover done" << std::endl;
     ofile.close();
 }
