@@ -556,9 +556,9 @@ int spliceAlignmentToGff( int argc, char** argv, std::map<std::string, std::stri
           "           0 prefer to output the ZDP realignment result" << std::endl <<
           "           1 prefer output the standard alignment result" << std::endl <<
           "           2 prefer output the longer result" << std::endl <<
-          " -n        genome sequence alignment approach"
-          "           `sliding` (sliding window) or `band` ( default: sliding)" << std::endl <<
-          " -w INT    sequence alignment window width (default: 60)" << std::endl <<
+          " -n        genome sequence alignment approach" << std::endl <<
+          "           `sliding` (sliding window) or `band` ( default: band)" << std::endl <<
+          " -w INT    sequence alignment band/window width (default: 60)" << std::endl <<
           " -l INT    longest transcript to align. default(50000)"<<std::endl <<
           " -m INT    minimum intron size" << std::endl << std::endl;
 
