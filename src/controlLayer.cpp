@@ -231,7 +231,7 @@ int getSequences( int argc, char** argv, std::map<std::string, std::string>& par
           " -h        produce help message" << std::endl <<
           " -i FILE   reference genome in GFF/GTF format" << std::endl <<
           " -r FILE   genome sequence in fasta format" << std::endl <<
-          " -m INT    minimum intron size for ORF stats checking" << std::endl <<
+          " -m INT    minimum intron size for a functional ORF" << std::endl <<
           " -p FILE   output file of protein sequence in fasta format" << std::endl <<
           " -c FILE   output file of CDS (without intron) in fasta format" << std::endl <<
           " -g FILE   output file of CDS (with intron) in fasta frormat" << std::endl << std::endl;
@@ -247,7 +247,7 @@ int getSequences( int argc, char** argv, std::map<std::string, std::string>& par
 
         int minIntron;
         if( inputParser.cmdOptionExists("-m") ){
-            minIntron = std::stoi( inputParser.getCmdOption("-i") );
+            minIntron = std::stoi( inputParser.getCmdOption("-m") );
         }else{
             minIntron=5;
         }
