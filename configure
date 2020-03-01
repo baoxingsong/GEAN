@@ -48,3 +48,4 @@ temp_file_regex  [\s\S]*[(\\)(\/)]([\s\S]*)
 maxintronlength   30000
 minintronlength   10
 MsaPreFolder    ./MsaPreFolder
+
