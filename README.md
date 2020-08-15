@@ -259,14 +259,17 @@ Best Practices for different aims could be found under example.
 * [whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
 * [genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
 * [transform maize reference genome annotation to de novo assembly](example/transformMaizeGFFannotation.md)
+### Support us
+Please support by citing us in your publication.
 ### Contact
 Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
 Please feel free to send E-mail to songbaoxing168@163.com
 
 ### Citing GEAN
 If you use GEAN, please cite: <br />
+`
 Song B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
-
+`
 ### Acknowledgement
 Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\
 Thank Dr. Hequan Sun from MPIPZ for discussions\

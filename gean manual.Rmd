@@ -63,7 +63,7 @@ If you would like to move the generated `gean` excusable file to a different pat
 ### Examples
 Examples on different purpose and using genome with different complexity could be found on our [github: https://github.com/baoxingsong/GEAN/tree/master/example](https://github.com/baoxingsong/GEAN/tree/master/example)
 
-```{r engine = 'bash', eval = TRUE, size="tiny"}
+```{r engine = 'bash', eval = FALSE, size="tiny"}
 /home/bs674/software/bin/gean
 ```
 
@@ -282,8 +282,11 @@ versions of GEAN. Many thanks also to everyone who has used GEAN and
 cited the publication – we are glad it has proven useful in your research, and a good citation
 record will help us to obtain fundings to keep developing GEAN.
 
+### Support us
+Please support by citing us in your publication.
+
 ### Citation
 If you use GEAN, please cite: <br />
 `
-Baoxing Song, Qing Sang, Hai Wang, Huimin Pei, Fen Wang and Xiangchao Gan. (2019) A weighted sequence alignment strategy for gene structure annotation lift over from reference genome to a newly sequenced individual. bioRxiv. doi:10.1101/615476
+Song B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
 `
