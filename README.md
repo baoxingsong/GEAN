@@ -279,5 +279,5 @@ Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of G
 ### Founding
 We acquired founding to continue the development of GEAN until 2022 Dec.
 
-[license]: ./LICENSE.md
+[license]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
