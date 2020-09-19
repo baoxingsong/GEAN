@@ -280,3 +280,4 @@ Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of G
 We acquired founding to continue the development of GEAN until 2022 Dec.
 
 [license]: ./LICENSE.md
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
