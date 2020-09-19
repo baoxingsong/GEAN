@@ -1,4 +1,4 @@
-# GEAN
+# GEAN &middot; [![license][license-badge]][license]
 
 The gene sequence and genetic feature variation between different individuals are very important for natural variation research. And the genome sequence and genetic features (always in GFF/GTF format) of reference is well established. In general the genomic sequence of different lines/accession are sequenced.
 The genetic features of variant individuals are also very interesting, while there no well established solution to transform the genetic features annotation of reference accession/line to other individuls. This pipeline tries transform the reference genetic fearures to variant individuls with genome sequence avaliable by whole-genome resequencing or *de novo* assembly . Here we provide a solution for [inconsistent alignment problem](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007699) which could lead to false positive splice sites disturb or ORF-shift predication. And whole genome MSA is all developped basing on the genetic features.
