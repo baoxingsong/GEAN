@@ -10,7 +10,7 @@
 #include "readFastaFile.h"
 #include "TranscriptUpdateInformation.h"
 #include "checkOrfState.h"
-
+#include "math.h"
 void generateLongestOutput( const std::string & referenceGffFile, const std::string & queryNewGffFile,
                             const std::string & queryGenomeFile, const std::string & outputGffFile, const int & minIntron,
                             double score, double penalty, double scoreThreshold, const bool & keepTandemDuplication,
