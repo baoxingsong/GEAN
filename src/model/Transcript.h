@@ -34,6 +34,7 @@
 #include <map>
 #include "Fasta.h"
 #include <algorithm>
+#include <limits>
 
 class Transcript{
     private:
