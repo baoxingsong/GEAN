@@ -1,7 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 4.3)
 project(GEAN)
 
-include(CheckCXXCompilerFlag)
 set(CMAKE_CXX_STANDARD 14)
 
 if (${CMAKE_SYSTEM_NAME} MATCHES "Darwin")
@@ -12,35 +11,16 @@ endif()
 
 
 
-CHECK_CXX_COMPILER_FLAG("-mavx2" COMPILER_OPT_ARCH_AVX2_SUPPORTED)
-CHECK_CXX_COMPILER_FLAG("-msse2" COMPILER_OPT_ARCH_SSE2_SUPPORTED)
-if(COMPILER_OPT_ARCH_AVX2_SUPPORTED)
-    set(CMAKE_CXX_FLAGS "-Wall -g3 -O3 -funroll-all-loops -mavx2 -I ./ -std=gnu++14 -pthread")
-    set(CMAKE_C_FLAGS "-Wall -g3 -O3 -funroll-all-loops -mavx2 -I ./ -std=gnu++14 -pthread")
-elseif( COMPILER_OPT_ARCH_SSE2_SUPPORTED)
-    set(CMAKE_CXX_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
-    set(CMAKE_C_FLAGS "-Wall -msse2 -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
-else()
-    set(CMAKE_CXX_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
-    set(CMAKE_C_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
-endif()
+set(CMAKE_CXX_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -std=gnu++14 -pthread")
+set(CMAKE_C_FLAGS "-Wall -g3 -O3 -funroll-all-loops -I ./ -pthread")
 
-
-#for google unit test
-add_subdirectory(./googletest/googletest)
-include_directories(googletest/googletest/include googletest/googletest)
 
 
 add_executable(gean
-        googletest
-        googletest/googletest
         src/myImportandFunction/alignNeedlemanForTranscript.cpp
-#       ksw2_extz2_sse.c
-#       ksw2.h
-#       src/myImportandFunction/alignNeedlemanForTranscript_simd.cpp
         src/myImportandFunction/alignNeedlemanForTranscript.h
-        src/myImportandFunction/alignNeedlemanWunsch_v2.cpp
-        src/myImportandFunction/alignNeedlemanWunsch.h
+        src/myImportandFunction/gotohAlignment.cpp
+        src/myImportandFunction/gotohAlignment.h
         src/model/GenomeBasicFeature.cpp
         src/model/GenomeBasicFeature.h
         src/controlLayer.cpp
@@ -112,8 +92,6 @@ add_executable(gean
         src/service/reannotation/runExonerate.h
         src/service/MSA/cutWindow.cpp
         src/service/MSA/cutWindow.h
-        src/service/MSA/transcriptRealignmentPversion.cpp
-        src/service/MSA/transcriptRealignmentPversion.h
         src/service/MSA/reSdiFromMsa.cpp
         src/service/MSA/reSdiFromMsa.h
         src/impl/getSequencesFromGff.cpp
@@ -122,53 +100,34 @@ add_executable(gean
         src/control/myCoordinateLiftOver.h
         src/control/myReAnnotationAndExonerateAndNovo.cpp
         src/control/myReAnnotationAndExonerateAndNovo.h
-        src/control/VariantsCountAsPhenotypeForAssociation.cpp
-        src/control/VariantsCountAsPhenotypeForAssociation.h
+        src/control/generateRandomSdi.cpp
+        src/control/generateRandomSdi.h
         src/control/myControl.h
         src/service/service.h
-        src/cns.cpp
         src/myImportandFunction/myImportantFunction.h
         src/impl/TranscriptUpdateInformation.cpp
         src/impl/TranscriptUpdateInformation.h
         src/impl/FileWriteCatch.cpp
         src/impl/FileWriteCatch.h
-        src/myImportandFunction/alignNeedlemanWunsch_simd.cpp
-        src/myImportandFunction/alignNeedlemanWunsch_simd.h
-        src/tests/util/nucleotideCodeSubstitutionMatrix_test.cpp
-        src/tests/myImportandFunction/alignNeedlemanWunsch_simd_test.cpp
         src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp
         src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.h
-        src/tests/control/myReAnnotationAndExonerateAndNovo_test.cpp
-        src/tests/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int32.cpp
         src/model/Range.cpp src/model/Range.h src/model/AlignmentMatch.cpp
         src/model/AlignmentMatch.h src/impl/NucmerRead.cpp
         src/impl/NucmerRead.h
         src/service/TransferGffWithNucmerResult.cpp
         src/service/TransferGffWithNucmerResult.h
-        src/tests/service/TransferGffWithNucmerResult_test.cpp
         src/myImportandFunction/alignSlidingWindow.cpp
         src/myImportandFunction/alignSlidingWindow.h
-        src/tests/myImportandFunction/alignSlidingWindow_test.cpp
         src/impl/readGffFileWithEverything.cpp
         src/impl/readGffFileWithEverything.h
-        src/tests/impl/readGffFileWithEverything.cpp
-        src/tests/std/bitsetTest.cpp
         src/impl/CheckAndUpdateTranscriptsEnds.cpp
         src/impl/CheckAndUpdateTranscriptsEnds.h
         src/service/UpdateVariants.cpp
         src/service/UpdateVariants.h
-        src/tests/service/UpdateVariants_test.cpp
         src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int16.cpp
         src/myImportandFunction/alignNeedlemanForTranscript_simd_avx2int16.h
         src/myImportandFunction/alignTranscript.cpp
         src/myImportandFunction/alignTranscript.h
-        src/tests/myImportandFunction/alignTranscript.cpp
-        src/tests/control/myGffCoordinateLiftOver_test.cpp
-        src/tests/impl/readFastaFile_test.cpp
-        src/tests/impl/deNovoGenomeVariantCalling_test.cpp
-        src/tests/impl/longest_test.cpp
-        src/tests/myImportandFunction/hengAlign_test.cpp
-        src/tests/impl/orf_test.cpp
         src/myImportandFunction/geneAnnotationAlignment.cpp
         src/myImportandFunction/geneAnnotationAlignment.h
         src/service/denovoGffLiftOverToUniqGffOutput.cpp
@@ -177,18 +136,9 @@ add_executable(gean
         src/impl/organizeGffRecords.h
         src/impl/deNovoGenomeVariantCalling.cpp
         src/impl/deNovoGenomeVariantCalling.h
-        src/service/deNovoGenomeVariantCallingService.cpp
-        src/service/deNovoGenomeVariantCallingService.h
-        src/myImportandFunction/hengAlign.cpp
-        src/myImportandFunction/hengAlign.h
-        src/cns.cpp src/song_cns.cpp
-        src/song_cns.h
-        src/tests/service/TransferAllExonWithSpliceAlignmentResult_test.cpp
         src/model/OrthologPair.cpp
         src/model/OrthologPair.h
         src/impl/geneSyntenic.cpp
         src/impl/geneSyntenic.h
         src/impl/outPutORFConserveredTranscripts.cpp
         src/impl/outPutORFConserveredTranscripts.h)
-
-target_link_libraries(gean gtest gtest_main)

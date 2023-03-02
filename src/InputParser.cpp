@@ -69,14 +69,6 @@ void usage( ){
         "    gff2seq     get the protein/CDS/gene sequence of GFF/GTF file" << std::endl<<
         "    annowgr     annotate re-sequenced genome" << std::endl <<
         "    randomVar   assign a random position for each variant" << std::endl << std::endl <<
-//        "annotationLiftOver             transform the reference GFF/GTF coordinate to the coordinate of another accession," << std::endl <<
-//        "                               complementing with trying to keep the ORF/splice sites and complete as possible by " << std::endl <<
-//        "                               genome sequence alignment" << std::endl <<
-//        "annotationLiftOverAndOrth      transform the reference GFF/GTF coordinate to the coordinate of another accession," << std::endl <<
-//        "                               complementing with trying to keep the ORF/splice sites and complete as possible by " << std::endl <<
-//        "                               genome sequence alignment and then complementing with aligning CDS sequence of " << std::endl <<
-//        "                               reference to the genome sequence of target line and then complementing with " << std::endl <<
-//        "                               aligning protein sequence of reference to the genome sequence of target line" << std::endl <<
         " -- whole genome wide MSA:" << std::endl <<
         "    premsa      cut the whole genome sequence into fragments" << std::endl <<
         "    msatosdi    generate sdi files from MSA results" <<  std::endl << std::endl <<

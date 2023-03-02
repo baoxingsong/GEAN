@@ -23,16 +23,12 @@
  ************************************************************************/
 
 #include "src/controlLayer.h"
-#include "./googletest/googletest/include/gtest/gtest.h"
 
 
 using namespace std;
 
 
 int main(int argc, char** argv){
-//testing::InitGoogleTest(&argc, argv);
-//RUN_ALL_TESTS();
-//return 0;
     if( argc<=1 ){
         usage();
         return 1;
@@ -88,12 +84,6 @@ int main(int argc, char** argv){
         return Reanva(--argc, ++argv, parameters);
     } else if( program.compare("varcall") == 0 ) {
         return DenoveAssemblyVariantCalling(--argc, ++argv, parameters);
-    }
-    // The following functions are for testing purpose
-    else if( program.compare("countNumberOfTwoneighborSNP") == 0 ) {
-        return myCountNumberOfTwoneighborSNP(--argc, ++argv, parameters);
-    }else if( program.compare("countNumberSNPAndIndel") == 0 ) {
-        return mycountNumberSNPAndIndel(--argc, ++argv, parameters);
     }else if ( program.compare("randomVar") == 0 ){
         return myGenerateRandomSdi(--argc, ++argv, parameters);
     }else{

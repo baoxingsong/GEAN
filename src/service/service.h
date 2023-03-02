@@ -7,7 +7,6 @@
 
 #include "MSA/cutWindow.h"
 #include "MSA/reSdiFromMsa.h"
-#include "MSA/transcriptRealignmentPversion.h"
 
 #include "reannotation/reAnnotationAndExonerateAndNovo.h"
 #include "reannotation/runExonerate.h"

@@ -304,8 +304,7 @@ void checkOrfPversionBin(int const  index, int const & binSize, std::vector<Tran
     --number_of_runing_threads;
 }
 
-
-void checkOrfPversion(Transcript& transcript, std::map<std::string, Fasta>& genome, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix,  int& minIntron, std::atomic_int & number_of_runing_threads){
+void checkOrfPversion(Transcript& transcript, std::map<std::string, Fasta>& genome, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix, int& minIntron, std::atomic_int& number_of_runing_threads){
     TranscriptUpdateCdsInformation(transcript, genome);
     checkOrfState(transcript, genome, nucleotideCodeSubstitutionMatrix, minIntron);
     --number_of_runing_threads;

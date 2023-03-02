@@ -5,8 +5,19 @@
 #include "getSequencesFromGff.h"
 #include "CheckAndUpdateTranscriptsEnds.h"
 
+#include <stdexcept>
+
 void getSequences(const std::string& gffFile, const std::string& genomeFile, const std::string& outputProteinSequences,
-                  const std::string& outputCdsSequences, const std::string& outputGenomeSequences, std::map<std::string, std::string>& parameters, const int & minIntron){
+                  const std::string& outputCdsSequences, const std::string& outputGenomeSequences,
+                  std::map<std::string, std::string>& parameters, const int & minIntron,
+                  const bool & autoAdjust, const size_t & orfCount){
+    const bool writeProtein = !outputProteinSequences.empty();
+    const bool writeCds = !outputCdsSequences.empty();
+    const bool writeGenome = !outputGenomeSequences.empty();
+    if( !writeProtein && !writeCds && !writeGenome ){
+        throw std::invalid_argument("at least one sequence output is required");
+    }
+
     std::string regex = get_parameters("cdsParentRegex", parameters);
     NucleotideCodeSubstitutionMatrix nucleotideCodeSubstitutionMatrix(parameters);
 
@@ -14,14 +25,22 @@ void getSequences(const std::string& gffFile, const std::string& genomeFile, con
     readGffFile (gffFile, transcriptHashSet, regex);
     std::map<std::string, Fasta> genome;
     readFastaFile(genomeFile, genome);
-    CheckAndUpdateTranscriptsEnds( transcriptHashSet, genome, nucleotideCodeSubstitutionMatrix, minIntron);
+    if( autoAdjust ){
+        CheckAndUpdateTranscriptsEnds( transcriptHashSet, genome, nucleotideCodeSubstitutionMatrix, minIntron, orfCount);
+    }
 
     std::ofstream oPfile;
-    oPfile.open(outputProteinSequences);
     std::ofstream oCfile;
-    oCfile.open(outputCdsSequences);
     std::ofstream oGfile;
-    oGfile.open(outputGenomeSequences);
+    if( writeProtein ){
+        oPfile.open(outputProteinSequences);
+    }
+    if( writeCds ){
+        oCfile.open(outputCdsSequences);
+    }
+    if( writeGenome ){
+        oGfile.open(outputGenomeSequences);
+    }
 
     for( std::map<std::string, std::vector<Transcript> >::iterator it1=transcriptHashSet.begin();
             it1!=transcriptHashSet.end(); ++it1 ){
@@ -32,21 +51,32 @@ void getSequences(const std::string& gffFile, const std::string& genomeFile, con
 
                 std::string cdsSequence = (*it2).getCdsSequence();
 
-                oPfile << ">" << (*it2).getName() << std::endl;
-                oCfile << ">" << (*it2).getName() << " metaInformation:" <<(*it2).getMetaInformation() << std::endl;
-                oGfile << ">" << (*it2).getName() << std::endl;
+                if( writeProtein ){
+                    oPfile << ">" << (*it2).getName() << std::endl;
+                }
+                if( writeCds ){
+                    oCfile << ">" << (*it2).getName() << " metaInformation:" <<(*it2).getMetaInformation() << std::endl;
+                    oCfile << (*it2).getCdsSequence() << std::endl;
+                }
+                if( writeGenome ){
+                    oGfile << ">" << (*it2).getName() << std::endl;
+                    oGfile << (*it2).getGeneomeSequence() << std::endl;
+                }
 
-                oCfile << (*it2).getCdsSequence() << std::endl;
-                oGfile << (*it2).getGeneomeSequence() << std::endl;
-
-                if( cdsSequence.length() >2 ){
+                if( writeProtein && cdsSequence.length() >2 ){
                     std::string proteinSequence = nA2AA(cdsSequence, nucleotideCodeSubstitutionMatrix);
                     oPfile << proteinSequence << std::endl;
                 }
             }
         }
     }
-    oPfile.close();
-    oCfile.close();
-    oGfile.close();
+    if( writeProtein ){
+        oPfile.close();
+    }
+    if( writeCds ){
+        oCfile.close();
+    }
+    if( writeGenome ){
+        oGfile.close();
+    }
 }

@@ -121,21 +121,24 @@ NucleotideCodeSubstitutionMatrix::NucleotideCodeSubstitutionMatrix( std::map<std
         }
     }
 
-    _exon_subsitition_matrix = new int8_t*[5];
-    _intron_subsitition_matrix = new int8_t*[5];
-    _start_stop_codon_subsitition_matrix = new int8_t*[5];
-    _splice_sites_subsitition_matrix = new int8_t*[5];
+    _exon_subsitition_matrix = new int32_t*[5];
+    _intron_subsitition_matrix = new int32_t*[5];
+    _start_stop_codon_subsitition_matrix = new int32_t*[5];
+    _splice_sites_subsitition_matrix = new int32_t*[5];
     for( i=0; i<5; ++i ){
-        _exon_subsitition_matrix[i] = new int8_t[5];
-        _intron_subsitition_matrix[i] = new int8_t[5];
-        _start_stop_codon_subsitition_matrix[i] = new int8_t[5];
-        _splice_sites_subsitition_matrix[i] = new int8_t[5];
+        _exon_subsitition_matrix[i] = new int32_t[5];
+        _intron_subsitition_matrix[i] = new int32_t[5];
+        _start_stop_codon_subsitition_matrix[i] = new int32_t[5];
+        _splice_sites_subsitition_matrix[i] = new int32_t[5];
     }
 
     for( i=0; i<5; i++){
         for( j=0; j<5; j++){
             if( i==4 || j==4 ){
                 this->_exon_subsitition_matrix[i][j] = 0;
+                this->_intron_subsitition_matrix[i][j] = 0;
+                this->_splice_sites_subsitition_matrix[i][j] = 0;
+                this->_start_stop_codon_subsitition_matrix[i][j] = 0;
             }else if( i==j ){
                 this->_exon_subsitition_matrix[i][j] = stoi(get_parameters("alignmentExonMatchP", parameters));
                 this->_intron_subsitition_matrix[i][j] = stoi(get_parameters("alignmentIntronMatchP", parameters));
@@ -793,16 +796,16 @@ char NucleotideCodeSubstitutionMatrix::getGeneticCode(const std::string & coding
     }
 }
 
-int8_t** NucleotideCodeSubstitutionMatrix::get_exon_subsitition_matrix() const{
+int32_t** NucleotideCodeSubstitutionMatrix::get_exon_subsitition_matrix() const{
     return _exon_subsitition_matrix;
 }
-int8_t** NucleotideCodeSubstitutionMatrix::get_intron_subsitition_matrix() const{
+int32_t** NucleotideCodeSubstitutionMatrix::get_intron_subsitition_matrix() const{
     return _intron_subsitition_matrix;
 }
-int8_t** NucleotideCodeSubstitutionMatrix::get_start_stop_codon_subsitition_matrix() const{
+int32_t** NucleotideCodeSubstitutionMatrix::get_start_stop_codon_subsitition_matrix() const{
     return _start_stop_codon_subsitition_matrix;
 }
-int8_t** NucleotideCodeSubstitutionMatrix::get_splice_sites_subsitition_matrix() const{
+int32_t** NucleotideCodeSubstitutionMatrix::get_splice_sites_subsitition_matrix() const{
     return _splice_sites_subsitition_matrix;
 }
 std::set<std::string>& NucleotideCodeSubstitutionMatrix::getLegalNasString() {

@@ -5,6 +5,7 @@
 #ifndef AND_CNS_MATRIX_H
 #define AND_CNS_MATRIX_H
 
+#include <cstdint>
 #include <string>
 
 class Matrix {

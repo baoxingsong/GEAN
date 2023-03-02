@@ -6,8 +6,9 @@
 #define ZSDP_GENEANNOTATIONALIGNMENT_H
 
 #include "../model/model.h"
-#include "../util/util.h"
-#include <stack>
+#include <cstdint>
+#include <string>
+#include <vector>
 
 int32_t globalAlignment( std::vector<Gene> & g1s, std::vector<Gene> & g2s, std::vector<std::string> & _alignment_q,
     std::vector<std::string> & _alignment_d);

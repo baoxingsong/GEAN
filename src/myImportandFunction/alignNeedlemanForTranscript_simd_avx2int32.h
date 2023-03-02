@@ -1,30 +1,18 @@
-//
-// Created by song on 7/27/18.
-//
-
-#ifndef ANNOTATIONLIFTOVER_ALIGNNEEDLEMANFORTRANSCRIPT_SIMD_AVX2INT32_H
-#define ANNOTATIONLIFTOVER_ALIGNNEEDLEMANFORTRANSCRIPT_SIMD_AVX2INT32_H
+#ifndef GEAN_ALIGN_TRANSCRIPT_SIMD32_H
+#define GEAN_ALIGN_TRANSCRIPT_SIMD32_H
 
 #include "alignNeedlemanForTranscript.h"
-#include <immintrin.h>
-#include <stack>
-#include <bitset>
 
+void alignNeedlemanForTranscript_simd_avx2int32(
+        std::string& reference,
+        std::string& query,
+        int& startCodonPosition,
+        int& stopCodonPosition,
+        std::vector<SpliceSitePosition>& spliceSitePositions,
+        std::map<std::string, std::string>& parameters,
+        NucleotideCodeSubstitutionMatrix& substitutionMatrix,
+        std::string& alignedQuery,
+        std::string& alignedReference,
+        std::string& alignmentInformation);
 
-
-#include <iostream>
-#include <map>
-#include <fstream>
-#include <sstream>
-#include <iomanip>
-#include "../util/parameters.h"
-#include <algorithm>
-
-void alignNeedlemanForTranscript_simd_avx2int32(std::string& dna_d,
-                                                std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
-                                                std::vector<SpliceSitePosition>& spliceSitePositions,
-                                                std::map<std::string, std::string>& parameters,
-                                                NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix,
-                                                std::string & alignment_q, std::string & alignment_d, std::string & infor);
-
-#endif //ANNOTATIONLIFTOVER_ALIGNNEEDLEMANFORTRANSCRIPT_SIMD_AVX2INT32_H
+#endif

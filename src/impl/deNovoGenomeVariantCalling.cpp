@@ -127,15 +127,6 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
                         endQuery = targetGeneMap[it0->first][queryIndex].getTranscripts()[0].getPStart()-1;
                         std::string refSeq = getSubsequence( refSequences, maxOne, startRef, endRef);
                         std::string querySeq = getSubsequence( targetSequences, it0->first, startQuery, endQuery);
-                        /*
-                        NeedlemanWunsch_simd_Fast needlemanWunsch_simd_Fast(querySeq, refSeq, match_score, mis_match_score,
-                                open_gap_penalty, extend_gap_penalty, nucleotideCodeSubstitutionMatrix);
-                        __m256i* vProfile = needlemanWunsch_simd_Fast.query_profile_avx2_byte(nucleotideCodeSubstitutionMatrix);
-                        needlemanWunsch_simd_Fast.ssw_avx2(vProfile, nucleotideCodeSubstitutionMatrix);
-                        needlemanWunsch_simd_Fast.get_optimal_alignment(nucleotideCodeSubstitutionMatrix);
-                        refAlign<<needlemanWunsch_simd_Fast.get_alignment_d();
-                        queryAlign<<needlemanWunsch_simd_Fast.get_alignment_q();
-                         */
                         std::string _alignment_q;
                         std::string _alignment_d;
                         alignSlidingWindow( querySeq, refSeq, _alignment_q, _alignment_d, widownWidth, parameters, nucleotideCodeSubstitutionMatrix );
@@ -156,15 +147,6 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
                         endQuery = targetGeneMap[it0->first][queryIndex].getTranscripts()[0].getPEnd();
                         std::string refSeq = getSubsequence( refSequences, maxOne, startRef, endRef);
                         std::string querySeq = getSubsequence( targetSequences, it0->first, startQuery, endQuery);
-                        /*
-                        NeedlemanWunsch_simd_Fast needlemanWunsch_simd_Fast(querySeq, refSeq, match_score, mis_match_score,
-                                                                            open_gap_penalty, extend_gap_penalty, nucleotideCodeSubstitutionMatrix);
-                        __m256i* vProfile = needlemanWunsch_simd_Fast.query_profile_avx2_byte(nucleotideCodeSubstitutionMatrix);
-                        needlemanWunsch_simd_Fast.ssw_avx2(vProfile, nucleotideCodeSubstitutionMatrix);
-                        needlemanWunsch_simd_Fast.get_optimal_alignment(nucleotideCodeSubstitutionMatrix);
-                        refAlign<<needlemanWunsch_simd_Fast.get_alignment_d();
-                        queryAlign<<needlemanWunsch_simd_Fast.get_alignment_q();
-                         */
                         std::string _alignment_q;
                         std::string _alignment_d;
                         alignSlidingWindow( querySeq, refSeq, _alignment_q, _alignment_d, widownWidth, parameters, nucleotideCodeSubstitutionMatrix );
@@ -197,15 +179,6 @@ void deNovoGenomeVariantCalling(const std::string & refGffFilePath, const std::s
 //        std::cout << "queryChr " << it0->first << " startQuery " << startQuery << " endQuery " << endQuery << std::endl;
         std::string refSeq = getSubsequence( refSequences, maxOne, startRef, endRef);
         std::string querySeq = getSubsequence( targetSequences, it0->first, startQuery, endQuery);
-        /*
-        NeedlemanWunsch_simd_Fast needlemanWunsch_simd_Fast(querySeq, refSeq, match_score, mis_match_score,
-                                                            open_gap_penalty, extend_gap_penalty, nucleotideCodeSubstitutionMatrix);
-        __m256i* vProfile = needlemanWunsch_simd_Fast.query_profile_avx2_byte(nucleotideCodeSubstitutionMatrix);
-        needlemanWunsch_simd_Fast.ssw_avx2(vProfile, nucleotideCodeSubstitutionMatrix);
-        needlemanWunsch_simd_Fast.get_optimal_alignment(nucleotideCodeSubstitutionMatrix);
-        refAlign<<needlemanWunsch_simd_Fast.get_alignment_d();
-        queryAlign<<needlemanWunsch_simd_Fast.get_alignment_q();
-        */
         std::string _alignment_q;
         std::string _alignment_d;
         alignSlidingWindow( querySeq, refSeq, _alignment_q, _alignment_d, widownWidth, parameters, nucleotideCodeSubstitutionMatrix );

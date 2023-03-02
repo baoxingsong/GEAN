@@ -26,22 +26,22 @@ void updateTranscriptEnds(Transcript & transcript){
 }
 
 void CheckAndUpdateTranscriptsEnds(std::map<std::string, Transcript> & transcripts, std::map<std::string, Fasta>& sequences,
-     NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & minIntron){
+     NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & minIntron, const size_t & orfCount){
+    if( orfCount == 0 ){
+        return;
+    }
     size_t checkedNumber = 0;
     size_t caseNumber = 0;
     for( std::map<std::string, Transcript>::iterator it = transcripts.begin();
-        it != transcripts.end(); ++it){
+        it != transcripts.end() && checkedNumber < orfCount; ++it){
         checkedNumber++;
         TranscriptUpdateCdsInformation(it->second, sequences);
         checkOrfState( it->second, sequences, nucleotideCodeSubstitutionMatrix, minIntron);
         if( it->second.getIfOrfShift() && it->second.getMetaInformation().find("notEndWithStopCodon")!=std::string::npos ){
             ++caseNumber;
         }
-        if( checkedNumber >= 100 ){
-            break;
-        }
     }
-    if( caseNumber > 95 ){
+    if( caseNumber > (orfCount * 95) / 100 ){
         for( std::map<std::string, Transcript>::iterator it = transcripts.begin();
              it != transcripts.end(); ++it){
             updateTranscriptEnds(it->second);
@@ -50,24 +50,26 @@ void CheckAndUpdateTranscriptsEnds(std::map<std::string, Transcript> & transcrip
 }
 
 void CheckAndUpdateTranscriptsEnds(std::map<std::string, std::vector<Transcript> > & transcriptHashSet, std::map<std::string, Fasta>& sequences,
-                                   NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & minIntron){
+                                   NucleotideCodeSubstitutionMatrix & nucleotideCodeSubstitutionMatrix, const int & minIntron,
+                                   const size_t & orfCount){
+    if( orfCount == 0 ){
+        return;
+    }
     size_t checkedNumber = 0;
     size_t caseNumber = 0;
     for( std::map<std::string, std::vector<Transcript>>::iterator it = transcriptHashSet.begin();
-         it != transcriptHashSet.end(); ++it){
-        for( std::vector<Transcript>::iterator it1=it->second.begin(); it1!=it->second.end(); ++it1 ){
+         it != transcriptHashSet.end() && checkedNumber < orfCount; ++it){
+        for( std::vector<Transcript>::iterator it1=it->second.begin();
+             it1!=it->second.end() && checkedNumber < orfCount; ++it1 ){
             checkedNumber++;
             TranscriptUpdateCdsInformation(*it1, sequences);
             checkOrfState( *it1, sequences, nucleotideCodeSubstitutionMatrix, minIntron);
             if( it1->getIfOrfShift() && it1->getMetaInformation().find("notEndWithStopCodon")!=std::string::npos ){
                 ++caseNumber;
             }
-            if( checkedNumber >= 100 ){
-                break;
-            }
         }
     }
-    if( caseNumber > 95 ){
+    if( caseNumber > (orfCount * 95) / 100 ){
         for( std::map<std::string, std::vector<Transcript>>::iterator it = transcriptHashSet.begin();
              it != transcriptHashSet.end(); ++it){
             for( std::vector<Transcript>::iterator it1=it->second.begin(); it1!=it->second.end(); ++it1 ){

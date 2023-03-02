@@ -45,6 +45,6 @@ bool ifSpliceSitesOk(Transcript& targetTranscript,
 bool checkSpliceSites(std::string& s1, std::string& s2, std::string& s1t, std::string& s2t, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix);
 bool ifIntronEnoughLarge(Transcript& targetTranscript, const int& minIntron);
 void checkOrfPversionBin(int const  index, int const & binSize, std::vector<Transcript>   & transcripts, std::map<std::string, Fasta> & genome, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix,  int const & minIntron, std::atomic_int & number_of_runing_threads);
-void checkOrfPversion(Transcript& transcript, std::map<std::string, Fasta>& genome, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix,  int& minIntron, std::atomic_int & number_of_runing_threads);
+void checkOrfPversion(Transcript& transcript, std::map<std::string, Fasta>& genome, NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix, int& minIntron, std::atomic_int& number_of_runing_threads);
 
 #endif //ANNOTATIONLIFTOVER_CHECKORFSTATE_H

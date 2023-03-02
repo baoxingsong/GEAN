@@ -1,146 +1,208 @@
-//
-// Created by Baoxing song on 09.10.18.
-//
-
 #include "geneAnnotationAlignment.h"
 
-int32_t globalAlignment( std::vector<Gene> & g1s, std::vector<Gene> & g2s, std::vector<std::string> & _alignment_q,
-    std::vector<std::string> & _alignment_d){
-    int32_t ** _similarity_matrix = new int32_t *[g1s.size() + 1];
-    int32_t  i, j;
-    for (i = 0; i < (g1s.size() + 1); ++i) {
-        _similarity_matrix[i] = new int32_t [g2s.size() + 1];
-    }
-    i=0;
-    for ( j = 0; j <= g2s.size(); ++j) {
-        _similarity_matrix[i][j] = -j;
-    }
-    j=0;
-    for (i = 0; i < (g1s.size()+1); ++i) {
-        _similarity_matrix[i][j] = -i;
-    }
+#include <algorithm>
+#include <limits>
+#include <stack>
+#include <stdexcept>
 
-    // this matrix is for set different penalty for open gap and extend gap begin
-    // and the track also changed to use this matrix
-    VARIANTCATEGORY** _track_matrix = new VARIANTCATEGORY *[g1s.size() + 1];
-    for (i = 0; i < (g1s.size() + 1); ++i) {
-        _track_matrix[i] = new VARIANTCATEGORY[g2s.size() + 1];
-    }
+namespace {
 
-    for ( i = 0; i <= g1s.size(); ++i) {
-        for ( j = 0; j <= g2s.size(); ++j) {
-            _track_matrix[i][j] = SNPORINSERTIONORDELETION;
+enum TraceState : uint8_t {
+    TRACE_M = 0,
+    TRACE_F = 1,
+    TRACE_E = 2,
+    TRACE_INVALID = 3
+};
+
+const uint8_t M_MASK = 0x03;
+const uint8_t F_EXTENDED = 0x04;
+const uint8_t E_EXTENDED = 0x08;
+const int64_t NEGATIVE_INFINITY = std::numeric_limits<int64_t>::lowest() / 4;
+
+size_t traceIndex(size_t i, size_t j, size_t secondLength) {
+    return i * (secondLength + 1) + j;
+}
+
+void setMPredecessor(uint8_t& cell, uint8_t state) {
+    cell = static_cast<uint8_t>((cell & ~M_MASK) | state);
+}
+
+int64_t addScore(int64_t score, int32_t delta) {
+    return score == NEGATIVE_INFINITY
+                   ? NEGATIVE_INFINITY
+                   : score + static_cast<int64_t>(delta);
+}
+
+int64_t bestStateScore(int64_t matchScore,
+                       int64_t verticalGapScore,
+                       int64_t horizontalGapScore,
+                       uint8_t& state) {
+    int64_t best = matchScore;
+    state = TRACE_M;
+    if (verticalGapScore > best) {
+        best = verticalGapScore;
+        state = TRACE_F;
+    }
+    if (horizontalGapScore > best) {
+        best = horizontalGapScore;
+        state = TRACE_E;
+    }
+    return best;
+}
+
+} // namespace
+
+int32_t globalAlignment(
+        std::vector<Gene>& firstGenes,
+        std::vector<Gene>& secondGenes,
+        std::vector<std::string>& alignedFirst,
+        std::vector<std::string>& alignedSecond) {
+    const size_t firstLength = firstGenes.size();
+    const size_t secondLength = secondGenes.size();
+    const int32_t openGapPenalty = -2;
+    const int32_t extendGapPenalty = -1;
+
+    if (firstLength + 1 > std::numeric_limits<size_t>::max() / (secondLength + 1)) {
+        throw std::length_error("gene alignment traceback matrix is too large");
+    }
+    std::vector<uint8_t> trace((firstLength + 1) * (secondLength + 1),
+                               TRACE_INVALID);
+
+    std::vector<int64_t> previousM(secondLength + 1, NEGATIVE_INFINITY);
+    std::vector<int64_t> currentM(secondLength + 1, NEGATIVE_INFINITY);
+    std::vector<int64_t> previousF(secondLength + 1, NEGATIVE_INFINITY);
+    std::vector<int64_t> currentF(secondLength + 1, NEGATIVE_INFINITY);
+    std::vector<int64_t> previousE(secondLength + 1, NEGATIVE_INFINITY);
+    std::vector<int64_t> currentE(secondLength + 1, NEGATIVE_INFINITY);
+
+    previousM[0] = 0;
+    setMPredecessor(trace[0], TRACE_M);
+    for (size_t j = 1; j <= secondLength; ++j) {
+        const size_t index = traceIndex(0, j, secondLength);
+        if (j == 1) {
+            previousE[j] = addScore(previousM[0], openGapPenalty);
+            trace[index] &= static_cast<uint8_t>(~E_EXTENDED);
+        } else {
+            previousE[j] = addScore(previousE[j - 1], extendGapPenalty);
+            trace[index] |= E_EXTENDED;
         }
     }
-    i=0;
-    for ( j = 1; j <= g2s.size(); ++j) {
-        _track_matrix[i][j] = DELETION;
-    }
-    j=0;
-    for (i = 1; i < (g1s.size()+1); ++i) {
-        _track_matrix[i][j] = INSERTION;
-    }
 
-    int32_t _open_gap_penalty = -2;
-    int32_t _extend_gap_penalty = -1;
-    int match = 0, insert = 0, del = 0 , selected = 0, t;
-    for (size_t i = 1; i < g1s.size() + 1; ++i) {
-        for (size_t j = 1; j < g2s.size() + 1; ++j) {
-            if( g1s[i-1].getName().compare(  g2s[j-1].getName() ) ==0 ){
-                match = _similarity_matrix[i - 1][j - 1] +1;
-            }else{
-                match = _similarity_matrix[i - 1][j - 1] -1;
-            }
+    for (size_t i = 1; i <= firstLength; ++i) {
+        std::fill(currentM.begin(), currentM.end(), NEGATIVE_INFINITY);
+        std::fill(currentF.begin(), currentF.end(), NEGATIVE_INFINITY);
+        std::fill(currentE.begin(), currentE.end(), NEGATIVE_INFINITY);
 
-            insert = _similarity_matrix[i - 1][j] + _open_gap_penalty;
-            del = _similarity_matrix[i][j - 1] + _open_gap_penalty;
+        const size_t leftIndex = traceIndex(i, 0, secondLength);
+        const int64_t openedLeft = addScore(previousM[0], openGapPenalty);
+        const int64_t extendedLeft = addScore(previousF[0], extendGapPenalty);
+        if (extendedLeft >= openedLeft) {
+            currentF[0] = extendedLeft;
+            trace[leftIndex] |= F_EXTENDED;
+        } else {
+            currentF[0] = openedLeft;
+            trace[leftIndex] &= static_cast<uint8_t>(~F_EXTENDED);
+        }
 
-            if ( _track_matrix[i - 1][j] == INSERTION || _track_matrix[i - 1][j] == SNPORINSERTION ||  _track_matrix[i - 1][j] == INSERTIONORDELETION
-                 || _track_matrix[i - 1][j] == SNPORINSERTIONORDELETION ){
-                insert = _similarity_matrix[i - 1][j] + _extend_gap_penalty;
-            }
-            if ( _track_matrix[i][j - 1] == DELETION || _track_matrix[i][j - 1] == SNPORDELETION ||_track_matrix[i][j-1] == INSERTIONORDELETION
-                 || _track_matrix[i][j - 1] == SNPORINSERTIONORDELETION ){
-                del = _similarity_matrix[i][j - 1] + _extend_gap_penalty;
-            }
-            if( del >insert && del==match  ){
-                selected = del;
-                _track_matrix[i][j] = SNPORDELETION;
-            }else if( insert >del && insert == match  ){
-                selected = match;
-                _track_matrix[i][j] = SNPORINSERTION;
-            }else if ( insert > match && insert > del){// prefer deletion
-                int t = 1;
-                while( i-t >=1 && (_track_matrix[i - t][j] == SNPORINSERTION || _track_matrix[i - t][j] == SNPORINSERTIONORDELETION || _track_matrix[i - t][j]==INSERTIONORDELETION ) ){
-                    _track_matrix[i - t][j] = INSERTION;
-                    ++t;
-                }
-                selected = insert;
-                _track_matrix[i][j] = INSERTION;
-            }else if( del > match && del > insert ){//prefer insertion, so that the INDELs could be put together
-                t = 1;
-                while( j-t >=1 && (_track_matrix[i][j-t] == SNPORDELETION || _track_matrix[i][j-t] == SNPORINSERTIONORDELETION || _track_matrix[i][j-t]==INSERTIONORDELETION) ){
-                    _track_matrix[i][j-t] = DELETION;
-                    ++t;
-                }
-                selected = del;
-                _track_matrix[i][j] = DELETION;
-            }else if (match > insert && match > del){
-                t = 1;
-                while( i-t >=1 && j-t>=1 && (_track_matrix[i-t][j-t] == SNPORINSERTION || _track_matrix[i-t][j-t] == SNPORINSERTIONORDELETION || _track_matrix[i-t][j-t]==SNPORDELETION ) ){
-                    _track_matrix[i-t][j-t] = SNP;
-                    ++t;
-                }
-                selected = match;
-                _track_matrix[i][j] = SNP;
-            }else if ( del >match && insert==del  ){
-                selected = del;
-                _track_matrix[i][j] = INSERTIONORDELETION;
+        for (size_t j = 1; j <= secondLength; ++j) {
+            const size_t index = traceIndex(i, j, secondLength);
+
+            uint8_t matchPredecessor = TRACE_INVALID;
+            const int64_t previousBest = bestStateScore(
+                    previousM[j - 1], previousF[j - 1], previousE[j - 1],
+                    matchPredecessor);
+            const int32_t substitution =
+                    firstGenes[i - 1].getName() == secondGenes[j - 1].getName()
+                            ? 1 : -1;
+            currentM[j] = addScore(previousBest, substitution);
+            setMPredecessor(trace[index], matchPredecessor);
+
+            const int64_t openedF = addScore(previousM[j], openGapPenalty);
+            const int64_t extendedF = addScore(previousF[j], extendGapPenalty);
+            if (extendedF >= openedF) {
+                currentF[j] = extendedF;
+                trace[index] |= F_EXTENDED;
             } else {
-                selected = del;
-                _track_matrix[i][j] = SNPORINSERTIONORDELETION;
+                currentF[j] = openedF;
+                trace[index] &= static_cast<uint8_t>(~F_EXTENDED);
             }
-            _similarity_matrix[i][j] = selected;
+
+            const int64_t openedE = addScore(currentM[j - 1], openGapPenalty);
+            const int64_t extendedE = addScore(currentE[j - 1], extendGapPenalty);
+            if (extendedE >= openedE) {
+                currentE[j] = extendedE;
+                trace[index] |= E_EXTENDED;
+            } else {
+                currentE[j] = openedE;
+                trace[index] &= static_cast<uint8_t>(~E_EXTENDED);
+            }
         }
+
+        previousM.swap(currentM);
+        previousF.swap(currentF);
+        previousE.swap(currentE);
     }
 
-    std::stack<std::string> SQ, SD;
+    uint8_t state = TRACE_INVALID;
+    const int64_t finalScore = bestStateScore(
+            previousM[secondLength], previousF[secondLength],
+            previousE[secondLength], state);
+    if (finalScore < std::numeric_limits<int32_t>::min() ||
+        finalScore > std::numeric_limits<int32_t>::max()) {
+        throw std::overflow_error("gene alignment score exceeds the int32 range");
+    }
 
-    size_t k;
-    i = g1s.size();
-    j = g2s.size();
-
+    std::stack<std::string> firstStack;
+    std::stack<std::string> secondStack;
+    size_t i = firstLength;
+    size_t j = secondLength;
     while (i > 0 || j > 0) {
-        if (i == 0) {
-            SQ.push("-");
-            SD.push(g2s[j-1].getName());
-            --j;
-        } else if (j == 0) {
-            SQ.push(g1s[i-1].getName());
-            SD.push("-");
-            --i;
-        }else{
-            if ( _track_matrix[i][j]==SNP || _track_matrix[i][j]==SNPORDELETION || _track_matrix[i][j]==SNPORINSERTION || _track_matrix[i][j]==SNPORINSERTIONORDELETION  ) {
-                SQ.push(g1s[i - 1].getName());
-                SD.push(g2s[j - 1].getName());
-                --i;
-                --j;
-            } else if (_track_matrix[i][j]==INSERTION || _track_matrix[i][j]==INSERTIONORDELETION) {//insertion
-                SQ.push(g1s[i - 1].getName());
-                SD.push("-");
-                --i;
-            } else {
-                SQ.push("-");
-                SD.push(g2s[j - 1].getName());
-                --j;
+        if (state == TRACE_M) {
+            if (i == 0 || j == 0) {
+                throw std::runtime_error("invalid gene M traceback boundary");
             }
+            const uint8_t predecessor =
+                    trace[traceIndex(i, j, secondLength)] & M_MASK;
+            if (predecessor > TRACE_E) {
+                throw std::runtime_error("invalid gene M traceback state");
+            }
+            firstStack.push(firstGenes[i - 1].getName());
+            secondStack.push(secondGenes[j - 1].getName());
+            --i;
+            --j;
+            state = predecessor;
+        } else if (state == TRACE_F) {
+            if (i == 0) {
+                throw std::runtime_error("invalid gene F traceback boundary");
+            }
+            const uint8_t predecessor =
+                    (trace[traceIndex(i, j, secondLength)] & F_EXTENDED)
+                            ? TRACE_F : TRACE_M;
+            firstStack.push(firstGenes[i - 1].getName());
+            secondStack.push("-");
+            --i;
+            state = predecessor;
+        } else if (state == TRACE_E) {
+            if (j == 0) {
+                throw std::runtime_error("invalid gene E traceback boundary");
+            }
+            const uint8_t predecessor =
+                    (trace[traceIndex(i, j, secondLength)] & E_EXTENDED)
+                            ? TRACE_E : TRACE_M;
+            firstStack.push("-");
+            secondStack.push(secondGenes[j - 1].getName());
+            --j;
+            state = predecessor;
+        } else {
+            throw std::runtime_error("invalid gene traceback state");
         }
     }
-    while (!SQ.empty()) {
-        _alignment_q.push_back(SQ.top() );
-        _alignment_d.push_back(SD.top());
-        SQ.pop();
-        SD.pop();
+
+    while (!firstStack.empty()) {
+        alignedFirst.push_back(firstStack.top());
+        alignedSecond.push_back(secondStack.top());
+        firstStack.pop();
+        secondStack.pop();
     }
-    return _similarity_matrix[g1s.size()][g2s.size()];
+    return static_cast<int32_t>(finalScore);
 }

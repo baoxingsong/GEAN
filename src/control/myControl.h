@@ -28,6 +28,6 @@ s *
 
 #include "myCoordinateLiftOver.h"
 #include "myReAnnotationAndExonerateAndNovo.h"
-#include "VariantsCountAsPhenotypeForAssociation.h"
+#include "generateRandomSdi.h"
 
 #endif //ANNOTATIONLIFTOVER_MYCONTROL_H

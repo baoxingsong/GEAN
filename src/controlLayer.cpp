@@ -24,6 +24,8 @@
 
 #include "controlLayer.h"
 
+#include <stdexcept>
+
 std::string softwareName = "gean";
 
 int getGenomeSequence(int argc, char** argv, std::map<std::string, std::string>& parameters){
@@ -53,7 +55,6 @@ int getGenomeSequence(int argc, char** argv, std::map<std::string, std::string>&
     }
     return 0;
 }
-
 int getChangedFromReference( int argc, char** argv, std::map<std::string, std::string>& parameters ){
     std::stringstream usage;
     usage << "Usage: "<<softwareName<<" lift -v variants -c chromosome -p position " << std::endl<<
@@ -226,24 +227,33 @@ int Reanva( int argc, char** argv, std::map<std::string, std::string>& parameter
 
 int getSequences( int argc, char** argv, std::map<std::string, std::string>& parameters ){
     std::stringstream usage;
-    usage << "Usage: "<<softwareName<<" gff2seq -i inputGffFile -r inputGenome -p outputProteinSequences -c outputCdsSequences -g outputGenomeSequences " << std::endl<<
+    usage << "Usage: "<<softwareName<<" gff2seq -i inputGffFile -r inputGenome [-p outputProteinSequences] [-c outputCdsSequences] [-g outputGenomeSequences] [-a] [-n INT]" << std::endl<<
           "Options" << std::endl <<
           " -h        produce help message" << std::endl <<
           " -i FILE   reference genome in GFF/GTF format" << std::endl <<
           " -r FILE   genome sequence in fasta format" << std::endl <<
           " -m INT    minimum intron size for a functional ORF" << std::endl <<
+          " -a, --auto-adjust    automatically adjust transcript ends based on ORF states (default false)" << std::endl <<
+          " -n, --orf-count INT  number of ORFs used for automatic adjustment (default 100)" << std::endl <<
           " -p FILE   output file of protein sequence in fasta format" << std::endl <<
           " -c FILE   output file of CDS (without intron) in fasta format" << std::endl <<
-          " -g FILE   output file of CDS (with intron) in fasta frormat" << std::endl << std::endl;
+          " -g FILE   output file of transcript (with intron) in fasta format" << std::endl <<
+          "           at least one of -p, -c, or -g is required" << std::endl << std::endl;
     InputParser inputParser (argc, argv);
+    const std::string outputProteinSequences = inputParser.cmdOptionExists("-p")
+            ? inputParser.getCmdOption("-p") : "";
+    const std::string outputCdsSequences = inputParser.cmdOptionExists("-c")
+            ? inputParser.getCmdOption("-c") : "";
+    const std::string outputGenomeSequences = inputParser.cmdOptionExists("-g")
+            ? inputParser.getCmdOption("-g") : "";
+    const bool hasOutput = !outputProteinSequences.empty() ||
+                           !outputCdsSequences.empty() ||
+                           !outputGenomeSequences.empty();
     if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
         std::cerr << usage.str();
-    }else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-r") && inputParser.cmdOptionExists("-p") && inputParser.cmdOptionExists("-c") && inputParser.cmdOptionExists("-g") ){
+    }else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-r") && hasOutput ){
         std::string inputGffFile = inputParser.getCmdOption("-i");
         std::string genome = inputParser.getCmdOption("-r");
-        std::string outputProteinSequences = inputParser.getCmdOption("-p");
-        std::string outputCdsSequences = inputParser.getCmdOption("-c");
-        std::string outputGenomeSequences = inputParser.getCmdOption("-g");
 
         int minIntron;
         if( inputParser.cmdOptionExists("-m") ){
@@ -256,10 +266,40 @@ int getSequences( int argc, char** argv, std::map<std::string, std::string>& par
             std::cerr << "the intron size should be 5 at minimum" << std::endl;
             exit(1);
         }
-        getSequences( inputGffFile, genome, outputProteinSequences, outputCdsSequences, outputGenomeSequences, parameters, minIntron);
+
+        bool autoAdjust = inputParser.cmdOptionExists("-a") || inputParser.cmdOptionExists("--auto-adjust");
+        int orfCount = 100;
+        std::string orfCountOption;
+        if( inputParser.cmdOptionExists("-n") ){
+            orfCountOption = inputParser.getCmdOption("-n");
+        }else if( inputParser.cmdOptionExists("--orf-count") ){
+            orfCountOption = inputParser.getCmdOption("--orf-count");
+        }
+        if( !orfCountOption.empty() ){
+            try{
+                size_t parsedCharacters = 0;
+                orfCount = std::stoi(orfCountOption, &parsedCharacters);
+                if( parsedCharacters != orfCountOption.size() || orfCount <= 0 ){
+                    throw std::invalid_argument("invalid ORF count");
+                }
+            }catch( const std::exception & ){
+                std::cerr << "the ORF count should be a positive integer" << std::endl;
+                return 1;
+            }
+        }else if( inputParser.cmdOptionExists("-n") || inputParser.cmdOptionExists("--orf-count") ){
+            std::cerr << "the ORF count should be a positive integer" << std::endl;
+            return 1;
+        }
+
+        getSequences( inputGffFile, genome, outputProteinSequences, outputCdsSequences, outputGenomeSequences,
+                      parameters, minIntron, autoAdjust, static_cast<size_t>(orfCount));
         return 0;
     }else{
+        if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-r") && !hasOutput ){
+            std::cerr << "at least one output option (-p, -c, or -g) is required" << std::endl;
+        }
         std::cerr << usage.str();
+        return 1;
     }
     return 0;
 }
@@ -1095,192 +1135,9 @@ int DenoveAssemblyVariantCalling( int argc, char** argv, std::map<std::string, s
     return 0;
 }
 
-//
-//int annotationLiftOver( int argc, char** argv ){
-//    std::stringstream usage;
-//    usage <<  "Usage:    * annotationLiftOver -i inputGffFile -r referenceGenomeSequence -v variants -o outputGffFile" << std::endl <<
-//        "   -h        produce help message" << std::endl <<
-//        "   -i        the input GFF/GTF file of reference line/accession" << std::endl <<
-//        "   -r        reference genome in fasta format" << std::endl <<
-//        "   -v        variant calling result in vcf/sdi format" << std::endl <<
-//        "   -o        the output GFF/GTF file of target line/accession" << std::endl <<
-//        "   -prefix   prefix for fasta records" << std::endl <<
-//        "   -g        default: (.+?)\\\\.   it works for parese the TAIR10 annotation" << std::endl <<
-//        "             regex to parser the parent gene id from transcript id"  << std::endl <<
-//        "   -t        (int) number of threads, default: 4 "<< std::endl <<
-//        "   -l        (int) if sequence is longer than this threshold would be aligned, for RAM and time saving porpose  "<< std::endl;
-//    InputParser inputParser (argc, argv);
-//    std::string vcfFix = "";
-//    if( inputParser.cmdOptionExists("-prefix")){
-//        vcfFix = inputParser.getCmdOption("-prefix");
-//    }
-//    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
-//        std::cerr << usage.str();
-//        return 1;
-//    } else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-r") && inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") ){
-//        std::string inputGffFile = inputParser.getCmdOption("-i");
-//        std::string referenceGenomeSequence = inputParser.getCmdOption("-r");
-//        std::string variants = inputParser.getCmdOption("-v");
-//        std::string outputGffFile = inputParser.getCmdOption("-o");
-//        std::string regexG;
-//        if( inputParser.cmdOptionExists("-g") ){
-//            regexG = inputParser.getCmdOption("-g");
-//        }else{
-//            regexG = "(.+?)\\.";
-//        }
-//        int threads;
-//        if( inputParser.cmdOptionExists("-t") ){
-//            threads = std::stoi( inputParser.getCmdOption("-t") );
-//        }else{
-//            threads = 4;
-//        }
-//        int lengthThread;
-//        if( inputParser.cmdOptionExists("-l") ){
-//            lengthThread = std::stoi( inputParser.getCmdOption("-l") );
-//        }else{
-//            lengthThread=100000;
-//        }
-//        myReAnnotationLiftoverSingleLine( referenceGenomeSequence, inputGffFile, variants,
-//                                          outputGffFile, threads, regexG, lengthThread, vcfFix );
-//        return 0;
-//    } else{
-//        std::cerr << usage.str();
-//        return 1;
-//    }
-//    return 1;
-//}
-//
-//int annotationLiftOverAndOrth( int argc, char** argv ){
-//    std::stringstream usage;
-//    usage <<  "Usage:    * annotationLiftOverAndOrth -i inputGffFile -r referenceGenomeSequence -v variants -o outputGffFile" << std::endl <<
-//          "   -h        produce help message" << std::endl <<
-//          "   -i        the input GFF/GTF file of reference line/accession" << std::endl <<
-//          "   -r        reference genome in fasta format" << std::endl <<
-//          "   -v        variant calling result in vcf/sdi format" << std::endl <<
-//          "   -o        the output GFF/GTF file of target line/accession" << std::endl <<
-//          "   -x        default: ([\\s\\S]*)Parent=([\\s\\S]*?)[;,][\\s\\S]*$  it works for parese the TAIR10 annotation" << std::endl<<
-//          "                 regex to parser the structure of CDS elements and parent transcript in GFF/GTF file" << std::endl <<
-//          "   -prefix   prefix for fasta records" << std::endl <<
-//          "   -g        default: (.+?)\\\\.   it works for parese the TAIR10 annotation" << std::endl <<
-//          "             regex to parser the parent gene id from transcript id"  << std::endl <<
-//          "   -t        (int) number of threads, default: 4 "<< std::endl <<
-//          "   -l        (int) if sequence is longer than this threshold would be aligned, for RAM and time saving porpose  "<< std::endl;
-//    InputParser inputParser (argc, argv);
-//    std::string vcfFix = "";
-//    if( inputParser.cmdOptionExists("-prefix")){
-//        vcfFix = inputParser.getCmdOption("-prefix");
-//    }
-//    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
-//        std::cerr << usage.str();
-//        return 1;
-//    } else if( inputParser.cmdOptionExists("-i") && inputParser.cmdOptionExists("-r") && inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") ){
-//        std::string inputGffFile = inputParser.getCmdOption("-i");
-//        std::string referenceGenomeSequence = inputParser.getCmdOption("-r");
-//        std::string variants = inputParser.getCmdOption("-v");
-//        std::string outputGffFile = inputParser.getCmdOption("-o");
-//        std::string regex;
-//        if( inputParser.cmdOptionExists("-x")  ){
-//            regex = inputParser.getCmdOption("-x");
-//        }else{
-//            regex = "([\\s\\S]*)Parent=([\\s\\S]*?)[;,][\\s\\S]*$";
-//        }
-//        std::string regexG;
-//        if( inputParser.cmdOptionExists("-g") ){
-//            regexG = inputParser.getCmdOption("-g");
-//        }else{
-//            regexG = "(.+?)\\.";
-//        }
-//        int threads;
-//        if( inputParser.cmdOptionExists("-t") ){
-//            threads = std::stoi( inputParser.getCmdOption("-t") );
-//        }else{
-//            threads = 4;
-//        }
-//        int lengthThread;
-//        if( inputParser.cmdOptionExists("-l") ){
-//            lengthThread = std::stoi( inputParser.getCmdOption("-l") );
-//        }else{
-//            lengthThread=30000;
-//        }
-//        myReAnnotationLiftoverAndOrthologous( referenceGenomeSequence, inputGffFile, variants,
-//                                          outputGffFile, regex, threads, regexG, lengthThread, vcfFix);
-//        return 0;
-//    } else{
-//        std::cerr << usage.str();
-//        return 1;
-//    }
-//    return 1;
-//}
-
-
-int myCountNumberOfTwoneighborSNP( int argc, char** argv, std::map<std::string, std::string>& parameters ){
-    std::stringstream usage;
-    usage <<  "Usage: "<<softwareName<<" countNumberOfTwoneighborSNP -v variants" << std::endl <<
-        "Options" << std::endl <<
-        "   -h        produce help message" << std::endl <<
-        "   -r        (string) reference genome in fasta format" << std::endl <<
-        "   -v        variant calling result in vcf/sdi format" << std::endl <<
-        "   -l        (int) number of bases in which range there should be no variants for double SNP" << std::endl <<
-        "   -o        prefix of output file" <<std::endl;
-    InputParser inputParser (argc, argv);
-    std::string vcfFix = "";
-    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
-        std::cerr << usage.str();
-        return 1;
-    } else if(inputParser.cmdOptionExists("-r") &&  inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") ) {
-        std::string referenceGenomeSequence = inputParser.getCmdOption("-r");
-        std::string variants = inputParser.getCmdOption("-v");
-        std::string outputPrefix = inputParser.getCmdOption("-o");
-        int rangeLength;
-        if( inputParser.cmdOptionExists("-l") ){
-            rangeLength = std::stoi( inputParser.getCmdOption("-l") );
-        }else{
-            rangeLength = 3;
-        }
-        countNumberOfTwoneighborSNP(variants, outputPrefix, rangeLength, vcfFix, parameters, referenceGenomeSequence);
-        return 0;
-    }else {
-        std::cerr << usage.str();
-        return 0;
-    }
-}
-
-
-int mycountNumberSNPAndIndel( int argc, char** argv, std::map<std::string, std::string>& parameters ){
-    std::stringstream usage;
-    usage <<  "Usage: "<<softwareName<<" countNumberSNPAndIndel -v variants" << std::endl <<
-          "Options" << std::endl <<
-          "   -h        produce help message" << std::endl <<
-          "   -r        (string) reference genome in fasta format" << std::endl <<
-          "   -v        variant calling result in vcf/sdi format" << std::endl <<
-          "   -l        (int) number of bases in which range there should be no INDEL" << std::endl <<
-          "   -o        prefix of output file" <<std::endl;
-    InputParser inputParser (argc, argv);
-    std::string vcfFix = "";
-    if(inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
-        std::cerr << usage.str();
-        return 1;
-    } else if( inputParser.cmdOptionExists("-r") &&  inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") ) {
-        std::string referenceGenomeSequence = inputParser.getCmdOption("-r");
-        std::string variants = inputParser.getCmdOption("-v");
-        std::string outputPrefix = inputParser.getCmdOption("-o");
-        int rangeLength;
-        if( inputParser.cmdOptionExists("-l") ){
-            rangeLength = std::stoi( inputParser.getCmdOption("-l") );
-        }else{
-            rangeLength = 3;
-        }
-        countNumberSNPAndIndel(variants, outputPrefix, rangeLength, vcfFix, parameters, referenceGenomeSequence);
-        return 0;
-    }else {
-        std::cerr << usage.str();
-        return 0;
-    }
-}
-
 int myGenerateRandomSdi( int argc, char** argv, std::map<std::string, std::string>& parameters ){
     std::stringstream usage;
-    usage <<  "Usage: "<<softwareName<<" generateRandomSdi -v variants" << std::endl <<
+    usage <<  "Usage: "<<softwareName<<" randomVar -v variants" << std::endl <<
           "Options" << std::endl <<
           "   -h        produce help message" << std::endl <<
           "   -r        (string) reference genome in fasta format" << std::endl <<
@@ -1291,7 +1148,7 @@ int myGenerateRandomSdi( int argc, char** argv, std::map<std::string, std::strin
     if( inputParser.cmdOptionExists("-h") ||inputParser.cmdOptionExists("--help")  ){
         std::cerr << usage.str();
         return 1;
-    } else if( inputParser.cmdOptionExists("-r") && inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") && inputParser.cmdOptionExists("-r") ) {
+    } else if( inputParser.cmdOptionExists("-r") && inputParser.cmdOptionExists("-v") && inputParser.cmdOptionExists("-o") ) {
         std::string referenceGenomeSequence = inputParser.getCmdOption("-r");
         std::string variants = inputParser.getCmdOption("-v");
         std::string outputPrefix = inputParser.getCmdOption("-o");

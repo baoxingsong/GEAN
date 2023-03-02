@@ -5,6 +5,7 @@
 #ifndef GEAN_OrthologPair_H
 #define GEAN_OrthologPair_H
 
+#include <cstdint>
 #include <string>
 #include "STRAND.h"
 
@@ -49,8 +50,8 @@ public:
     uint32_t getQueryStartPos() const;
     void setQueryStartPos(uint32_t queryStartPos);
     uint32_t getQueryEndPos() const;
-    void setQueryEndPos(uint32_t queryEndPos);\
-//    uint32_t getQueryMiddlePos() const;\
+    void setQueryEndPos(uint32_t queryEndPos);
+//    uint32_t getQueryMiddlePos() const;
 //    void setQueryMiddlePos(uint32_t queryMiddlePos);
     double getScore() const;
     void setScore(double score);
@@ -127,8 +128,8 @@ public:
     uint32_t getQueryStartPos() const;
     void setQueryStartPos(uint32_t queryStartPos);
     uint32_t getQueryEndPos() const;
-    void setQueryEndPos(uint32_t queryEndPos);\
-    uint32_t getQueryMiddlePos() const;\
+    void setQueryEndPos(uint32_t queryEndPos);
+    uint32_t getQueryMiddlePos() const;
     void setQueryMiddlePos(uint32_t queryMiddlePos);
     double getScore() const;
     void setScore(double score);

@@ -11,7 +11,6 @@
 
 class AlignTranscript {
     private:
-        alignNeedlemanForTranscript_simd_avx2int16 * avx16 = NULL;
         std::string alignment_d;
         std::string alignment_q;
         std::string infor;
@@ -19,7 +18,7 @@ class AlignTranscript {
         AlignTranscript(std::string& dna_d, std::string& dna_q, int & startCodonPosition, int & stopCodonPosition,
                         std::vector<SpliceSitePosition>& splitSitePositions, std::map<std::string, std::string>& parameters,
                         NucleotideCodeSubstitutionMatrix& nucleotideCodeSubstitutionMatrix);
-        ~AlignTranscript();
+        ~AlignTranscript() = default;
         std::string getAlignment_q();
         std::string getAlignment_d();
         //void print_results();

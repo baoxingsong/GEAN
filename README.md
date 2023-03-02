@@ -141,17 +141,20 @@ Options
      The result of ORF-states are included in the CDS sequence
 
 #### gff2seq
-Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state)
+Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state). CDS attributes support GFF3 `Parent` (including multiple parents) and GTF `transcript_id` syntax.
 ````
-Usage: gean gff2seq -i inputGffFile -r inputGenome -p outputProteinSequences -c outputCdsSequences -g outputGenomeSequences
+Usage: gean gff2seq -i inputGffFile -r inputGenome [-p outputProteinSequences] [-c outputCdsSequences] [-g outputGenomeSequences] [-a] [-n INT]
 Options
  -h        produce help message
  -i FILE   reference genome in GFF/GTF format
  -r FILE   genome sequence in fasta format
  -m INT    minimum intron size for ORF stats checking
+ -a, --auto-adjust    automatically adjust transcript ends based on ORF states (default false)
+ -n, --orf-count INT  number of ORFs used for automatic adjustment (default 100)
  -p FILE   output file of protein sequence in fasta format
  -c FILE   output file of CDS (without intron) in fasta format
- -g FILE   output file of transcript (with intron) in fasta frormat
+ -g FILE   output file of transcript (with intron) in fasta format
+            at least one of -p, -c, or -g is required; any combination is allowed
 ````
 
 #### annowgr
@@ -176,7 +179,7 @@ Options
 #### randomVar
 Assign a random position for each variant in a variant calling result file, which could be used to compare the different between observed variant calling and random variants.
 ````
-Usage: gean generateRandomSdi -v variants
+Usage: gean randomVar -v variants
 Options
    -h        produce help message
    -r        (string) reference genome in fasta format

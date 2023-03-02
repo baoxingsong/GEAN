@@ -7,8 +7,6 @@
 
 #include "alignNeedlemanForTranscript.h"
 #include "alignTranscript.h"
-//   #include "alignNeedlemanWunsch.h"
-#include "alignNeedlemanWunsch_simd.h"
 #include "alignSlidingWindow.h"
 #include "geneAnnotationAlignment.h"
 

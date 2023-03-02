@@ -14,7 +14,9 @@
 #include "TranscriptUpdateInformation.h"
 
 void getSequences(const std::string& gffFile, const std::string& genome, const std::string& outputProteinSequences,
-                  const std::string& outputCdsSequences, const std::string& outputGenomeSequences, std::map<std::string, std::string>& parameters, const int & minIntron);
+                  const std::string& outputCdsSequences, const std::string& outputGenomeSequences,
+                  std::map<std::string, std::string>& parameters, const int & minIntron,
+                  const bool & autoAdjust=false, const size_t & orfCount=100);
 
 
 #endif //ANNOTATIONLIFTOVER_GETSEQUENCESFROMGFF_H

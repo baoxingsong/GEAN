@@ -61,10 +61,10 @@ class NucleotideCodeSubstitutionMatrix{
         std::map<std::string, std::set<std::string> > revDnaIupacCode;
         std::map<std::string, char > middleStandardGeneticCode;
 
-        int8_t** _exon_subsitition_matrix;
-        int8_t** _intron_subsitition_matrix;
-        int8_t** _start_stop_codon_subsitition_matrix;
-        int8_t** _splice_sites_subsitition_matrix;
+        int32_t** _exon_subsitition_matrix;
+        int32_t** _intron_subsitition_matrix;
+        int32_t** _start_stop_codon_subsitition_matrix;
+        int32_t** _splice_sites_subsitition_matrix;
 
         std::set<std::string> legalNasString;
         std::set<char> legalNasChar;
@@ -85,14 +85,14 @@ class NucleotideCodeSubstitutionMatrix{
         //give a sequence, return all the possiable iupac combinations
         void getAllPossibleWithIupac(const std::string& seq, std::set<std::string>& currentPossibleCombinations);
         std::map<std::string, std::set<std::string> >& getDnaIupacCode();
-        int8_t nucleotide_substitution_matrix[5][5];
+        int32_t nucleotide_substitution_matrix[5][5];
         char getGeneticCode(const std::string & coding, const BEGINMIDDLEEND & beginmiddleend );
         char getGeneticCode(const std::string & coding);
 
-        int8_t** get_exon_subsitition_matrix() const;
-        int8_t** get_intron_subsitition_matrix() const;
-        int8_t** get_start_stop_codon_subsitition_matrix()const;
-        int8_t** get_splice_sites_subsitition_matrix() const;
+        int32_t** get_exon_subsitition_matrix() const;
+        int32_t** get_intron_subsitition_matrix() const;
+        int32_t** get_start_stop_codon_subsitition_matrix()const;
+        int32_t** get_splice_sites_subsitition_matrix() const;
         std::set<std::string>& getLegalNasString() ;
         std::set<char>& getLegalNasChar() ;
 
@@ -104,5 +104,4 @@ class NucleotideCodeSubstitutionMatrix{
 };
 #endif
 //std::unordered_set<std::string> stopCodons = {"ATG", "TTG", "CTG"};// = {"TAA", "TAG", "TGA"}; // TO DO, use iupac code
-
 
