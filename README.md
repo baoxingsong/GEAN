@@ -277,7 +277,7 @@ Thank Lukas Baumgarten from MPIPZ and Qiushi Li from University of UCalgary for 
 Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of GEAN
 
 ### Founding
-We acquired founding to continue the development of GEAN until 2022 Dec.
+NSFC:31900486
 
 [license]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
