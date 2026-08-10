@@ -1,22 +1,28 @@
 # GEAN &middot; [![license][license-badge]][license]
 
-The gene sequence and genetic feature variation between different individuals are very important for natural variation research. And the genome sequence and genetic features (always in GFF/GTF format) of reference is well established. In general the genomic sequence of different lines/accession are sequenced.
-The genetic features of variant individuals are also very interesting, while there no well established solution to transform the genetic features annotation of reference accession/line to other individuls. This pipeline tries transform the reference genetic fearures to variant individuls with genome sequence avaliable by whole-genome resequencing or *de novo* assembly . Here we provide a solution for [inconsistent alignment problem](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007699) which could lead to false positive splice sites disturb or ORF-shift predication. And whole genome MSA is all developped basing on the genetic features.
-GEAN could also use to transform the well annotated genetics feature of model species to phylogenetically nearby species with whole genome newly sequenced .
+Variation in gene sequences and genomic features among individuals is central to research on natural variation. Reference genome sequences and their genomic features, typically annotated in GFF or GTF format, are often well established, while the genomes of other accessions or lines are increasingly being sequenced.
+
+However, there is no well-established solution for transferring genomic feature annotations from a reference accession or line to other individuals. GEAN transfers reference annotations to individuals whose genome sequences are available from whole-genome resequencing or *de novo* assembly. It addresses the [inconsistent alignment problem](https://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1007699), which can produce false-positive splice-site disruptions or erroneous ORF-shift predictions. GEAN also supports whole-genome multiple sequence alignment (MSA) guided by genomic features.
+
+GEAN can also transfer well-curated genomic feature annotations from a model species to a closely related species with a newly sequenced genome.
 
 <p align="center">
 <img src="./doc/alternativeAlignment.gif" width="450px" background-color="#ffffff" />
 </p>
-Here GEAN solved this problem by a dynamic programming algorithm (Zebric stripped dynamic programming).
-This pipeline could help to peform analysis where the gene structure annotaion of different accessions might important such the natural variation of certain single interesting gene, quantify the gene expression for non-reference accession/line and detect the difference expression level across different accession/line. 
+GEAN addresses this problem with a dynamic programming algorithm called Zebric stripped dynamic programming (ZDP).
 
-Using the gene annotation as anchors, GEAN could perform base-pair resolution whole-genome-wide sequence alignment and perform variant calling.
+This pipeline supports analyses in which gene-structure annotations across accessions are important, including studying natural variation in a gene of interest, quantifying gene expression in non-reference accessions or lines, and detecting differential expression among accessions or lines.
 
-## Install
+Using gene annotations as anchors, GEAN can perform genome-wide sequence alignment at base-pair resolution and call variants.
+
+## Installation
+
 ### Dependencies
-CPU support avx2\
-GNU GCC >=6.0 \
-Cmake >= 3.0
+
+- A CPU with AVX2 support
+- GNU GCC 6.0 or later
+- CMake 3.0 or later
+
 ```
 git clone https://github.com/baoxingsong/GEAN.git
 cd GEAN
@@ -24,7 +30,7 @@ cmake CMakeLists.txt
 make
 ```
 
-this command will generate an executable file named gean
+These commands generate an executable named `gean`.
 <!--
 ## Run it
 ````
@@ -32,221 +38,220 @@ Program gean
 Usage: gean <command> [options]
 Commands:
  -- variant calling:
-    pseudogeno  create pseudo genome sequence
-    lift        transform coordinate to another accession
-    revlift     transform coordinate of another accession to reference
-    liftgff     transform all the GFF/GTF coordinates
-    revliftgff  transform all the GFF/GTF coordinates back to reference
-    reanva      update variants records for functional annotation
-    gff2seq     get the protein/CDS/gene sequence of GFF/GTF file
-    annowgr     annotate re-sequenced genome
-    randomVar   assign a random position for each variant
- -- whole genome wide MSA:
-    premsa      cut the whole genome sequence into fragments
-    msatosdi    generate sdi files from MSA results
+    pseudogeno  create a pseudogenome sequence
+    lift        transform a coordinate to another accession
+    revlift     transform a coordinate from another accession to the reference
+    liftgff     transform all GFF/GTF coordinates
+    revliftgff  transform all GFF/GTF coordinates back to the reference
+    reanva      update variant records for functional annotation
+    gff2seq     extract protein/CDS/gene sequences from a GFF/GTF file
+    annowgr     annotate a resequenced genome
+    randomVar   assign a random position to each variant
+ -- genome-wide MSA:
+    premsa      split whole-genome sequences into fragments
+    msatosdi    generate SDI files from MSA results
 
- -- de novo assembly genome:
-    transgff    trans reference gff/gtf to de novo assembly genome
-    purifygff   purify the result from transgff
+ -- de novo genome assembly:
+    transgff    transfer a reference GFF/GTF annotation to a de novo assembly
+    purifygff   remove duplicate annotations from transgff output
 ````
 
 #### pseudogeno
-Get pseudo-genome sequence of re-sequencing accession/line using reference genome sequence and variant calling records.
+Generate a pseudogenome sequence for a resequenced accession or line from a reference genome and variant records.
 ````
 Usage: gean pseudogeno -r reference -v variants -o output
 Options
- -h         produce help message
- -r FILE    reference genome in fasta format
- -v FILE    variant calling result in vcf/sdi format
- -p STRING  prefix for vcf records
- -o FILE    output pseudo genome in fasta format
+ -h         show this help message
+ -r FILE    reference genome in FASTA format
+ -v FILE    variant-calling result in VCF/SDI format
+ -p STRING  prefix for VCF records
+ -o FILE    output pseudogenome in FASTA format
 ````
-** -prefix is the prefix of chromosome name for vcf/sdi variant records. Like the chromosome in TAIR10 reference genome is Chr1, Chr2, Chr3, Chr4 and Chr5. While the chromosomes in vcf files from the 1001 genomes project were indicated with 1, 2, 3, 4 and 5.
-So `-prefix Chr` should be set to make the software work properly. If this parameter is not set correctly, the software would act as no variant records in the input vcf/sdi file.   
+The `-prefix` option specifies the chromosome-name prefix used in VCF/SDI variant records. For example, chromosomes in the TAIR10 reference genome are named Chr1, Chr2, Chr3, Chr4, and Chr5, whereas chromosomes in VCF files from the 1001 Genomes Project are named 1, 2, 3, 4, and 5. Set `-prefix Chr` to reconcile these naming conventions. If the prefix is incorrect, the software will behave as though the input VCF/SDI file contains no variant records.
 
 #### lift
-Project/liftover a certain reference genome-sequence coordinate to re-sequencing accession/line pseudo-genome-sequence.
+Lift a coordinate from the reference genome to the pseudogenome of a resequenced accession or line.
 ````
 Usage: gean lift -v variants -c chromosome -p position
 Options
- -h         produce help message
- -r FILE    reference genome in fasta format
- -v FILE    variant calling result in vcf/sdi format
- -f STRING  prefix for vcf records
+ -h         show this help message
+ -r FILE    reference genome in FASTA format
+ -v FILE    variant-calling result in VCF/SDI format
+ -f STRING  prefix for VCF records
  -c STRING  chromosome
- -p INT     the position/coordinate in reference genome
+ -p INT     position/coordinate in the reference genome
 ````
 
 #### revlift
-Project/liftover a certain coordinate of re-sequencing accession/line pseudo-genome-sequence to reference genome-sequence.
+Lift a coordinate from the pseudogenome of a resequenced accession or line back to the reference genome.
 ````
 Usage: gean revlift -v variants -c chromosome -p position
 Options
- -h         produce help message
- -r FILE    reference genome in fasta format
- -v FILE    variant calling result in vcf/sdi format
- -f STRING  prefix for vcf records
- -c STRING  chromosome, should be consistent with the chromosome information in sdi file (The coordinate starts from 1)
- -p INT     the position/coordinate in re-sequenced genome
+ -h         show this help message
+ -r FILE    reference genome in FASTA format
+ -v FILE    variant-calling result in VCF/SDI format
+ -f STRING  prefix for VCF records
+ -c STRING  chromosome; must match the chromosome name in the SDI file (coordinates are 1-based)
+ -p INT     position/coordinate in the resequenced genome
 ````
 
 #### liftgff
-Inference the gene structure (gtf/gff file) annotation of re-sequencing accession/line by purely coordinate liftover.
+Infer gene-structure annotations for a resequenced accession or line by coordinate liftover alone.
 ````
 Usage: gean liftgff -v variants -i inputGffFile -o outputGffFile
 Options
- -h         produce help message
- -r FILE    reference genome in fasta format
- -v FILE    variant calling result in vcf/sdi format
- -i FILE    the input GFF/GTF file of reference line/accession
- -f STRING  prefix for vcf records
- -o         the output GFF/GTF file of target line/accession
+ -h         show this help message
+ -r FILE    reference genome in FASTA format
+ -v FILE    variant-calling result in VCF/SDI format
+ -i FILE    input GFF/GTF file for the reference accession or line
+ -f STRING  prefix for VCF records
+ -o         output GFF/GTF file for the target accession or line
 ````
 
 #### revliftgff
-Project/liftover the gene structure (gtf/gff file) annotation of re-sequencing accession/line to reference genome-sequence by purely coordinate liftover.
+Lift gene-structure annotations from a resequenced accession or line back to the reference genome by coordinate liftover alone.
 ````
 Usage: gean revliftgff -v variants -i inputGffFile -o outputGffFile
 Options
- -h         produce help message
- -r FILE    reference genome in fasta format
- -v FILE    variant calling result in vcf/sdi format
- -i FILE    the input GFF/GTF file of non-reference line/accession
- -f STRING  prefix for vcf records
- -o         the output GFF/GTF file of reference line/accession
+ -h         show this help message
+ -r FILE    reference genome in FASTA format
+ -v FILE    variant-calling result in VCF/SDI format
+ -i FILE    input GFF/GTF file for the non-reference accession or line
+ -f STRING  prefix for VCF records
+ -o         output GFF/GTF file for the reference accession or line
 ````
 
 #### reanva
-Realign the sequence using ZDP algorithm to solve the inconsistent INDEL alignment problem and recall all variants which could cause false positive ORF-state shit predication.
+Realign sequences with the ZDP algorithm to resolve inconsistent INDEL alignments and recover variants that could otherwise produce false-positive ORF-shift predictions.
 ````
 Usage: gean reanva -i inputGffFile -r inputGenome -a similar segments -s new genome sequence -o output GFF/GTF file
 Options
- -h        produce help message
+ -h        show this help message
  -i FILE   GFF/GTF file
  -r FILE   reference genome sequence
- -v FILE   variant calling result in vcf/sdi format
- -f STRING prefix for vcf records
+ -v FILE   variant-calling result in VCF/SDI format
+ -f STRING prefix for VCF records
  -o FILE   output file
  -m INT    minimum intron size
  ````
- * By ORF-states, this software has following criteria:
-     1) Splicing sites is one of motif in "SpliceSites", which is included in the release
-     2) The minimum length of intron is larger than a certain value
-     3) CDS sequence length is larger than a certain value
-     4) The length of CDS sequence is divisible by 3
-     5) No premature stop codon
-     6) End with end codon
-     7) Start with start codon
-     The IUPAC Codes of DNA sequence could be well dealt with. 
-     The result of ORF-states are included in the CDS sequence
+ * The software evaluates ORF states using the following criteria:
+     1) Splice sites match a motif in the `SpliceSites` file included with the release.
+     2) Introns meet the specified minimum length.
+     3) CDS sequences meet the specified minimum length.
+     4) CDS sequence lengths are divisible by 3.
+     5) CDS sequences contain no premature stop codons.
+     6) CDS sequences end with a stop codon.
+     7) CDS sequences begin with a start codon.
+
+   IUPAC ambiguity codes in DNA sequences are supported. ORF-state results are included with the CDS output.
 
 #### gff2seq
-Extract CDS sequence, C-DNA sequence and protein sequence for each protein-coding transcript. And predict the protein coding potential (termed as ORF-state). CDS attributes support GFF3 `Parent` (including multiple parents) and GTF `transcript_id` syntax.
+Extract CDS, genomic transcript, and protein sequences for each protein-coding transcript, and evaluate its protein-coding potential (referred to as its ORF state). CDS attributes may use GFF3 `Parent` syntax, including multiple parents, or GTF `transcript_id` syntax.
 ````
 Usage: gean gff2seq -i inputGffFile -r inputGenome [-p outputProteinSequences] [-c outputCdsSequences] [-g outputGenomeSequences] [-a] [-n INT]
 Options
- -h        produce help message
+ -h        show this help message
  -i FILE   reference genome in GFF/GTF format
- -r FILE   genome sequence in fasta format
- -m INT    minimum intron size for ORF stats checking
+ -r FILE   genome sequence in FASTA format
+ -m INT    minimum intron size for ORF-state checking
  -a, --auto-adjust    automatically adjust transcript ends based on ORF states (default false)
  -n, --orf-count INT  number of ORFs used for automatic adjustment (default 100)
- -p FILE   output file of protein sequence in fasta format
- -c FILE   output file of CDS (without intron) in fasta format
- -g FILE   output file of transcript (with intron) in fasta format
-            at least one of -p, -c, or -g is required; any combination is allowed
+ -p FILE   output protein sequences in FASTA format
+ -c FILE   output CDS sequences (without introns) in FASTA format
+ -g FILE   output transcript sequences (with introns) in FASTA format
+           at least one of -p, -c, or -g is required; any combination is allowed
 ````
 
 #### annowgr
-Transform the reference gene structure annotation to re-sequencing accession/lines with several complementary methods.
+Transfer reference gene-structure annotations to resequenced accessions or lines using several complementary methods.
 ````
 Usage: gean annowgr -i inputGffFile -r referenceGenomeSequence -v variants -o outputGffFile
 Options
- -h        produce help message
+ -h        show this help message
  -i FILE   reference GFF/GTF file
- -n FILE   the de novo annotation GFF of the target accession
- -r FILE   reference genome in fasta format
- -v FILE   variant calling result in vcf/sdi format
- -o FILE   the output GFF/GTF file
+ -n FILE   de novo GFF annotation for the target accession
+ -r FILE   reference genome in FASTA format
+ -v FILE   variant-calling result in VCF/SDI format
+ -o FILE   output GFF/GTF file
  -m INT    minimum intron size
- -d        remove reference ORF shift transcripts (default false)
- -f STRING prefix for vcf records
- -t INT    number of threads, default: 4
- -l INT  longest transcript to align. default(50000)
+ -d        remove reference transcripts with ORF shifts (default: false)
+ -f STRING prefix for VCF records
+ -t INT    number of threads (default: 4)
+ -l INT    maximum transcript length to align (default: 50000)
 ````
 
 
 #### randomVar
-Assign a random position for each variant in a variant calling result file, which could be used to compare the different between observed variant calling and random variants.
+Assign a random position to each variant in a variant-calling result file. The output can be used to compare observed variants with randomly positioned variants.
 ````
 Usage: gean randomVar -v variants
 Options
-   -h        produce help message
-   -r        (string) reference genome in fasta format
-   -v        variant calling result in vcf/sdi format
-   -o        prefix of output file
+   -h        show this help message
+   -r        (string) reference genome in FASTA format
+   -v        variant-calling result in VCF/SDI format
+   -o        output-file prefix
 ````
 
 
-### Whole genome wide multiple sequence alignment pipeline (under testing)
+### Genome-wide multiple sequence alignment pipeline (under testing)
 #### premsa
-cut the genome sequence of a population of individuals into fragments to perform multiple sequence alignment for each fragment.
+Split the genome sequences of a population into fragments for multiple sequence alignment.
 ````
 Usage: gean premsa -i inputGffFile -r referenceGenomeSequence -v variants
 Options
- -h         produce help message
- -i FILE    the input GFF/GTF file of reference line/accession
+ -h         show this help message
+ -i FILE    input GFF/GTF file for the reference accession or line
  -r FILE    reference genome
- -v FILE    list of variant calling results files
- -f STRING  prefix for vcf records
+ -v FILE    list of variant-calling result files
+ -f STRING  prefix for VCF records
  -m INT     minimum intron size
- -t INT     number of threads, default: 4
- -w INT     window size, default: 10000
- -s INT     window overlap size, default: 500
- -p INT     output catch size (default 100)
- -l INT     longest transcript to align. default(50000)
+ -t INT     number of threads (default: 4)
+ -w INT     window size (default: 10000)
+ -s INT     window overlap size (default: 500)
+ -p INT     output cache size (default: 100)
+ -l INT     maximum transcript length to align (default: 50000)
 ````
 
 #### msatosdi
-perform variant calling from the multiple sequence alignment of sequence fragments of a population of genome sequences
+Call variants from multiple sequence alignments of genome fragments from a population.
 ````
 Usage: gean msatosdi -i inputGffFile -r referenceGenomeSequence -v variants -o outputGffFile
 Options
- -h         produce help message
+ -h         show this help message
  -a FILE    accession list
  -c FILE    chromosome list
- -m FOLDER  folder of MSA result
+ -m FOLDER  folder containing MSA results
  -o FOLDER  output folder
- -r FILE    reference genome in fasta format
- -t INT     number of threads, default: 4
- -v FILE    list of variant calling results files
- -f STRING  prefix for vcf records
+ -r FILE    reference genome in FASTA format
+ -t INT     number of threads (default: 4)
+ -v FILE    list of variant-calling result files
+ -f STRING  prefix for VCF records
  ````
  
-### pipeline to project the reference gene structure annotation to a de novo assembly genome sequence highly similar with the reference genome sequence
+### Pipeline for transferring reference gene-structure annotations to a closely related de novo assembly
 #### transgff
-Project project reference gene structure annotation to a de novo genome sequence basing the whole genome sequence alignment.
-The result file contains duplication gene annotations records, which might do not compile with other software and could be purified with the following function.
+Transfer reference gene-structure annotations to a *de novo* genome assembly based on whole-genome sequence alignment.
+The output may contain duplicate gene-annotation records that are incompatible with other software. Use the following command to remove them.
 ````
 Usage: gean transgff -i inputGffFile -r inputGenome -a similar segments -s new genome sequence -o output GFF/GTF file
 Options
- -h        produce help message
+ -h        show this help message
  -i FILE   reference GFF/GTF file
  -r FILE   reference genome sequence
- -a FILE   similar segments
+ -a FILE   similar sequence segments
  -s FILE   target genome sequence
  -o FILE   output GFF/GTF file
  -w INT    sequence alignment window width (default: 60)
- -l        run in slow model (default false)
+ -l        run in slow mode (default: false)
  -m INT    minimum intron size
  ````
  
-#### purifygff   
-remove those duplication gene structure annotations generated from the transff function
+#### purifygff
+Remove duplicate gene-structure annotations generated by `transgff`.
 ````
  Usage: gean purifygff -i inputGffFile -s inputGenome -o output GFF/GTF file
  Options
-  -h        produce help message
+  -h        show this help message
   -i FILE   GFF/GTF file
   -s FILE   target genome sequence
   -o FILE   output GFF/GTF file
@@ -254,33 +259,47 @@ remove those duplication gene structure annotations generated from the transff f
   -m INT    minimum intron size
 ````
 -->
-There are several functions are under testing and are included in the source code. The document for those functions will be released after testing.
-Best Practices for different aims could be found under example.
+Several functions included in the source code are still under testing. Documentation for these functions will be released after testing is complete.
+
+Best-practice workflows for different goals are available in the `example` directory.
+
 ### Manual
-[gean_manual](gean-manual.pdf)
-### examples
-* [whole genome wide pair-wise sequence alignment and variants calling for de novo assembly](example/denovoVariantCalling/README.md)
-* [genome wide multiple sequence alignment using variant calling result](example/variantsSynchronization/README.md)
-* [transform maize reference genome annotation to de novo assembly](example/transformMaizeGFFannotation.md)
-### Support us
-Please support by citing us in your publication.
+
+[GEAN manual](gean-manual.pdf)
+
+### Examples
+
+- [Genome-wide pairwise sequence alignment and variant calling for a de novo assembly](example/denovoVariantCalling/README.md)
+- [Genome-wide multiple sequence alignment using variant-calling results](example/variantsSynchronization/README.md)
+- [Transfer a maize reference-genome annotation to a de novo assembly](example/transformMaizeGFFannotation.md)
+
+### Support Us
+
+Please support GEAN by citing it in your publications.
+
 ### Contact
-Bug report? Any question? Any suggestion? Any requirement? Want to cooperate?\
-Please feel free to send E-mail to songbaoxing168@163.com
+
+For bug reports, questions, suggestions, feature requests, or collaboration inquiries, please email songbaoxing168@163.com.
 
 ### Citing GEAN
+
 If you use GEAN, please cite: <br />
 `
 Song B, Sang Q, Wang H, Pei H, Gan X and Wang F. Complement Genome Annotation Lift Over Using a Weighted Sequence Alignment Strategy. Front. Genet. 10:1046. doi: 10.3389/fgene.2019.01046
 `
-### Acknowledgement
-Thank [Prof. Usadel Björn](http://www.usadellab.org/) for great suggestions for speeding up\
-Thank Dr. Hequan Sun from MPIPZ for discussions\
-Thank Lukas Baumgarten from MPIPZ and Qiushi Li from University of UCalgary for bug reporting\
-Thank Elad Oren from Hebrew University of Jerusalem for the extending usage of GEAN
+### Acknowledgments
 
-### Founding
-NSFC:31900486
+We thank [Professor Björn Usadel](http://www.usadellab.org/) for valuable suggestions on improving performance.
+
+We thank Dr. Hequan Sun of MPIPZ for helpful discussions.
+
+We thank Lukas Baumgarten of MPIPZ and Qiushi Li of the University of Calgary for reporting bugs.
+
+We thank Elad Oren of the Hebrew University of Jerusalem for extending the use cases of GEAN.
+
+### Funding
+
+NSFC: 31900486
 
 [license]: ./LICENSE
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
